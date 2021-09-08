@@ -1,27 +1,24 @@
 ---
-bio: My research interests include distributed robotics, mobile computing and programmable
+bio: My research interests include computational models of cognition, generalized learning and transfer learning, and Bayesian statistics.
   matter.
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2008
-email: ""
+  - course: PhD Candidate in Cognitive and Comparative Psychology
+    institution: The Graduate Center, CUNY
+    year: 2027
+  - course: BA in Economics
+    institution: Gettysburg College
+    year: 2011
+email: "djshives@gmail.com"
 highlight_name: true
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+- Computational Models of Cognition
+- Generalized Learning and Transfer Learning
+- Bayesian Statistics
 organizations:
-- name: Stanford University
-  url: https://www.stanford.edu/
-role: Professor of Artificial Intelligence
+- name: The Graduate Center, CUNY
+  url: https://www.gc.cuny.edu/Home
+role: PhD Candidate
 social:
 - icon: envelope
   icon_pack: fas
@@ -31,22 +28,22 @@ social:
   icon: twitter
   icon_pack: fab
   label: Follow me on Twitter
-  link: https://twitter.com/GeorgeCushen
+  link: https://twitter.com/shives_drew
 - icon: graduation-cap
   icon_pack: fas
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+  link: 
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/djshives
 - icon: linkedin
   icon_pack: fab
-  link: https://www.linkedin.com/
+  link: https://www.linkedin.com/in/drewshives/
 superuser: true
-title: Nelson Bighetti
+title: Drew Shives
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
+Drew's path to cognitive science and data science was long and winding. As an undergraduate, he worked with Professor Rimvydas Baltaduonis at Gettysburg College on experimental economics projects, including an honors thesis on the effect of prediction markets on information cascade-prone environments. After a short time in the financial industry, Drew became a cook and chef in some of New York City's finest Michelin-starred restaurants. Through this profession, he honed his focus and gained a greater appreciation for the pursuit of excellence. 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Combining all of these previous experiences, Drew is now a PhD candidate at The Graduate Center, CUNY in the Cognitive and Comparative Psychology program. His advisor is Professor Matthew Crump, and he works in the Computational Cognition Lab focused on computational models of cognitive processes and experimental psychology. Drew also works part-time as a Data Scientist at Marina Maher Communications where his work includes hierarchical modeling, full-stack app development, and much more.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.

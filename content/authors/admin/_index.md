@@ -46,4 +46,4 @@ Drew's path to cognitive science and data science has been long and winding. As 
 
 Combining all of these previous experiences, Drew is now a PhD candidate at The Graduate Center, CUNY in the Cognitive and Comparative Psychology program. His advisor is Professor Matthew Crump, and he works in the Computational Cognition Lab focused on computational models of cognitive processes and experimental psychology. Drew also works part-time as a Data Scientist at Marina Maher Communications where his work includes hierarchical modeling, full-stack app development, and much more.
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Resume.pdf" "newtab" >}}resumé{{< /staticref >}}.

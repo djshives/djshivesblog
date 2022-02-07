@@ -23,10 +23,6 @@ projects: []
 ## Loading libraries.
 
 
-```r
-library(tidyverse)
-```
-
 ```
 ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 ```
@@ -44,12 +40,6 @@ library(tidyverse)
 ## x dplyr::lag()    masks stats::lag()
 ```
 
-```r
-library(readxl)
-library(tidyxl)
-library(unpivotr)
-```
-
 ```
 ## 
 ## Attaching package: 'unpivotr'
@@ -59,10 +49,6 @@ library(unpivotr)
 ## The following objects are masked from 'package:tidyr':
 ## 
 ##     pack, unpack
-```
-
-```r
-library(reshape2)
 ```
 
 ```

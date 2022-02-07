@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Loading libraries.
 
-```{r echo = FALSE, warning = FALSE}
+```{r message = FALSE, warning = FALSE}
 library(tidyverse)
 library(readxl)
 library(tidyxl)

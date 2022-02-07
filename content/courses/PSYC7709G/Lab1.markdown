@@ -23,43 +23,12 @@ projects: []
 ## Loading libraries.
 
 
-```
-## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-```
-
-```
-## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-## ✓ readr   2.0.2     ✓ forcats 0.5.1
-```
-
-```
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-```
-
-```
-## 
-## Attaching package: 'unpivotr'
-```
-
-```
-## The following objects are masked from 'package:tidyr':
-## 
-##     pack, unpack
-```
-
-```
-## 
-## Attaching package: 'reshape2'
-```
-
-```
-## The following object is masked from 'package:tidyr':
-## 
-##     smiths
+```r
+library(tidyverse)
+library(readxl)
+library(tidyxl)
+library(unpivotr)
+library(reshape2)
 ```
 
 ## Loading data.

@@ -16,12 +16,15 @@ main:
   - name: Posts
     url: '#posts'
     weight: 40
+  - name: Photos
+    url: https://djshives.myportfolio.com/home
+    weight: 50
   # - name: Talks
   #   url: '#talks'
-  #   weight: 50
+  #   weight: 60
   # - name: Publications
   #   url: '#featured'
-  #   weight: 60
+  #   weight: 70
   - name: Contact
     url: '#contact'
-    weight: 70
+    weight: 60

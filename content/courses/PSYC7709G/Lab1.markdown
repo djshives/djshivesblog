@@ -80,7 +80,7 @@ library(reshape2)
 
 
 ```r
-data = read_excel("/Users/drewshives/Documents/GitHub/djshivesblog/content/courses/PSYC7709G/data/Lab1_data.xlsx", col_names = FALSE)
+data = read_excel("data/Lab1_data.xlsx", col_names = FALSE)
 ```
 
 ```

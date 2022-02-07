@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Using R for Reproducible Research | Academic</title>
+    <link>https://djshives.netlify.app/courses/psyc7709g/</link>
+      <atom:link href="https://djshives.netlify.app/courses/psyc7709g/index.xml" rel="self" type="application/rss+xml" />
+    <description>Using R for Reproducible Research</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 31 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Using R for Reproducible Research</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/</link>
+    </image>
+    
+    <item>
+      <title>Lab 1 - Shaping Data</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab1/</link>
+      <pubDate>Sun, 06 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab1/</guid>
+      <description>&lt;h2 id=&#34;loading-libraries&#34;&gt;Loading libraries.&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+library(readxl)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;loading-in-the-data&#34;&gt;Loading in the data.&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(readxl)
+
+data = read_excel(&amp;quot;data/Lab1_data.xlsx&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## New names:
+## * `` -&amp;gt; ...1
+## * `` -&amp;gt; ...3
+## * `` -&amp;gt; ...4
+## * `` -&amp;gt; ...5
+## * `` -&amp;gt; ...6
+## * ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;head(data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 × 13
+##   ...1   Noisy ...3  ...4  ...5  ...6  ...7  Quiet ...9  ...10 ...11 ...12 ...13
+##   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
+## 1 &amp;lt;NA&amp;gt;   Morn… &amp;lt;NA&amp;gt;  Afte… &amp;lt;NA&amp;gt;  Even… &amp;lt;NA&amp;gt;  Morn… &amp;lt;NA&amp;gt;  Afte… &amp;lt;NA&amp;gt;  Even… &amp;lt;NA&amp;gt; 
+## 2 Parti… A     B     A     B     A     B     A     B     A     B     A     B    
+## 3 1      61    77    97    97    89    94    87    87    65    53    79    51   
+## 4 2      100   68    92    57    55    85    96    88    91    56    90    53   
+## 5 3      70    56    89    78    98    73    86    86    99    92    67    96   
+## 6 4      100   84    59    85    73    74    50    62    89    61    85    67
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://djshives.netlify.app/sitemap.xml

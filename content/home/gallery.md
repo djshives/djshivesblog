@@ -9,6 +9,9 @@ headless: true
 # Order that this section appears on the page.
 weight: 66
 
+# Activate this widget? true/false
+active: false
+
 title: Gallery
 subtitle:
 

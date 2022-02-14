@@ -10,6 +10,7 @@ summary: ''
 authors: []
 lastmod: '2022-02-13T22:44:07-05:00'
 featured: no
+type: book
 image:
   caption: ''
   focal_point: ''

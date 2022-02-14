@@ -1,8 +1,8 @@
 ---
-title: Lab 2 - Multiple Regression
+title: Lab 2 - Multiple Regression I
 author: Package Build
 date: '2022-02-13'
-slug: lab-2-multiple-regression
+slug: lab-2-multiple-regression-i
 categories: []
 tags: []
 subtitle: ''
@@ -97,7 +97,7 @@ ggplot(slamecka_design,aes(x=number_of_IL,
   scale_x_continuous(breaks = c(2, 4, 8),
                    labels = c(2, 4, 8)) +
   ylim(0, 80) +
-  expand_limits(x = 9)
+  expand_limits(x = 9) +
   theme_classic()
 ```
 

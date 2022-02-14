@@ -1,6 +1,6 @@
 ---
 title: Lab 1 - Shaping Data
-author: Package Build
+author: Drew Shives
 date: '2022-02-06'
 slug: lab-1-shaping-data
 categories: []

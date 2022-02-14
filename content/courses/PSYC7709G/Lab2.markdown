@@ -1,14 +1,14 @@
 ---
 title: Lab 2 - Multiple Regression I
-author: Package Build
-date: '2022-02-13'
+author: Drew Shives
+date: '2022-02-05'
 slug: lab-2-multiple-regression-i
 categories: []
 tags: []
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2022-02-13T22:44:07-05:00'
+lastmod: '2022-02-05T22:44:07-05:00'
 featured: no
 type: book
 image:

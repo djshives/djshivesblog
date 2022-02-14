@@ -566,8 +566,8 @@ ggplot(slamecka_design2,aes(x=number_of_IL,
 ```
 
 ```
-## Warning: Removed 11 rows containing non-finite values (stat_summary).
-## Removed 11 rows containing non-finite values (stat_summary).
+## Warning: Removed 10 rows containing non-finite values (stat_summary).
+## Removed 10 rows containing non-finite values (stat_summary).
 ```
 
 <img src="/courses/PSYC7709G/Lab2_files/figure-html/unnamed-chunk-4-1.png" width="672" />

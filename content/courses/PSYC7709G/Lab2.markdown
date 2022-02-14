@@ -8,16 +8,14 @@ tags: []
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2022-02-06T23:27:47-05:00'
+lastmod: '2022-02-13T22:44:07-05:00'
 featured: no
-type: book
 image:
   caption: ''
   focal_point: ''
   preview_only: no
 projects: []
 ---
-
 
 
 ## Loading libraries.

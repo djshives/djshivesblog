@@ -1,0 +1,218 @@
+---
+title: Lab 3 - Multiple Regression II
+author: Drew Shives
+date: '2022-02-4'
+slug: lab-3-multiple-regression-ii
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-02-22T19:08:14-05:00'
+featured: no
+type: book
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.
+
+### Data and Exploratory Data Analysis
+
+Let's begin by loading in the necessary packages...
+
+```{r message = FALSE, warning = FALSE}
+library(MASS)
+library(tidyverse)
+library(ggrepel)
+library(extraDistr)
+library(loo)
+library(bridgesampling)
+library(brms)
+library(rstan)
+library(bayesplot)
+library(tictoc)
+library(hypr)
+library(tidybayes)
+rstan_options(auto_write = FALSE)
+options(mc.cores = parallel::detectCores())
+select <- dplyr::select
+```
+
+...And create a toy dataset. For this lab, we will be using the research design by Hulme et al. (1984) that investigates whether age and speech rate are involed with memory ability.
+
+```{r}
+data <- tibble(age = c(4,4,7,7,10,10),
+               speech_rate = c(1,2,2,4,3,6),
+               memory = c(14,23,30,50,39,67),
+               id = c(1, 2, 3, 4, 5, 6))
+
+data
+```
+
+As we can see from the above as speech rate increases, so does memory ability. The same, however, can be said for age and memory ability. This can be better illustrated visually.
+
+```{r}
+data %>%
+  ggplot(aes(x = speech_rate, y = memory, group = age)) +
+  geom_point() +
+  facet_wrap(~age) +
+  geom_label_repel(aes(label = memory), nudge_x = 1, na.rm = TRUE) +
+  scale_x_continuous(
+    limits = c(0, 7),
+    sec.axis = sec_axis(~ . , name = "Age", breaks = NULL, labels = NULL)
+    ) +
+  ggtitle("Memory by Speech Rate") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+Unfortunately, it looks like we have an issue of independent variables being correlated with one another, known as multicollinearity.
+
+```{r}
+cor(data)
+```
+
+As we can see from the above, there is a 75% correlation between age and speech_rate. This means that a complete pooling regression model, where all of the data is pooled together, is not appropriate.
+
+We can build the complete pooling model using the lm() function. The dependent variable, memory, is placed to the left of the "~" in the function, and the independent variables, age and speech_rate, to the right. The "data" parameter is filled by data.
+
+The summary() function is then used to view the regression output.
+
+```{r}
+complete_pool <- lm(
+  memory ~ 1 + speech_rate + age,
+  data = data
+  )
+
+summary(complete_pool)
+```
+
+There is a high R^2 for the mode, but when looking at the individual r^2 for the independent variables...
+
+```{r}
+cor(data) ^ 2
+```
+
+...They sum to greater than 1!
+
+So what is to be done?
+
+## No Pooling Models
+
+One possible solution is to not pool any data and create an individual model for each age bucket...
+
+```{r}
+ggplot(
+  data = data,
+  aes(
+    x = speech_rate,
+    y = memory,
+    col = age,
+    group = age
+  )
+) +
+  geom_point() +
+  geom_smooth(
+    method = lm
+  )
+
+```
+
+But this looses the relationship between speech rate and age. In large data sets, this can become especially confusing and time consuming.
+
+## Partial-Pooling Model: Multilevel
+
+Rather than no pooling or complete pooling, we can create a partially-pooled multilevel model! Partial pooling is a process where population-level and individual-level effects are estimated simultaneously. By doing so, each individual's estimated effect is a reflection of the weighted combination of their own data and the population average. This allows us to account for the relationship between speech rate and age.
+
+Using the brms package, we can easily fit a multilevel model in a very similar fashion to the lm() function. The dependent variable for the model again falls to the left of the "~" and the independent variables are placed to the right. What is different, however, is in the parentheses, "(speech_rate|age)". What this parameter does is specify that we want varying slopes and intercepts for speech rate for each age grouping.
+
+(Aside: we also specify several other things unique to Bayesian models, most notably priors. Prior specification is a topic in it of itself, and for this model we can use vaguely informative priors based on the means and standard deviations of the data itself.)
+
+```{r message = FALSE, warning = FALSE}
+priors <- c(
+  prior(normal(3, 2), class = b, coef = speech_rate),
+  prior(normal(0, 2), class = Intercept),
+  prior(normal(0, 2), class = sigma),
+  prior(normal(0, 2), class = sd, coef = Intercept, group = age),
+  prior(normal(3, 2), class = sd, coef = speech_rate, group = age)
+)
+
+partial_pool_model <- brm(
+  memory ~ 1 + speech_rate + (speech_rate|age),
+  data = data,
+  prior= priors,
+  iter = 4000,
+  control = list(
+    adapt_delta = 0.99,
+    max_treedepth = 20
+    )
+)
+```
+
+Similar to using the "summary()" function for the complete pooling model, we can use it here for the multilevel model. 
+
+```{r}
+summary(partial_pool_model)
+```
+
+```{r}
+mcmc_areas(
+  partial_pool_model,
+  pars = c(
+    "b_Intercept",
+    "b_speech_rate",
+    "sd_age__Intercept",
+    "sd_age__speech_rate"
+  ),
+  prob_outer = 0.99,
+  prob = 0.95
+)
+```
+
+While the summary table is useful to get a sense of the model, and the subsequent chart visualizes the coefficients of the model for both the population and group levels, looking at the effect sizes for speech rate per age group is most illustrative.
+
+```{r}
+model_summary <- summary(partial_pool_model)
+
+effect_estimates <- as_tibble(ranef(partial_pool_model)[[1]]) %>%
+  mutate(Estimate.speech_rate_with_fixed = Estimate.speech_rate + model_summary$fixed[2, 1])
+  
+
+ggplot(
+  data = effect_estimates,
+  aes(
+    x = c(4, 7, 10),
+    y = Estimate.speech_rate_with_fixed
+  )
+) +
+  geom_point() +
+  geom_errorbar(
+    aes(
+      ymin = Estimate.speech_rate_with_fixed - 2 * Est.Error.speech_rate,
+      ymax = Estimate.speech_rate_with_fixed + 2 * Est.Error.speech_rate
+    )
+  ) +
+  scale_x_continuous(
+    breaks = c(4, 7, 10),
+  ) +
+  xlab("Age") +
+  ylab("Estimated Effect of Speech Rate on Memory (-/+ 2sd)") +
+  geom_label_repel(
+    aes(
+      label = round(Estimate.speech_rate_with_fixed, 2)
+    ),
+    nudge_y = 1
+  )
+```
+
+The above chart shows the estimated effect of speech rate on memory by age. We can see that, somewhat surprisingly, age 7 is where the effect of speech rate on memory is greatest while at age 4 it is the lowest.

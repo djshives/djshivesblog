@@ -25,7 +25,7 @@ experience:
   - title: Data Scientist
     company: Marina Maher Communications
     company_url: ''
-    company_logo: org-x
+    company_logo: assets/mmc_logo.jpeg
     location: New York City
     date_start: '2020-03-01'
     date_end: ''

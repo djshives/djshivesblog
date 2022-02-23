@@ -22,7 +22,7 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
-- title: Graduate Assistant
+  - title: Graduate Assistant
     company: The Graduate Center, CUNY
     company_url: ''
     company_logo: gc_logo

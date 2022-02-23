@@ -64,7 +64,7 @@ experience:
       * Supervised a team of two analysts across multiple client teams.
       * Developed and implemented A/B testing methodology utilizing Bayesian inference.
       * Utilized SQL and the Python to query, analyze, and model panel, time series, and cross-sectional data.
-      *Developed and implemented department-wide statistics trainings, including A/B testing and linear and multivariate regression.
+      * Developed and implemented department-wide statistics trainings, including A/B testing and linear and multivariate regression.
 
 design:
   columns: '2'

@@ -97,7 +97,7 @@ complete_pool <- lm(
 summary(complete_pool)
 ```
 
-There is a high R^2 for the mode, but when looking at the individual r^2 for the independent variables...
+There is a high R^2 for the model, but when looking at the individual r^2 for the independent variables...
 
 ```{r}
 cor(data) ^ 2

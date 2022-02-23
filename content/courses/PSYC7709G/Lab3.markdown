@@ -1,14 +1,14 @@
 ---
 title: Lab 3 - Multiple Regression II
 author: Drew Shives
-date: '2022-02-4'
+date: '2022-02-04'
 slug: lab-3-multiple-regression-ii
 categories: []
 tags: []
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2022-02-22T19:08:14-05:00'
+lastmod: '2022-02-04T19:08:14-05:00'
 featured: no
 type: book
 image:
@@ -249,7 +249,7 @@ summary(partial_pool_model)
 ```
 
 ```
-## Warning: There were 293 divergent transitions after warmup. Increasing
+## Warning: There were 99 divergent transitions after warmup. Increasing
 ## adapt_delta above 0.99 may help. See http://mc-stan.org/misc/
 ## warnings.html#divergent-transitions-after-warmup
 ```
@@ -265,22 +265,22 @@ summary(partial_pool_model)
 ## Group-Level Effects: 
 ## ~age (Number of levels: 3) 
 ##                            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-## sd(Intercept)                  2.68      1.59     0.17     6.13 1.02     1650
-## sd(speech_rate)                6.16      1.30     3.92     8.91 1.02      357
-## cor(Intercept,speech_rate)     0.50      0.45    -0.71     0.99 1.00      991
+## sd(Intercept)                  2.63      1.63     0.12     6.13 1.00     1579
+## sd(speech_rate)                6.23      1.23     4.03     8.79 1.00     3170
+## cor(Intercept,speech_rate)     0.50      0.46    -0.71     0.99 1.00     1297
 ##                            Tail_ESS
-## sd(Intercept)                  1886
-## sd(speech_rate)                3696
-## cor(Intercept,speech_rate)     1260
+## sd(Intercept)                  1890
+## sd(speech_rate)                3659
+## cor(Intercept,speech_rate)     1694
 ## 
 ## Population-Level Effects: 
 ##             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept       3.68      3.54    -4.09     9.80 1.01     2692     3339
-## speech_rate    -0.51      1.22    -2.79     2.02 1.00     2906     4608
+## Intercept       3.59      3.67    -4.14     9.87 1.00     2187     3993
+## speech_rate    -0.50      1.25    -2.76     2.11 1.00     2479     4096
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     1.59      1.03     0.14     4.11 1.05      119       35
+## sigma     1.77      1.03     0.36     4.28 1.01     1150     1232
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -312,7 +312,7 @@ model_summary <- summary(partial_pool_model)
 ```
 
 ```
-## Warning: There were 293 divergent transitions after warmup. Increasing
+## Warning: There were 99 divergent transitions after warmup. Increasing
 ## adapt_delta above 0.99 may help. See http://mc-stan.org/misc/
 ## warnings.html#divergent-transitions-after-warmup
 ```

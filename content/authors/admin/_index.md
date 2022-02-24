@@ -30,7 +30,7 @@ social:
   label: Follow me on Twitter
   link: https://twitter.com/shives_drew
 - icon: instagram
-  icon_pack: fas
+  icon_pack: fab
   link: https://www.instagram.com/drewshives/
 - icon: github
   icon_pack: fab

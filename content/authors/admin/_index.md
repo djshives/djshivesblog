@@ -42,7 +42,7 @@ superuser: true
 title: Drew Shives
 ---
 
-Drew's path to cognitive science and data science has been long and winding. As an undergraduate, he worked with Professor Rimvydas Baltaduonis at Gettysburg College on experimental economics projects, including an honors thesis on the effect of prediction markets on information cascade-prone environments. After a short time in the financial industry, Drew became a cook and chef in some of New York City's finest Michelin-starred restaurants. Through this profession, he honed his focus and gained a greater appreciation for the pursuit of excellence. 
+Throughout his career, Drew has sought to better understand the mind and its processes by applying a mathematically-focused lens to questions about behavior and cognition. As an undergraduate, he worked with Professor Rimvydas Baltaduonis at Gettysburg College on experimental economics projects, including an honors thesis on the effect of prediction markets on information cascade-prone environments. After a short time in the financial industry, Drew became a cook and chef in some of New York City's finest Michelin-starred restaurants. 
 
 Combining all of these previous experiences, Drew is now a PhD candidate at The Graduate Center, CUNY in the Cognitive and Comparative Psychology program. His advisor is Professor Matthew Crump, and he works in the Computational Cognition Lab focused on computational models of cognitive processes and experimental psychology. Drew also works part-time as a Data Scientist at Marina Maher Communications where his work includes hierarchical modeling, full-stack app development, and much more.
 

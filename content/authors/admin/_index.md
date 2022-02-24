@@ -13,7 +13,7 @@ email: "djshives@gmail.com"
 highlight_name: true
 interests:
 - Computational Models of Cognition
-- Generalized Learning and Transfer Learning
+- Cognitive Recommender Systems
 - Bayesian Statistics
 organizations:
 - name: The Graduate Center, CUNY
@@ -29,9 +29,9 @@ social:
   icon_pack: fab
   label: Follow me on Twitter
   link: https://twitter.com/shives_drew
-- icon: graduation-cap
+- icon: instagram
   icon_pack: fas
-  link: 
+  link: https://www.instagram.com/drewshives/
 - icon: github
   icon_pack: fab
   link: https://github.com/djshives

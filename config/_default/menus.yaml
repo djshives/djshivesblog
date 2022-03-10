@@ -4,21 +4,24 @@
 #   The weight parameter defines the order that the links will appear in.
 
 main:
+  - name: Home
+    url: 'https://djshives.netlify.app/'
+    weight: 10
   - name: About
     url: '#about'
-    weight: 10
+    weight: 20
   - name: Courses
     url: courses/
-    weight: 20
+    weight: 30
   - name: Experience
     url: '#experience'
-    weight: 30
+    weight: 40
   # - name: Posts
   #   url: '#posts'
   #   weight: 40
   - name: Photos
     url: https://djshives.myportfolio.com/home
-    weight: 40
+    weight: 50
   # - name: Talks
   #   url: '#talks'
   #   weight: 60
@@ -27,4 +30,4 @@ main:
   #   weight: 70
   - name: Contact
     url: '#contact'
-    weight: 50
+    weight: 60

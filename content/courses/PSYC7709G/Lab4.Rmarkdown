@@ -1,0 +1,121 @@
+---
+title: Lab 4 - ANOVA
+author: Drew Shives
+date: '2022-02-03'
+slug: lab-4-anova
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-03-10T12:49:22-05:00'
+featured: no
+type: book
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(papaja)
+```
+
+## Question (1) 
+
+### Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same. For example, prove that the p-values are the same, and prove that the F-value and T-value are related.
+
+Loading in the example data.
+
+```{r}
+example_data <- tibble(Group = rep(c("A","B"), each = 5),
+                       DV = c(2,4,3,5,4,7,6,5,6,7))
+```
+
+Running an ANOVA on the example data, saving it to an object, and displaying the summary.
+
+```{r}
+example_anova <- aov(DV ~ Group, example_data)
+summary(example_anova)
+```
+
+Running a two sample t-test on the sample data, saving it to an object, and displaying the summary.
+
+```{r}
+example_t_test <- t.test(DV ~ Group, example_data, var.equal = TRUE)
+example_t_test
+```
+
+### Showing that the results of both analyses are the same.
+
+The square of the t-statistic and the F-statistic are the same.
+
+```{r}
+round((example_t_test$statistic ^ 2), 5) == round(summary(example_anova)[[1]][1, 4], 5)
+```
+
+The p-values for both are the same.
+
+```{r}
+round(example_t_test$p.value, 5) == round(summary(example_anova)[[1]][1, 5], 5)
+```
+
+## Question (2)
+
+### Look at the lab on ANOVA that I wrote for our undergraduate statistics OER lab manual https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html. That lab shows an example of obtaining data from a published paper in psych science where a one-factor ANOVA was used as a part of the analysis. Load the data, conduct the ANOVA, report a ggplot of the means, and use papaja to help you write a short results section reporting the ANOVA result.
+
+Loading in the experimental data.
+
+```{r warning = FALSE, error = FALSE}
+data <- read_csv("https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/Jamesetal2015Experiment2.csv")
+
+```
+
+Creating the factors and levels for "Condition".
+
+```{r}
+data$Condition <- as.factor(data$Condition)
+
+levels(data$Condition) <- c("Control", "Reactivation+Tetris", "Tetris_only", "Reactivation_only")
+
+```
+
+### Graphing the means, standard deviations, and individual scores.
+
+```{r}
+descriptive_df <- data %>% 
+                    group_by(Condition) %>% 
+                    summarise(means= mean(Days_One_to_Seven_Number_of_Intrusions),
+                              SEs = sd(Days_One_to_Seven_Number_of_Intrusions)/sqrt(length(Days_One_to_Seven_Number_of_Intrusions)))
+
+ggplot(descriptive_df, aes(x=Condition, y=means)) + 
+  geom_bar(stat="identity", aes(fill=Condition)) + 
+  geom_errorbar(aes(ymin=means-SEs,               
+                    ymax=means+SEs), width=.1) +
+  geom_point(data=data, aes(x=Condition, y=Days_One_to_Seven_Number_of_Intrusions), alpha=.5)+
+  geom_point(alpha=.25)+
+  ylab("Intrusive Memories (Mean for Week)")
+```
+
+Running an ANOVA on the experimental data, saving it to an object, and displaying the summary.
+
+```{r}
+anova <- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, data)
+
+summary(anova)
+```
+
+### Reporting the result using papaja.
+
+```{r}
+apa_output <- apa_print(anova)
+```
+
+The main effect of condition was significant, `r apa_output$full_result`. 

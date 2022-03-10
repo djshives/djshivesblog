@@ -30,10 +30,11 @@
   
     
   
-  <meta name="description" content="Course lessons and assignments." />
+  <meta name="description" content="Introduction The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.
+Data and Exploratory Data Analysis Let&rsquo;s begin by loading in the necessary packages&hellip;" />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/" />
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lab-3-multiple-regression-ii/" />
 
   
 
@@ -266,8 +267,6 @@
   
 
   
-    <link rel="alternate" href="/courses/psyc7709g/index.xml" type="application/rss+xml" title="Academic" />
-  
 
   
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -276,7 +275,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/" />
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lab-3-multiple-regression-ii/" />
 
   
   
@@ -293,14 +292,19 @@
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="Academic" />
-  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/" />
-  <meta property="og:title" content="PSYC 7709G - Using R for Reproducible Research | Academic" />
-  <meta property="og:description" content="Course lessons and assignments." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lab-3-multiple-regression-ii/" />
+  <meta property="og:title" content="Lab 3 - Multiple Regression II | Academic" />
+  <meta property="og:description" content="Introduction The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.
+Data and Exploratory Data Analysis Let&rsquo;s begin by loading in the necessary packages&hellip;" /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
-      <meta property="og:updated_time" content="2022-01-31T00:00:00&#43;00:00" />
+      <meta
+        property="article:published_time"
+        content="2022-02-04T00:00:00&#43;00:00"
+      />
     
+    <meta property="article:modified_time" content="2022-02-04T19:08:14-05:00">
   
 
   
@@ -311,15 +315,17 @@
 
   
 
+  
 
 
 
 
-  <title>PSYC 7709G - Using R for Reproducible Research | Academic</title>
+
+  <title>Lab 3 - Multiple Regression II | Academic</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="a878480a4789faf54ff2c29081a9644c" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="14e0dcbc0c126ad59c8c6cedbfb53b4b" >
 
   
   
@@ -656,7 +662,7 @@
     <div class="d-flex">
       <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
         
-          Courses
+          Lessons
         
       </span>
       <span><i class="fas fa-chevron-down"></i></span>
@@ -693,6 +699,10 @@
 
       
       
+        
+          
+        
+      
 
 
   
@@ -706,7 +716,7 @@
 
     
       <div class="docs-toc-item">
-        <a class="docs-toc-link  active" href="/courses/psyc7709g/">Lessons</a>
+        <a class="docs-toc-link " href="/courses/psyc7709g/">Lessons</a>
     
       
         <ul class="nav docs-sidenav">
@@ -721,7 +731,7 @@
 
 
 
-  <li class=""><a href="/courses/psyc7709g/lab-3-multiple-regression-ii/">Lab 3 - Multiple Regression II</a></li>
+  <li class="active"><a href="/courses/psyc7709g/lab-3-multiple-regression-ii/">Lab 3 - Multiple Regression II</a></li>
 
 
 
@@ -753,7 +763,13 @@
 
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#lessons-and-labs-from-psyc-7709g">Lessons and Labs from PSYC 7709G</a></li>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li><a href="#data-and-exploratory-data-analysis">Data and Exploratory Data Analysis</a></li>
+      </ul>
+    </li>
+    <li><a href="#no-pooling-models">No Pooling Models</a></li>
+    <li><a href="#partial-pooling-model-multilevel">Partial-Pooling Model: Multilevel</a></li>
   </ul>
 </nav>
 
@@ -771,6 +787,7 @@
   <nav class="d-none d-md-flex" aria-label="breadcrumb">
     <ol class="breadcrumb">
       
+  
   
   
 
@@ -792,8 +809,17 @@
   </li>
 
 
-      <li class="breadcrumb-item active" aria-current="page">
+  <li class="breadcrumb-item">
+    <a href="/courses/psyc7709g/">
+      
         Lessons
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        Lab 3 - Multiple Regression II
       </li>
     </ol>
   </nav>
@@ -801,35 +827,260 @@
 
           
 
-          <h1>PSYC 7709G - Using R for Reproducible Research</h1>
+          <h1>Lab 3 - Multiple Regression II</h1>
 
           <div class="article-style">
-            
+            <h2 id="introduction">Introduction</h2>
+<p>The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.</p>
+<h3 id="data-and-exploratory-data-analysis">Data and Exploratory Data Analysis</h3>
+<p>Let&rsquo;s begin by loading in the necessary packages&hellip;</p>
+<pre><code class="language-r">library(MASS)
+library(tidyverse)
+library(ggrepel)
+library(extraDistr)
+library(loo)
+library(bridgesampling)
+library(brms)
+library(rstan)
+library(bayesplot)
+library(tictoc)
+library(hypr)
+library(tidybayes)
+rstan_options(auto_write = FALSE)
+options(mc.cores = parallel::detectCores())
+select &lt;- dplyr::select
+</code></pre>
+<p>&hellip;And create a toy dataset. For this lab, we will be using the research design by Hulme et al. (1984) that investigates whether age and speech rate are involed with memory ability.</p>
+<pre><code class="language-r">data &lt;- tibble(age = c(4,4,7,7,10,10),
+               speech_rate = c(1,2,2,4,3,6),
+               memory = c(14,23,30,50,39,67),
+               id = c(1, 2, 3, 4, 5, 6))
 
+data
+</code></pre>
+<pre><code>## # A tibble: 6 × 4
+##     age speech_rate memory    id
+##   &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     4           1     14     1
+## 2     4           2     23     2
+## 3     7           2     30     3
+## 4     7           4     50     4
+## 5    10           3     39     5
+## 6    10           6     67     6
+</code></pre>
+<p>As we can see from the above as speech rate increases, so does memory ability. The same, however, can be said for age and memory ability. This can be better illustrated visually.</p>
+<pre><code class="language-r">data %&gt;%
+  ggplot(aes(x = speech_rate, y = memory, group = age)) +
+  geom_point() +
+  facet_wrap(~age) +
+  geom_label_repel(aes(label = memory), nudge_x = 1, na.rm = TRUE) +
+  scale_x_continuous(
+    limits = c(0, 7),
+    sec.axis = sec_axis(~ . , name = &quot;Age&quot;, breaks = NULL, labels = NULL)
+    ) +
+  ggtitle(&quot;Memory by Speech Rate&quot;) +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Unfortunately, it looks like we have an issue of independent variables being correlated with one another, known as multicollinearity.</p>
+<pre><code class="language-r">cor(data)
+</code></pre>
+<pre><code>##                   age speech_rate    memory        id
+## age         1.0000000   0.7500000 0.8027961 0.9561829
+## speech_rate 0.7500000   1.0000000 0.9889517 0.8964215
+## memory      0.8027961   0.9889517 1.0000000 0.9261501
+## id          0.9561829   0.8964215 0.9261501 1.0000000
+</code></pre>
+<p>As we can see from the above, there is a 75% correlation between age and speech_rate. This means that a complete pooling regression model, where all of the data is pooled together, is not appropriate.</p>
+<p>We can build the complete pooling model using the lm() function. The dependent variable, memory, is placed to the left of the &ldquo;~&rdquo; in the function, and the independent variables, age and speech_rate, to the right. The &ldquo;data&rdquo; parameter is filled by data.</p>
+<p>The summary() function is then used to view the regression output.</p>
+<pre><code class="language-r">complete_pool &lt;- lm(
+  memory ~ 1 + speech_rate + age,
+  data = data
+  )
 
+summary(complete_pool)
+</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = memory ~ 1 + speech_rate + age, data = data)
+## 
+## Residuals:
+##      1      2      3      4      5      6 
+## -1.167 -1.667  2.333  3.333 -1.167 -1.667 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)    1.667      3.598   0.463  0.67470   
+## speech_rate    9.500      1.087   8.736  0.00316 **
+## age            1.000      0.725   1.379  0.26162   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.877 on 3 degrees of freedom
+## Multiple R-squared:  0.9866,	Adjusted R-squared:  0.9776 
+## F-statistic: 110.1 on 2 and 3 DF,  p-value: 0.001559
+</code></pre>
+<p>There is a high R^2 for the model, but when looking at the individual r^2 for the independent variables&hellip;</p>
+<pre><code class="language-r">cor(data) ^ 2
+</code></pre>
+<pre><code>##                   age speech_rate    memory        id
+## age         1.0000000   0.5625000 0.6444815 0.9142857
+## speech_rate 0.5625000   1.0000000 0.9780254 0.8035714
+## memory      0.6444815   0.9780254 1.0000000 0.8577539
+## id          0.9142857   0.8035714 0.8577539 1.0000000
+</code></pre>
+<p>&hellip;They sum to greater than 1!</p>
+<p>So what is to be done?</p>
+<h2 id="no-pooling-models">No Pooling Models</h2>
+<p>One possible solution is to not pool any data and create an individual model for each age bucket&hellip;</p>
+<pre><code class="language-r">ggplot(
+  data = data,
+  aes(
+    x = speech_rate,
+    y = memory,
+    col = age,
+    group = age
+  )
+) +
+  geom_point() +
+  geom_smooth(
+    method = lm
+  )
+</code></pre>
+<pre><code>## `geom_smooth()` using formula 'y ~ x'
+</code></pre>
+<pre><code>## Warning in qt((1 - level)/2, df): NaNs produced
 
+## Warning in qt((1 - level)/2, df): NaNs produced
 
+## Warning in qt((1 - level)/2, df): NaNs produced
+</code></pre>
+<pre><code>## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
 
+## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
 
+## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>But this looses the relationship between speech rate and age. In large data sets, this can become especially confusing and time consuming.</p>
+<h2 id="partial-pooling-model-multilevel">Partial-Pooling Model: Multilevel</h2>
+<p>Rather than no pooling or complete pooling, we can create a partially-pooled multilevel model! Partial pooling is a process where population-level and individual-level effects are estimated simultaneously. By doing so, each individual&rsquo;s estimated effect is a reflection of the weighted combination of their own data and the population average. This allows us to account for the relationship between speech rate and age.</p>
+<p>Using the brms package, we can easily fit a multilevel model in a very similar fashion to the lm() function. The dependent variable for the model again falls to the left of the &ldquo;~&rdquo; and the independent variables are placed to the right. What is different, however, is in the parentheses, &ldquo;(speech_rate|age)&rdquo;. What this parameter does is specify that we want varying slopes and intercepts for speech rate for each age grouping.</p>
+<p>(Aside: we also specify several other things unique to Bayesian models, most notably priors. Prior specification is a topic in it of itself, and for this model we can use vaguely informative priors based on the means and standard deviations of the data itself.)</p>
+<pre><code class="language-r">priors &lt;- c(
+  prior(normal(3, 2), class = b, coef = speech_rate),
+  prior(normal(0, 2), class = Intercept),
+  prior(normal(0, 2), class = sigma),
+  prior(normal(0, 2), class = sd, coef = Intercept, group = age),
+  prior(normal(3, 2), class = sd, coef = speech_rate, group = age)
+)
 
+partial_pool_model &lt;- brm(
+  memory ~ 1 + speech_rate + (speech_rate|age),
+  data = data,
+  prior= priors,
+  iter = 4000,
+  control = list(
+    adapt_delta = 0.99,
+    max_treedepth = 20
+    )
+)
+</code></pre>
+<p>Similar to using the &ldquo;summary()&rdquo; function for the complete pooling model, we can use it here for the multilevel model.</p>
+<pre><code class="language-r">summary(partial_pool_model)
+</code></pre>
+<pre><code>## Warning: There were 278 divergent transitions after warmup. Increasing
+## adapt_delta above 0.99 may help. See http://mc-stan.org/misc/
+## warnings.html#divergent-transitions-after-warmup
+</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: memory ~ 1 + speech_rate + (speech_rate | age) 
+##    Data: data (Number of observations: 6) 
+##   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
+##          total post-warmup draws = 8000
+## 
+## Group-Level Effects: 
+## ~age (Number of levels: 3) 
+##                            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+## sd(Intercept)                  2.66      1.58     0.16     5.97 1.00     1534
+## sd(speech_rate)                6.18      1.25     3.98     8.83 1.01      439
+## cor(Intercept,speech_rate)     0.50      0.44    -0.70     0.99 1.01     1247
+##                            Tail_ESS
+## sd(Intercept)                  2288
+## sd(speech_rate)                3105
+## cor(Intercept,speech_rate)     1383
+## 
+## Population-Level Effects: 
+##             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept       3.67      3.53    -4.17     9.77 1.02     2575     4009
+## speech_rate    -0.50      1.21    -2.67     2.03 1.02     2718     3747
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma     1.69      1.03     0.17     4.19 1.03      137       33
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).
+</code></pre>
+<pre><code class="language-r">mcmc_areas(
+  partial_pool_model,
+  pars = c(
+    &quot;b_Intercept&quot;,
+    &quot;b_speech_rate&quot;,
+    &quot;sd_age__Intercept&quot;,
+    &quot;sd_age__speech_rate&quot;
+  ),
+  prob_outer = 0.99,
+  prob = 0.95
+)
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>While the summary table is useful to get a sense of the model, and the subsequent chart visualizes the coefficients of the model for both the population and group levels, looking at the effect sizes for speech rate per age group is most illustrative.</p>
+<pre><code class="language-r">model_summary &lt;- summary(partial_pool_model)
+</code></pre>
+<pre><code>## Warning: There were 278 divergent transitions after warmup. Increasing
+## adapt_delta above 0.99 may help. See http://mc-stan.org/misc/
+## warnings.html#divergent-transitions-after-warmup
+</code></pre>
+<pre><code class="language-r">effect_estimates &lt;- as_tibble(ranef(partial_pool_model)[[1]]) %&gt;%
+  mutate(Estimate.speech_rate_with_fixed = Estimate.speech_rate + model_summary$fixed[2, 1])
+  
 
-
-
-
-
-
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="" srcset="
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_e92fb95a0835a58217074dba42873826.png 400w,
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_72d92c3a7d7bfe61df7354cbabaa2d56.png 760w,
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_1200x1200_fit_lanczos_3.png 1200w"
-               src="/courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_e92fb95a0835a58217074dba42873826.png"
-               width="360"
-               height="414"
-               loading="lazy" data-zoomable /></div>
-  </div></figure>
-<h2 id="lessons-and-labs-from-psyc-7709g">Lessons and Labs from PSYC 7709G</h2>
+ggplot(
+  data = effect_estimates,
+  aes(
+    x = c(4, 7, 10),
+    y = Estimate.speech_rate_with_fixed
+  )
+) +
+  geom_point() +
+  geom_errorbar(
+    aes(
+      ymin = Estimate.speech_rate_with_fixed - 2 * Est.Error.speech_rate,
+      ymax = Estimate.speech_rate_with_fixed + 2 * Est.Error.speech_rate
+    )
+  ) +
+  scale_x_continuous(
+    breaks = c(4, 7, 10),
+  ) +
+  xlab(&quot;Age&quot;) +
+  ylab(&quot;Estimated Effect of Speech Rate on Memory (-/+ 2sd)&quot;) +
+  geom_label_repel(
+    aes(
+      label = round(Estimate.speech_rate_with_fixed, 2)
+    ),
+    nudge_y = 1
+  )
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>The above chart shows the estimated effect of speech rate on memory by age. We can see that, somewhat surprisingly, age 7 is where the effect of speech rate on memory is greatest while at age 4 it is the lowest.</p>
 
           </div>
 
@@ -844,6 +1095,19 @@
 <div class="post-nav">
   
   
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/psyc7709g/lab-2-multiple-regression-i/" rel="next">Lab 2 - Multiple Regression I</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/psyc7709g/lab-4-anova/" rel="prev">Lab 4 - ANOVA</a>
+  </div>
+  
 </div>
 
           </div>
@@ -851,7 +1115,7 @@
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Jan 31, 2022</p>
+          <p>Last updated on Feb 4, 2022</p>
 
           
 

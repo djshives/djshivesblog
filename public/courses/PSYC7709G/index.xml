@@ -1,51 +1,582 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Using R for Reproducible Research | Academic</title>
+    <title>PSYC 7709G - Using R for Reproducible Research | Academic</title>
     <link>https://djshives.netlify.app/courses/psyc7709g/</link>
       <atom:link href="https://djshives.netlify.app/courses/psyc7709g/index.xml" rel="self" type="application/rss+xml" />
-    <description>Using R for Reproducible Research</description>
+    <description>PSYC 7709G - Using R for Reproducible Research</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 31 Jan 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
-      <title>Using R for Reproducible Research</title>
+      <title>PSYC 7709G - Using R for Reproducible Research</title>
       <link>https://djshives.netlify.app/courses/psyc7709g/</link>
     </image>
     
     <item>
       <title>Lab 1 - Shaping Data</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab1/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-1-shaping-data/</link>
       <pubDate>Sun, 06 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab1/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-1-shaping-data/</guid>
       <description>&lt;h2 id=&#34;loading-libraries&#34;&gt;Loading libraries.&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
 library(readxl)
+library(tidyxl)
+library(unpivotr)
+library(reshape2)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;loading-in-the-data&#34;&gt;Loading in the data.&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(readxl)
-
-data = read_excel(&amp;quot;data/Lab1_data.xlsx&amp;quot;)
+&lt;h2 id=&#34;loading-data&#34;&gt;Loading data.&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data = read_excel(&amp;quot;data/Lab1_data.xlsx&amp;quot;, col_names = FALSE)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## New names:
 ## * `` -&amp;gt; ...1
+## * `` -&amp;gt; ...2
 ## * `` -&amp;gt; ...3
 ## * `` -&amp;gt; ...4
 ## * `` -&amp;gt; ...5
-## * `` -&amp;gt; ...6
 ## * ...
 &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;head(data)
+&lt;h2 id=&#34;manipulating-data-into-long-format-using-unpivotr-and-tidyxl&#34;&gt;Manipulating data into long format using unpivotr and tidyxl.&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data2 &amp;lt;- data %&amp;gt;% 
+  as_cells() %&amp;gt;%
+  behead(&amp;quot;up-left&amp;quot;, noise_level) %&amp;gt;%
+  behead(&amp;quot;up-left&amp;quot;, time_of_day) %&amp;gt;%
+  behead(&amp;quot;up-left&amp;quot;, a_b) %&amp;gt;%
+  filter(a_b != &amp;quot;Participant&amp;quot;) %&amp;gt;%
+  rename(score = chr) %&amp;gt;%
+  select(score, noise_level, time_of_day, a_b)
+
+data2$participant &amp;lt;- rep(1:10, 12)
+
+data2 &amp;lt;- data2 %&amp;gt;%
+  relocate(participant, .before = score) %&amp;gt;%
+  relocate(score, .after = a_b) %&amp;gt;%
+  arrange(participant, decreasting = TRUE)
+
+data2
 &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 6 × 13
-##   ...1   Noisy ...3  ...4  ...5  ...6  ...7  Quiet ...9  ...10 ...11 ...12 ...13
-##   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
-## 1 &amp;lt;NA&amp;gt;   Morn… &amp;lt;NA&amp;gt;  Afte… &amp;lt;NA&amp;gt;  Even… &amp;lt;NA&amp;gt;  Morn… &amp;lt;NA&amp;gt;  Afte… &amp;lt;NA&amp;gt;  Even… &amp;lt;NA&amp;gt; 
-## 2 Parti… A     B     A     B     A     B     A     B     A     B     A     B    
-## 3 1      61    77    97    97    89    94    87    87    65    53    79    51   
-## 4 2      100   68    92    57    55    85    96    88    91    56    90    53   
-## 5 3      70    56    89    78    98    73    86    86    99    92    67    96   
-## 6 4      100   84    59    85    73    74    50    62    89    61    85    67
+&lt;pre&gt;&lt;code&gt;## # A tibble: 120 × 5
+##    participant noise_level time_of_day a_b   score
+##          &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
+##  1           1 Noisy       Morning     A     61   
+##  2           1 Noisy       Morning     B     77   
+##  3           1 Noisy       Afternoon   A     97   
+##  4           1 Noisy       Afternoon   B     97   
+##  5           1 Noisy       Evening     A     89   
+##  6           1 Noisy       Evening     B     94   
+##  7           1 Quiet       Morning     A     87   
+##  8           1 Quiet       Morning     B     87   
+##  9           1 Quiet       Afternoon   A     65   
+## 10           1 Quiet       Afternoon   B     53   
+## # … with 110 more rows
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;manipulating-data-into-long-format-using-the-tidyverse&#34;&gt;Manipulating data into long format using the tidyverse.&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data_headerless &amp;lt;- data[-c(1, 2), ] %&amp;gt;%
+  select(!1)
+
+colnames(data_headerless) &amp;lt;- data_headerless[1, ]
+
+data_headerless &amp;lt;- data_headerless[-1, ]
+
+data_headerless$participant &amp;lt;- 1:10
+
+data_headerless &amp;lt;- pivot_longer(data_headerless, cols = c(A, B))
+
+data_headerless$time_of_day &amp;lt;- rep(c(rep(&amp;quot;Morning&amp;quot;, 2), rep(&amp;quot;Afternoon&amp;quot;, 2), rep(&amp;quot;Evening&amp;quot;, 2)), 20)
+
+data_headerless$noise_level &amp;lt;- rep(c(rep(&amp;quot;Noisy&amp;quot;, 6), rep(&amp;quot;Quiet&amp;quot;, 6)), 10)
+
+data_headerless
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 120 × 5
+##    participant name  value time_of_day noise_level
+##          &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;      
+##  1           1 A     61    Morning     Noisy      
+##  2           1 B     77    Morning     Noisy      
+##  3           1 A     97    Afternoon   Noisy      
+##  4           1 B     97    Afternoon   Noisy      
+##  5           1 A     89    Evening     Noisy      
+##  6           1 B     94    Evening     Noisy      
+##  7           1 A     87    Morning     Quiet      
+##  8           1 B     87    Morning     Quiet      
+##  9           1 A     65    Afternoon   Quiet      
+## 10           1 B     53    Afternoon   Quiet      
+## # … with 110 more rows
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lab 2 - Multiple Regression I</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-2-multiple-regression-i/</link>
+      <pubDate>Sat, 05 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-2-multiple-regression-i/</guid>
+      <description>&lt;h2 id=&#34;loading-libraries&#34;&gt;Loading libraries.&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+library(ggrepel)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;original-graph&#34;&gt;Original Graph&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;slamecka_design &amp;lt;- tibble(number_of_learning_trials = rep(c(2,4,8), each=6),
+                          number_of_IL = rep(rep(c(2,4,8), 2), 3),
+                          subjects = 1:18,
+                          recall = c(35,21,6,
+                                   39,31,8,
+                                   40,34,18,
+                                   52,42,26,
+                                   61,58,46,
+                                   73,66,52
+                                   )
+                          )
+
+ggplot(slamecka_design,aes(x=number_of_IL,
+                           group = number_of_learning_trials,
+                           y=recall))+
+  geom_line(stat = &amp;quot;summary&amp;quot;, fun = &amp;quot;mean&amp;quot;)+
+  geom_point(stat = &amp;quot;summary&amp;quot;, fun = &amp;quot;mean&amp;quot;)+
+  
+  theme_classic()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab2_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;modified-graph-to-match-figure-55-in-the-textbook&#34;&gt;Modified graph to match Figure 5.5 in the textbook.&lt;/h2&gt;
+&lt;p&gt;Modifications include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Changing the x-axis title.&lt;/li&gt;
+&lt;li&gt;Changing the y-axis title.&lt;/li&gt;
+&lt;li&gt;Making the x-axis and y-axis ticks the same as in the textbook.&lt;/li&gt;
+&lt;li&gt;Including different symbols to differentiate the lines.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;labels = c(&amp;quot;2 learning trials&amp;quot;, &amp;quot;4 learning trials&amp;quot;, &amp;quot;8 learning trials&amp;quot;)
+
+slamecka_design &amp;lt;- tibble(number_of_learning_trials = rep(c(2,4,8), each=6),
+                          number_of_IL = rep(rep(c(2,4,8), 2), 3),
+                          subjects = 1:18,
+                          recall = c(35,21,6,
+                                   39,31,8,
+                                   40,34,18,
+                                   52,42,26,
+                                   61,58,46,
+                                   73,66,52
+                                   )
+                          )
+
+slamecka_design &amp;lt;- slamecka_design %&amp;gt;%
+  mutate(
+    label = case_when(
+      (number_of_IL == 8 &amp;amp; subjects == 6) ~ &amp;quot;2 learning trials&amp;quot;,
+      (number_of_IL == 8 &amp;amp; subjects == 12) ~ &amp;quot;4 learning trials&amp;quot;,
+      (number_of_IL == 8 &amp;amp; subjects == 18) ~ &amp;quot;8 learning trials&amp;quot;
+    )
+  )
+           
+ggplot(slamecka_design,aes(x=number_of_IL,
+                           group = number_of_learning_trials,
+                           y=recall)) +
+  geom_line(stat = &amp;quot;summary&amp;quot;, fun = &amp;quot;mean&amp;quot;) +
+  geom_text_repel(aes(label = label), nudge_x = 1, na.rm = TRUE) +
+  geom_point(stat = &amp;quot;summary&amp;quot;, fun = &amp;quot;mean&amp;quot;, aes(shape = factor(number_of_learning_trials)), show.legend = FALSE) +
+  xlab(&amp;quot;Number of interpolated lists&amp;quot;) +
+  ylab(&amp;quot;Number of words correct&amp;quot;) +
+  scale_x_continuous(breaks = c(2, 4, 8),
+                   labels = c(2, 4, 8)) +
+  ylim(0, 80) +
+  expand_limits(x = 9) +
+  theme_classic()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab2_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3x3x3-design-and-graph&#34;&gt;3x3x3 Design and Graph&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;labels = c(&amp;quot;2 learning trials&amp;quot;, &amp;quot;4 learning trials&amp;quot;, &amp;quot;8 learning trials&amp;quot;)
+
+slamecka_design2 &amp;lt;- tibble(number_of_learning_trials = rep(c(2,4,8), each=18),
+                          number_of_IL = rep(rep(c(2,4,8), 2), 9),
+                          reward = rep(c(rep(0, 6), rep(50, 6), rep(1000, 6)), 3),
+                          subjects = 1:54,
+                          recall = sample(1:100, 54, replace = TRUE)
+                          )
+
+slamecka_design2 &amp;lt;- slamecka_design2 %&amp;gt;%
+  mutate(
+    label = case_when(
+      (number_of_IL == 8 &amp;amp; subjects == 6) ~ &amp;quot;2 learning trials&amp;quot;,
+      (number_of_IL == 8 &amp;amp; subjects == 12) ~ &amp;quot;4 learning trials&amp;quot;,
+      (number_of_IL == 8 &amp;amp; subjects == 18) ~ &amp;quot;8 learning trials&amp;quot;
+    )
+  )
+           
+ggplot(slamecka_design2,aes(x=number_of_IL,
+                           group = number_of_learning_trials,
+                           y=recall)) +
+  facet_wrap(~reward) +
+  geom_line(stat = &amp;quot;summary&amp;quot;, fun = &amp;quot;mean&amp;quot;) +
+  geom_point(stat = &amp;quot;summary&amp;quot;, fun = &amp;quot;mean&amp;quot;, aes(shape = factor(number_of_learning_trials))) +
+  xlab(&amp;quot;Number of interpolated lists&amp;quot;) +
+  ylab(&amp;quot;Number of words correct&amp;quot;) +
+  theme(legend.title = element_text(size = 1), 
+               legend.text = element_text(size = 1)) +
+  labs(shape = &amp;quot;Number of learning trials&amp;quot;) +
+  scale_x_continuous(breaks = c(2, 4, 8),
+                   labels = c(2, 4, 8),
+                   sec.axis = sec_axis(~ . , name = &amp;quot;Reward&amp;quot;, breaks = NULL, labels = NULL)) +
+  ylim(0, 80) +
+  expand_limits(x = 9) +
+  theme_classic()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Removed 11 rows containing non-finite values (stat_summary).
+## Removed 11 rows containing non-finite values (stat_summary).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab2_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lab 3 - Multiple Regression II</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-3-multiple-regression-ii/</link>
+      <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-3-multiple-regression-ii/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.&lt;/p&gt;
+&lt;h3 id=&#34;data-and-exploratory-data-analysis&#34;&gt;Data and Exploratory Data Analysis&lt;/h3&gt;
+&lt;p&gt;Let&amp;rsquo;s begin by loading in the necessary packages&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(MASS)
+library(tidyverse)
+library(ggrepel)
+library(extraDistr)
+library(loo)
+library(bridgesampling)
+library(brms)
+library(rstan)
+library(bayesplot)
+library(tictoc)
+library(hypr)
+library(tidybayes)
+rstan_options(auto_write = FALSE)
+options(mc.cores = parallel::detectCores())
+select &amp;lt;- dplyr::select
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;hellip;And create a toy dataset. For this lab, we will be using the research design by Hulme et al. (1984) that investigates whether age and speech rate are involed with memory ability.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data &amp;lt;- tibble(age = c(4,4,7,7,10,10),
+               speech_rate = c(1,2,2,4,3,6),
+               memory = c(14,23,30,50,39,67),
+               id = c(1, 2, 3, 4, 5, 6))
+
+data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 × 4
+##     age speech_rate memory    id
+##   &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1     4           1     14     1
+## 2     4           2     23     2
+## 3     7           2     30     3
+## 4     7           4     50     4
+## 5    10           3     39     5
+## 6    10           6     67     6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As we can see from the above as speech rate increases, so does memory ability. The same, however, can be said for age and memory ability. This can be better illustrated visually.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;%
+  ggplot(aes(x = speech_rate, y = memory, group = age)) +
+  geom_point() +
+  facet_wrap(~age) +
+  geom_label_repel(aes(label = memory), nudge_x = 1, na.rm = TRUE) +
+  scale_x_continuous(
+    limits = c(0, 7),
+    sec.axis = sec_axis(~ . , name = &amp;quot;Age&amp;quot;, breaks = NULL, labels = NULL)
+    ) +
+  ggtitle(&amp;quot;Memory by Speech Rate&amp;quot;) +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately, it looks like we have an issue of independent variables being correlated with one another, known as multicollinearity.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;cor(data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                   age speech_rate    memory        id
+## age         1.0000000   0.7500000 0.8027961 0.9561829
+## speech_rate 0.7500000   1.0000000 0.9889517 0.8964215
+## memory      0.8027961   0.9889517 1.0000000 0.9261501
+## id          0.9561829   0.8964215 0.9261501 1.0000000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As we can see from the above, there is a 75% correlation between age and speech_rate. This means that a complete pooling regression model, where all of the data is pooled together, is not appropriate.&lt;/p&gt;
+&lt;p&gt;We can build the complete pooling model using the lm() function. The dependent variable, memory, is placed to the left of the &amp;ldquo;~&amp;rdquo; in the function, and the independent variables, age and speech_rate, to the right. The &amp;ldquo;data&amp;rdquo; parameter is filled by data.&lt;/p&gt;
+&lt;p&gt;The summary() function is then used to view the regression output.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;complete_pool &amp;lt;- lm(
+  memory ~ 1 + speech_rate + age,
+  data = data
+  )
+
+summary(complete_pool)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## lm(formula = memory ~ 1 + speech_rate + age, data = data)
+## 
+## Residuals:
+##      1      2      3      4      5      6 
+## -1.167 -1.667  2.333  3.333 -1.167 -1.667 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&amp;gt;|t|)   
+## (Intercept)    1.667      3.598   0.463  0.67470   
+## speech_rate    9.500      1.087   8.736  0.00316 **
+## age            1.000      0.725   1.379  0.26162   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.877 on 3 degrees of freedom
+## Multiple R-squared:  0.9866,	Adjusted R-squared:  0.9776 
+## F-statistic: 110.1 on 2 and 3 DF,  p-value: 0.001559
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There is a high R^2 for the model, but when looking at the individual r^2 for the independent variables&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;cor(data) ^ 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                   age speech_rate    memory        id
+## age         1.0000000   0.5625000 0.6444815 0.9142857
+## speech_rate 0.5625000   1.0000000 0.9780254 0.8035714
+## memory      0.6444815   0.9780254 1.0000000 0.8577539
+## id          0.9142857   0.8035714 0.8577539 1.0000000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;hellip;They sum to greater than 1!&lt;/p&gt;
+&lt;p&gt;So what is to be done?&lt;/p&gt;
+&lt;h2 id=&#34;no-pooling-models&#34;&gt;No Pooling Models&lt;/h2&gt;
+&lt;p&gt;One possible solution is to not pool any data and create an individual model for each age bucket&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(
+  data = data,
+  aes(
+    x = speech_rate,
+    y = memory,
+    col = age,
+    group = age
+  )
+) +
+  geom_point() +
+  geom_smooth(
+    method = lm
+  )
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `geom_smooth()` using formula &#39;y ~ x&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning in qt((1 - level)/2, df): NaNs produced
+
+## Warning in qt((1 - level)/2, df): NaNs produced
+
+## Warning in qt((1 - level)/2, df): NaNs produced
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
+
+## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
+
+## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;But this looses the relationship between speech rate and age. In large data sets, this can become especially confusing and time consuming.&lt;/p&gt;
+&lt;h2 id=&#34;partial-pooling-model-multilevel&#34;&gt;Partial-Pooling Model: Multilevel&lt;/h2&gt;
+&lt;p&gt;Rather than no pooling or complete pooling, we can create a partially-pooled multilevel model! Partial pooling is a process where population-level and individual-level effects are estimated simultaneously. By doing so, each individual&amp;rsquo;s estimated effect is a reflection of the weighted combination of their own data and the population average. This allows us to account for the relationship between speech rate and age.&lt;/p&gt;
+&lt;p&gt;Using the brms package, we can easily fit a multilevel model in a very similar fashion to the lm() function. The dependent variable for the model again falls to the left of the &amp;ldquo;~&amp;rdquo; and the independent variables are placed to the right. What is different, however, is in the parentheses, &amp;ldquo;(speech_rate|age)&amp;rdquo;. What this parameter does is specify that we want varying slopes and intercepts for speech rate for each age grouping.&lt;/p&gt;
+&lt;p&gt;(Aside: we also specify several other things unique to Bayesian models, most notably priors. Prior specification is a topic in it of itself, and for this model we can use vaguely informative priors based on the means and standard deviations of the data itself.)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;priors &amp;lt;- c(
+  prior(normal(3, 2), class = b, coef = speech_rate),
+  prior(normal(0, 2), class = Intercept),
+  prior(normal(0, 2), class = sigma),
+  prior(normal(0, 2), class = sd, coef = Intercept, group = age),
+  prior(normal(3, 2), class = sd, coef = speech_rate, group = age)
+)
+
+partial_pool_model &amp;lt;- brm(
+  memory ~ 1 + speech_rate + (speech_rate|age),
+  data = data,
+  prior= priors,
+  iter = 4000,
+  control = list(
+    adapt_delta = 0.99,
+    max_treedepth = 20
+    )
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Similar to using the &amp;ldquo;summary()&amp;rdquo; function for the complete pooling model, we can use it here for the multilevel model.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;summary(partial_pool_model)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: There were 278 divergent transitions after warmup. Increasing
+## adapt_delta above 0.99 may help. See http://mc-stan.org/misc/
+## warnings.html#divergent-transitions-after-warmup
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: memory ~ 1 + speech_rate + (speech_rate | age) 
+##    Data: data (Number of observations: 6) 
+##   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
+##          total post-warmup draws = 8000
+## 
+## Group-Level Effects: 
+## ~age (Number of levels: 3) 
+##                            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+## sd(Intercept)                  2.66      1.58     0.16     5.97 1.00     1534
+## sd(speech_rate)                6.18      1.25     3.98     8.83 1.01      439
+## cor(Intercept,speech_rate)     0.50      0.44    -0.70     0.99 1.01     1247
+##                            Tail_ESS
+## sd(Intercept)                  2288
+## sd(speech_rate)                3105
+## cor(Intercept,speech_rate)     1383
+## 
+## Population-Level Effects: 
+##             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept       3.67      3.53    -4.17     9.77 1.02     2575     4009
+## speech_rate    -0.50      1.21    -2.67     2.03 1.02     2718     3747
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma     1.69      1.03     0.17     4.19 1.03      137       33
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;mcmc_areas(
+  partial_pool_model,
+  pars = c(
+    &amp;quot;b_Intercept&amp;quot;,
+    &amp;quot;b_speech_rate&amp;quot;,
+    &amp;quot;sd_age__Intercept&amp;quot;,
+    &amp;quot;sd_age__speech_rate&amp;quot;
+  ),
+  prob_outer = 0.99,
+  prob = 0.95
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;While the summary table is useful to get a sense of the model, and the subsequent chart visualizes the coefficients of the model for both the population and group levels, looking at the effect sizes for speech rate per age group is most illustrative.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;model_summary &amp;lt;- summary(partial_pool_model)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: There were 278 divergent transitions after warmup. Increasing
+## adapt_delta above 0.99 may help. See http://mc-stan.org/misc/
+## warnings.html#divergent-transitions-after-warmup
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;effect_estimates &amp;lt;- as_tibble(ranef(partial_pool_model)[[1]]) %&amp;gt;%
+  mutate(Estimate.speech_rate_with_fixed = Estimate.speech_rate + model_summary$fixed[2, 1])
+  
+
+ggplot(
+  data = effect_estimates,
+  aes(
+    x = c(4, 7, 10),
+    y = Estimate.speech_rate_with_fixed
+  )
+) +
+  geom_point() +
+  geom_errorbar(
+    aes(
+      ymin = Estimate.speech_rate_with_fixed - 2 * Est.Error.speech_rate,
+      ymax = Estimate.speech_rate_with_fixed + 2 * Est.Error.speech_rate
+    )
+  ) +
+  scale_x_continuous(
+    breaks = c(4, 7, 10),
+  ) +
+  xlab(&amp;quot;Age&amp;quot;) +
+  ylab(&amp;quot;Estimated Effect of Speech Rate on Memory (-/+ 2sd)&amp;quot;) +
+  geom_label_repel(
+    aes(
+      label = round(Estimate.speech_rate_with_fixed, 2)
+    ),
+    nudge_y = 1
+  )
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The above chart shows the estimated effect of speech rate on memory by age. We can see that, somewhat surprisingly, age 7 is where the effect of speech rate on memory is greatest while at age 4 it is the lowest.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lab 4 - ANOVA</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/</link>
+      <pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/</guid>
+      <description>&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+library(papaja)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;question-1&#34;&gt;Question (1)&lt;/h2&gt;
+&lt;h3 id=&#34;use-r-to-conduct-a-ttest-and-anova-on-the-below-example-data-then-use-r-to-prove-that-the-results-of-both-analyses-are-the-same-for-example-prove-that-the-p-values-are-the-same-and-prove-that-the-f-value-and-t-value-are-related&#34;&gt;Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same. For example, prove that the p-values are the same, and prove that the F-value and T-value are related.&lt;/h3&gt;
+&lt;p&gt;Loading in the example data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;example_data &amp;lt;- tibble(Group = rep(c(&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;), each = 5),
+                       DV = c(2,4,3,5,4,7,6,5,6,7))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Running an ANOVA on the example data, saving it to an object, and displaying the summary.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;example_anova &amp;lt;- aov(DV ~ Group, example_data)
+summary(example_anova)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             Df Sum Sq Mean Sq F value  Pr(&amp;gt;F)   
+## Group        1   16.9    16.9    16.9 0.00339 **
+## Residuals    8    8.0     1.0                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Running a two sample t-test on the sample data, saving it to an object, and displaying the summary.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;example_t_test &amp;lt;- t.test(DV ~ Group, example_data, var.equal = TRUE)
+example_t_test
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## 	Two Sample t-test
+## 
+## data:  DV by Group
+## t = -4.111, df = 8, p-value = 0.003386
+## alternative hypothesis: true difference in means between group A and group B is not equal to 0
+## 95 percent confidence interval:
+##  -4.058445 -1.141555
+## sample estimates:
+## mean in group A mean in group B 
+##             3.6             6.2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;showing-that-the-results-of-both-analyses-are-the-same&#34;&gt;Showing that the results of both analyses are the same.&lt;/h3&gt;
+&lt;p&gt;The square of the t-statistic and the F-statistic are the same.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;round((example_t_test$statistic ^ 2), 5) == round(summary(example_anova)[[1]][1, 4], 5)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    t 
+## TRUE
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The p-values for both are the same.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;round(example_t_test$p.value, 5) == round(summary(example_anova)[[1]][1, 5], 5)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] TRUE
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;question-2&#34;&gt;Question (2)&lt;/h2&gt;
+&lt;h3 id=&#34;look-at-the-lab-on-anova-that-i-wrote-for-our-undergraduate-statistics-oer-lab-manual-httpscrumplabgithubiostatisticslablab-8-one-way-anovahtml-that-lab-shows-an-example-of-obtaining-data-from-a-published-paper-in-psych-science-where-a-one-factor-anova-was-used-as-a-part-of-the-analysis-load-the-data-conduct-the-anova-report-a-ggplot-of-the-means-and-use-papaja-to-help-you-write-a-short-results-section-reporting-the-anova-result&#34;&gt;Look at the lab on ANOVA that I wrote for our undergraduate statistics OER lab manual &lt;a href=&#34;https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html&lt;/a&gt;. That lab shows an example of obtaining data from a published paper in psych science where a one-factor ANOVA was used as a part of the analysis. Load the data, conduct the ANOVA, report a ggplot of the means, and use papaja to help you write a short results section reporting the ANOVA result.&lt;/h3&gt;
+&lt;p&gt;Loading in the experimental data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data &amp;lt;- read_csv(&amp;quot;https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/Jamesetal2015Experiment2.csv&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Creating the factors and levels for &amp;ldquo;Condition&amp;rdquo;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data$Condition &amp;lt;- as.factor(data$Condition)
+
+levels(data$Condition) &amp;lt;- c(&amp;quot;Control&amp;quot;, &amp;quot;Reactivation+Tetris&amp;quot;, &amp;quot;Tetris_only&amp;quot;, &amp;quot;Reactivation_only&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;graphing-the-means-standard-deviations-and-individual-scores&#34;&gt;Graphing the means, standard deviations, and individual scores.&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;descriptive_df &amp;lt;- data %&amp;gt;% 
+                    group_by(Condition) %&amp;gt;% 
+                    summarise(means= mean(Days_One_to_Seven_Number_of_Intrusions),
+                              SEs = sd(Days_One_to_Seven_Number_of_Intrusions)/sqrt(length(Days_One_to_Seven_Number_of_Intrusions)))
+
+ggplot(descriptive_df, aes(x=Condition, y=means)) + 
+  geom_bar(stat=&amp;quot;identity&amp;quot;, aes(fill=Condition)) + 
+  geom_errorbar(aes(ymin=means-SEs,               
+                    ymax=means+SEs), width=.1) +
+  geom_point(data=data, aes(x=Condition, y=Days_One_to_Seven_Number_of_Intrusions), alpha=.5)+
+  geom_point(alpha=.25)+
+  ylab(&amp;quot;Intrusive Memories (Mean for Week)&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab4_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Running an ANOVA on the experimental data, saving it to an object, and displaying the summary.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;anova &amp;lt;- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, data)
+
+summary(anova)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             Df Sum Sq Mean Sq F value Pr(&amp;gt;F)  
+## Condition    3  114.8   38.27   3.795 0.0141 *
+## Residuals   68  685.8   10.09                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;reporting-the-result-using-papaja&#34;&gt;Reporting the result using papaja.&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;apa_output &amp;lt;- apa_print(anova)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The main effect of condition was significant, &lt;code&gt;\(F(3, 68) = 3.79\)&lt;/code&gt;, &lt;code&gt;\(\mathit{MSE} = 10.09\)&lt;/code&gt;, &lt;code&gt;\(p = .014\)&lt;/code&gt;, &lt;code&gt;\(\hat{\eta}^2_G = .143\)&lt;/code&gt;.&lt;/p&gt;
 </description>
     </item>
     

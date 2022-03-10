@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="Course lessons and assignments." />
+  <meta name="description" content="library(tidyverse) library(papaja)  Question (1) Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same." />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/" />
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/" />
 
   
 
@@ -266,8 +266,6 @@
   
 
   
-    <link rel="alternate" href="/courses/psyc7709g/index.xml" type="application/rss+xml" title="Academic" />
-  
 
   
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -276,7 +274,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/" />
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/" />
 
   
   
@@ -293,14 +291,18 @@
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="Academic" />
-  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/" />
-  <meta property="og:title" content="PSYC 7709G - Using R for Reproducible Research | Academic" />
-  <meta property="og:description" content="Course lessons and assignments." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/" />
+  <meta property="og:title" content="Lab 4 - ANOVA | Academic" />
+  <meta property="og:description" content="library(tidyverse) library(papaja)  Question (1) Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
-      <meta property="og:updated_time" content="2022-01-31T00:00:00&#43;00:00" />
+      <meta
+        property="article:published_time"
+        content="2022-02-03T00:00:00&#43;00:00"
+      />
     
+    <meta property="article:modified_time" content="2022-03-10T12:49:22-05:00">
   
 
   
@@ -311,15 +313,17 @@
 
   
 
+  
 
 
 
 
-  <title>PSYC 7709G - Using R for Reproducible Research | Academic</title>
+
+  <title>Lab 4 - ANOVA | Academic</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="a878480a4789faf54ff2c29081a9644c" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="9c01703396c19b82abd2c42231b9b9bb" >
 
   
   
@@ -656,7 +660,7 @@
     <div class="d-flex">
       <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
         
-          Courses
+          Lessons
         
       </span>
       <span><i class="fas fa-chevron-down"></i></span>
@@ -693,6 +697,10 @@
 
       
       
+        
+          
+        
+      
 
 
   
@@ -706,7 +714,7 @@
 
     
       <div class="docs-toc-item">
-        <a class="docs-toc-link  active" href="/courses/psyc7709g/">Lessons</a>
+        <a class="docs-toc-link " href="/courses/psyc7709g/">Lessons</a>
     
       
         <ul class="nav docs-sidenav">
@@ -725,7 +733,7 @@
 
 
 
-  <li class=""><a href="/courses/psyc7709g/lab-4-anova/">Lab 4 - ANOVA</a></li>
+  <li class="active"><a href="/courses/psyc7709g/lab-4-anova/">Lab 4 - ANOVA</a></li>
 
       
         </ul>
@@ -753,7 +761,19 @@
 
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#lessons-and-labs-from-psyc-7709g">Lessons and Labs from PSYC 7709G</a></li>
+    <li><a href="#question-1">Question (1)</a>
+      <ul>
+        <li><a href="#use-r-to-conduct-a-ttest-and-anova-on-the-below-example-data-then-use-r-to-prove-that-the-results-of-both-analyses-are-the-same-for-example-prove-that-the-p-values-are-the-same-and-prove-that-the-f-value-and-t-value-are-related">Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same. For example, prove that the p-values are the same, and prove that the F-value and T-value are related.</a></li>
+        <li><a href="#showing-that-the-results-of-both-analyses-are-the-same">Showing that the results of both analyses are the same.</a></li>
+      </ul>
+    </li>
+    <li><a href="#question-2">Question (2)</a>
+      <ul>
+        <li><a href="#look-at-the-lab-on-anova-that-i-wrote-for-our-undergraduate-statistics-oer-lab-manual-httpscrumplabgithubiostatisticslablab-8-one-way-anovahtml-that-lab-shows-an-example-of-obtaining-data-from-a-published-paper-in-psych-science-where-a-one-factor-anova-was-used-as-a-part-of-the-analysis-load-the-data-conduct-the-anova-report-a-ggplot-of-the-means-and-use-papaja-to-help-you-write-a-short-results-section-reporting-the-anova-result">Look at the lab on ANOVA that I wrote for our undergraduate statistics OER lab manual <a href="https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html">https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html</a>. That lab shows an example of obtaining data from a published paper in psych science where a one-factor ANOVA was used as a part of the analysis. Load the data, conduct the ANOVA, report a ggplot of the means, and use papaja to help you write a short results section reporting the ANOVA result.</a></li>
+        <li><a href="#graphing-the-means-standard-deviations-and-individual-scores">Graphing the means, standard deviations, and individual scores.</a></li>
+        <li><a href="#reporting-the-result-using-papaja">Reporting the result using papaja.</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -771,6 +791,7 @@
   <nav class="d-none d-md-flex" aria-label="breadcrumb">
     <ol class="breadcrumb">
       
+  
   
   
 
@@ -792,8 +813,17 @@
   </li>
 
 
-      <li class="breadcrumb-item active" aria-current="page">
+  <li class="breadcrumb-item">
+    <a href="/courses/psyc7709g/">
+      
         Lessons
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        Lab 4 - ANOVA
       </li>
     </ol>
   </nav>
@@ -801,35 +831,96 @@
 
           
 
-          <h1>PSYC 7709G - Using R for Reproducible Research</h1>
+          <h1>Lab 4 - ANOVA</h1>
 
           <div class="article-style">
-            
+            <pre><code class="language-r">library(tidyverse)
+library(papaja)
+</code></pre>
+<h2 id="question-1">Question (1)</h2>
+<h3 id="use-r-to-conduct-a-ttest-and-anova-on-the-below-example-data-then-use-r-to-prove-that-the-results-of-both-analyses-are-the-same-for-example-prove-that-the-p-values-are-the-same-and-prove-that-the-f-value-and-t-value-are-related">Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same. For example, prove that the p-values are the same, and prove that the F-value and T-value are related.</h3>
+<p>Loading in the example data.</p>
+<pre><code class="language-r">example_data &lt;- tibble(Group = rep(c(&quot;A&quot;,&quot;B&quot;), each = 5),
+                       DV = c(2,4,3,5,4,7,6,5,6,7))
+</code></pre>
+<p>Running an ANOVA on the example data, saving it to an object, and displaying the summary.</p>
+<pre><code class="language-r">example_anova &lt;- aov(DV ~ Group, example_data)
+summary(example_anova)
+</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## Group        1   16.9    16.9    16.9 0.00339 **
+## Residuals    8    8.0     1.0                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</code></pre>
+<p>Running a two sample t-test on the sample data, saving it to an object, and displaying the summary.</p>
+<pre><code class="language-r">example_t_test &lt;- t.test(DV ~ Group, example_data, var.equal = TRUE)
+example_t_test
+</code></pre>
+<pre><code>## 
+## 	Two Sample t-test
+## 
+## data:  DV by Group
+## t = -4.111, df = 8, p-value = 0.003386
+## alternative hypothesis: true difference in means between group A and group B is not equal to 0
+## 95 percent confidence interval:
+##  -4.058445 -1.141555
+## sample estimates:
+## mean in group A mean in group B 
+##             3.6             6.2
+</code></pre>
+<h3 id="showing-that-the-results-of-both-analyses-are-the-same">Showing that the results of both analyses are the same.</h3>
+<p>The square of the t-statistic and the F-statistic are the same.</p>
+<pre><code class="language-r">round((example_t_test$statistic ^ 2), 5) == round(summary(example_anova)[[1]][1, 4], 5)
+</code></pre>
+<pre><code>##    t 
+## TRUE
+</code></pre>
+<p>The p-values for both are the same.</p>
+<pre><code class="language-r">round(example_t_test$p.value, 5) == round(summary(example_anova)[[1]][1, 5], 5)
+</code></pre>
+<pre><code>## [1] TRUE
+</code></pre>
+<h2 id="question-2">Question (2)</h2>
+<h3 id="look-at-the-lab-on-anova-that-i-wrote-for-our-undergraduate-statistics-oer-lab-manual-httpscrumplabgithubiostatisticslablab-8-one-way-anovahtml-that-lab-shows-an-example-of-obtaining-data-from-a-published-paper-in-psych-science-where-a-one-factor-anova-was-used-as-a-part-of-the-analysis-load-the-data-conduct-the-anova-report-a-ggplot-of-the-means-and-use-papaja-to-help-you-write-a-short-results-section-reporting-the-anova-result">Look at the lab on ANOVA that I wrote for our undergraduate statistics OER lab manual <a href="https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html" target="_blank" rel="noopener">https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html</a>. That lab shows an example of obtaining data from a published paper in psych science where a one-factor ANOVA was used as a part of the analysis. Load the data, conduct the ANOVA, report a ggplot of the means, and use papaja to help you write a short results section reporting the ANOVA result.</h3>
+<p>Loading in the experimental data.</p>
+<pre><code class="language-r">data &lt;- read_csv(&quot;https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/Jamesetal2015Experiment2.csv&quot;)
+</code></pre>
+<p>Creating the factors and levels for &ldquo;Condition&rdquo;.</p>
+<pre><code class="language-r">data$Condition &lt;- as.factor(data$Condition)
 
+levels(data$Condition) &lt;- c(&quot;Control&quot;, &quot;Reactivation+Tetris&quot;, &quot;Tetris_only&quot;, &quot;Reactivation_only&quot;)
+</code></pre>
+<h3 id="graphing-the-means-standard-deviations-and-individual-scores">Graphing the means, standard deviations, and individual scores.</h3>
+<pre><code class="language-r">descriptive_df &lt;- data %&gt;% 
+                    group_by(Condition) %&gt;% 
+                    summarise(means= mean(Days_One_to_Seven_Number_of_Intrusions),
+                              SEs = sd(Days_One_to_Seven_Number_of_Intrusions)/sqrt(length(Days_One_to_Seven_Number_of_Intrusions)))
 
+ggplot(descriptive_df, aes(x=Condition, y=means)) + 
+  geom_bar(stat=&quot;identity&quot;, aes(fill=Condition)) + 
+  geom_errorbar(aes(ymin=means-SEs,               
+                    ymax=means+SEs), width=.1) +
+  geom_point(data=data, aes(x=Condition, y=Days_One_to_Seven_Number_of_Intrusions), alpha=.5)+
+  geom_point(alpha=.25)+
+  ylab(&quot;Intrusive Memories (Mean for Week)&quot;)
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab4_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Running an ANOVA on the experimental data, saving it to an object, and displaying the summary.</p>
+<pre><code class="language-r">anova &lt;- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, data)
 
-
-
-
-
-
-
-
-
-
-
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="" srcset="
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_e92fb95a0835a58217074dba42873826.png 400w,
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_72d92c3a7d7bfe61df7354cbabaa2d56.png 760w,
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_1200x1200_fit_lanczos_3.png 1200w"
-               src="/courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_e92fb95a0835a58217074dba42873826.png"
-               width="360"
-               height="414"
-               loading="lazy" data-zoomable /></div>
-  </div></figure>
-<h2 id="lessons-and-labs-from-psyc-7709g">Lessons and Labs from PSYC 7709G</h2>
+summary(anova)
+</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Condition    3  114.8   38.27   3.795 0.0141 *
+## Residuals   68  685.8   10.09                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</code></pre>
+<h3 id="reporting-the-result-using-papaja">Reporting the result using papaja.</h3>
+<pre><code class="language-r">apa_output &lt;- apa_print(anova)
+</code></pre>
+<p>The main effect of condition was significant, <code>\(F(3, 68) = 3.79\)</code>, <code>\(\mathit{MSE} = 10.09\)</code>, <code>\(p = .014\)</code>, <code>\(\hat{\eta}^2_G = .143\)</code>.</p>
 
           </div>
 
@@ -844,6 +935,13 @@
 <div class="post-nav">
   
   
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/psyc7709g/lab-3-multiple-regression-ii/" rel="next">Lab 3 - Multiple Regression II</a>
+  </div>
+  
+  
 </div>
 
           </div>
@@ -851,7 +949,7 @@
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Jan 31, 2022</p>
+          <p>Last updated on Mar 10, 2022</p>
 
           
 

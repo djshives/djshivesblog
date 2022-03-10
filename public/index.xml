@@ -596,7 +596,7 @@ summary(anova)
 &lt;h3 id=&#34;reporting-the-result-using-papaja&#34;&gt;Reporting the result using papaja.&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;apa_output &amp;lt;- apa_print(anova)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The main effect of condition was significant, &lt;code&gt;$r apa_output$full_result$&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The main effect of condition was significant, &lt;code&gt;\(F(3, 68) = 3.79\)&lt;/code&gt;, &lt;code&gt;\(\mathit{MSE} = 10.09\)&lt;/code&gt;, &lt;code&gt;\(p = .014\)&lt;/code&gt;, &lt;code&gt;\(\hat{\eta}^2_G = .143\)&lt;/code&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -772,7 +772,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-145692837&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-832794165&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -782,7 +782,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-145692837&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-832794165&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

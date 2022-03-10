@@ -19,11 +19,10 @@ projects: []
 ---
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-```{r message = FALSE, warning = FALSE}
+
+
+```r
 library(tidyverse)
 library(papaja)
 ```
@@ -34,37 +33,73 @@ library(papaja)
 
 Loading in the example data.
 
-```{r}
+
+```r
 example_data <- tibble(Group = rep(c("A","B"), each = 5),
                        DV = c(2,4,3,5,4,7,6,5,6,7))
 ```
 
 Running an ANOVA on the example data, saving it to an object, and displaying the summary.
 
-```{r}
+
+```r
 example_anova <- aov(DV ~ Group, example_data)
 summary(example_anova)
 ```
 
+```
+##             Df Sum Sq Mean Sq F value  Pr(>F)   
+## Group        1   16.9    16.9    16.9 0.00339 **
+## Residuals    8    8.0     1.0                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
 Running a two sample t-test on the sample data, saving it to an object, and displaying the summary.
 
-```{r}
+
+```r
 example_t_test <- t.test(DV ~ Group, example_data, var.equal = TRUE)
 example_t_test
+```
+
+```
+## 
+## 	Two Sample t-test
+## 
+## data:  DV by Group
+## t = -4.111, df = 8, p-value = 0.003386
+## alternative hypothesis: true difference in means between group A and group B is not equal to 0
+## 95 percent confidence interval:
+##  -4.058445 -1.141555
+## sample estimates:
+## mean in group A mean in group B 
+##             3.6             6.2
 ```
 
 ### Showing that the results of both analyses are the same.
 
 The square of the t-statistic and the F-statistic are the same.
 
-```{r}
+
+```r
 round((example_t_test$statistic ^ 2), 5) == round(summary(example_anova)[[1]][1, 4], 5)
+```
+
+```
+##    t 
+## TRUE
 ```
 
 The p-values for both are the same.
 
-```{r}
+
+```r
 round(example_t_test$p.value, 5) == round(summary(example_anova)[[1]][1, 5], 5)
+```
+
+```
+## [1] TRUE
 ```
 
 ## Question (2)
@@ -73,23 +108,24 @@ round(example_t_test$p.value, 5) == round(summary(example_anova)[[1]][1, 5], 5)
 
 Loading in the experimental data.
 
-```{r message = FALSE, warning = FALSE}
-data <- read_csv("https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/Jamesetal2015Experiment2.csv")
 
+```r
+data <- read_csv("https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/Jamesetal2015Experiment2.csv")
 ```
 
 Creating the factors and levels for "Condition".
 
-```{r}
+
+```r
 data$Condition <- as.factor(data$Condition)
 
 levels(data$Condition) <- c("Control", "Reactivation+Tetris", "Tetris_only", "Reactivation_only")
-
 ```
 
 ### Graphing the means, standard deviations, and individual scores.
 
-```{r}
+
+```r
 descriptive_df <- data %>% 
                     group_by(Condition) %>% 
                     summarise(means= mean(Days_One_to_Seven_Number_of_Intrusions),
@@ -104,18 +140,29 @@ ggplot(descriptive_df, aes(x=Condition, y=means)) +
   ylab("Intrusive Memories (Mean for Week)")
 ```
 
+<img src="Lab4_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+
 Running an ANOVA on the experimental data, saving it to an object, and displaying the summary.
 
-```{r}
+
+```r
 anova <- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, data)
 
 summary(anova)
 ```
 
+```
+##             Df Sum Sq Mean Sq F value Pr(>F)  
+## Condition    3  114.8   38.27   3.795 0.0141 *
+## Residuals   68  685.8   10.09                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
 ### Reporting the result using papaja.
 
-```{r}
+
+```r
 apa_output <- apa_print(anova)
 ```
 
-The main effect of condition was significant, `r $apa_output$full_result$`. 

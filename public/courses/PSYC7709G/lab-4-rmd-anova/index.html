@@ -295,14 +295,14 @@
   
   <meta property="og:site_name" content="Academic" />
   <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lab-4-rmd-anova/" />
-  <meta property="og:title" content="Lab 4 RMD - ANOVA | Academic" />
+  <meta property="og:title" content="Lab 4 - ANOVA | Academic" />
   <meta property="og:description" content="library(tidyverse) library(papaja) Question (1) Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2022-03-10T00:00:00&#43;00:00"
+        content="2022-02-01T00:00:00&#43;00:00"
       />
     
     <meta property="article:modified_time" content="2022-03-10T13:31:58-05:00">
@@ -322,11 +322,11 @@
 
 
 
-  <title>Lab 4 RMD - ANOVA | Academic</title>
+  <title>Lab 4 - ANOVA | Academic</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="d7056e987d266411997d13f8ae575a72" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="eae6096b2d1252eb13d092130061139e" >
 
   
   
@@ -724,10 +724,6 @@
       
 
 
-  <li class="active"><a href="/courses/psyc7709g/lab-4-rmd-anova/">Lab 4 RMD - ANOVA</a></li>
-
-
-
   <li class=""><a href="/courses/psyc7709g/lab-1-shaping-data/">Lab 1 - Shaping Data</a></li>
 
 
@@ -740,7 +736,7 @@
 
 
 
-  <li class=""><a href="/courses/psyc7709g/lab-4-anova/">Lab 4 - ANOVA</a></li>
+  <li class="active"><a href="/courses/psyc7709g/lab-4-rmd-anova/">Lab 4 - ANOVA</a></li>
 
       
         </ul>
@@ -814,7 +810,7 @@
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        Lab 4 RMD - ANOVA
+        Lab 4 - ANOVA
       </li>
     </ol>
   </nav>
@@ -822,7 +818,7 @@
 
           
 
-          <h1>Lab 4 RMD - ANOVA</h1>
+          <h1>Lab 4 - ANOVA</h1>
 
           <div class="article-style">
             
@@ -897,7 +893,7 @@ ggplot(descriptive_df, aes(x=Condition, y=means)) +
   geom_point(data=data, aes(x=Condition, y=Days_One_to_Seven_Number_of_Intrusions), alpha=.5)+
   geom_point(alpha=.25)+
   ylab(&quot;Intrusive Memories (Mean for Week)&quot;)</code></pre>
-<p><img src="/courses/PSYC7709G/Lab4RMD_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/courses/PSYC7709G/Lab4_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Running an ANOVA on the experimental data, saving it to an object, and displaying the summary.</p>
 <pre class="r"><code>anova &lt;- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, data)
 
@@ -911,8 +907,7 @@ summary(anova)</code></pre>
 <div id="reporting-the-result-using-papaja." class="section level3">
 <h3>Reporting the result using papaja.</h3>
 <pre class="r"><code>apa_output &lt;- apa_print(anova)</code></pre>
-<p>The main effect of condition was significant, <span class="math inline">\(F(3, 68) = 3.79\)</span>, <span class="math inline">\(\mathit{MSE} = 10.09\)</span>, <span class="math inline">\(p = .014\)</span>, <span class="math inline">\(\hat{\eta}^2_G = .143\)</span>.</p>
-<p><code>$$\(F(3, 68) = 3.79\), \(\mathit{MSE} = 10.09\), \(p = .014\), \(\hat{\eta}^2_G = .143\)$$</code></p>
+<p>The main effect of condition was significant, {{&lt; math &gt;}} $<span class="math inline">\(F(3, 68) = 3.79\)</span>, <span class="math inline">\(\mathit{MSE} = 10.09\)</span>, <span class="math inline">\(p = .014\)</span>, <span class="math inline">\(\hat{\eta}^2_G = .143\)</span>.$ {{&lt; /math &gt;}}</p>
 </div>
 </div>
 
@@ -931,9 +926,10 @@ summary(anova)</code></pre>
   
   
   <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/courses/psyc7709g/lab-1-shaping-data/" rel="prev">Lab 1 - Shaping Data</a>
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/psyc7709g/lab-3-multiple-regression-ii/" rel="next">Lab 3 - Multiple Regression II</a>
   </div>
+  
   
 </div>
 

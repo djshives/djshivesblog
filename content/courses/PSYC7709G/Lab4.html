@@ -1,7 +1,7 @@
 ---
-title: Lab 4 RMD - ANOVA
+title: Lab 4 - ANOVA
 author: Package Build
-date: '2022-03-10'
+date: '2022-02-01'
 slug: lab-4-rmd-anova
 categories: []
 tags: []
@@ -89,7 +89,7 @@ ggplot(descriptive_df, aes(x=Condition, y=means)) +
   geom_point(data=data, aes(x=Condition, y=Days_One_to_Seven_Number_of_Intrusions), alpha=.5)+
   geom_point(alpha=.25)+
   ylab(&quot;Intrusive Memories (Mean for Week)&quot;)</code></pre>
-<p><img src="/courses/PSYC7709G/Lab4RMD_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/courses/PSYC7709G/Lab4_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Running an ANOVA on the experimental data, saving it to an object, and displaying the summary.</p>
 <pre class="r"><code>anova &lt;- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, data)
 
@@ -103,7 +103,6 @@ summary(anova)</code></pre>
 <div id="reporting-the-result-using-papaja." class="section level3">
 <h3>Reporting the result using papaja.</h3>
 <pre class="r"><code>apa_output &lt;- apa_print(anova)</code></pre>
-<p>The main effect of condition was significant, <span class="math inline">\(F(3, 68) = 3.79\)</span>, <span class="math inline">\(\mathit{MSE} = 10.09\)</span>, <span class="math inline">\(p = .014\)</span>, <span class="math inline">\(\hat{\eta}^2_G = .143\)</span>.</p>
-<p><code>$$\(F(3, 68) = 3.79\), \(\mathit{MSE} = 10.09\), \(p = .014\), \(\hat{\eta}^2_G = .143\)$$</code></p>
+<p>The main effect of condition was significant, {{&lt; math &gt;}} $<span class="math inline">\(F(3, 68) = 3.79\)</span>, <span class="math inline">\(\mathit{MSE} = 10.09\)</span>, <span class="math inline">\(p = .014\)</span>, <span class="math inline">\(\hat{\eta}^2_G = .143\)</span>.$ {{&lt; /math &gt;}}</p>
 </div>
 </div>

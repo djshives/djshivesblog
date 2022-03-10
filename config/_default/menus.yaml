@@ -9,7 +9,7 @@ main:
     weight: 10
   - name: About
     url: '#about'
-    weight: 10
+    weight: 20
   - name: Courses
     url: courses/
     weight: 30

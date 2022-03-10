@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="Course lessons and assignments." />
+  <meta name="description" content="  " />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/" />
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lab-4-rmd-anova/" />
 
   
 
@@ -266,8 +266,6 @@
   
 
   
-    <link rel="alternate" href="/courses/psyc7709g/index.xml" type="application/rss+xml" title="Academic" />
-  
 
   
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -276,7 +274,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/" />
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lab-4-rmd-anova/" />
 
   
   
@@ -293,14 +291,18 @@
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="Academic" />
-  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/" />
-  <meta property="og:title" content="PSYC 7709G - Using R for Reproducible Research | Academic" />
-  <meta property="og:description" content="Course lessons and assignments." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lab-4-rmd-anova/" />
+  <meta property="og:title" content="Lab 4 RMD - ANOVA | Academic" />
+  <meta property="og:description" content="  " /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
-      <meta property="og:updated_time" content="2022-01-31T00:00:00&#43;00:00" />
+      <meta
+        property="article:published_time"
+        content="2022-03-10T00:00:00&#43;00:00"
+      />
     
+    <meta property="article:modified_time" content="2022-03-10T13:31:58-05:00">
   
 
   
@@ -311,15 +313,17 @@
 
   
 
+  
 
 
 
 
-  <title>PSYC 7709G - Using R for Reproducible Research | Academic</title>
+
+  <title>Lab 4 RMD - ANOVA | Academic</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="a878480a4789faf54ff2c29081a9644c" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="d7056e987d266411997d13f8ae575a72" >
 
   
   
@@ -656,7 +660,7 @@
     <div class="d-flex">
       <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
         
-          Courses
+          Lessons
         
       </span>
       <span><i class="fas fa-chevron-down"></i></span>
@@ -693,6 +697,10 @@
 
       
       
+        
+          
+        
+      
 
 
   
@@ -706,14 +714,14 @@
 
     
       <div class="docs-toc-item">
-        <a class="docs-toc-link  active" href="/courses/psyc7709g/">Lessons</a>
+        <a class="docs-toc-link " href="/courses/psyc7709g/">Lessons</a>
     
       
         <ul class="nav docs-sidenav">
       
 
 
-  <li class=""><a href="/courses/psyc7709g/lab-4-rmd-anova/">Lab 4 RMD - ANOVA</a></li>
+  <li class="active"><a href="/courses/psyc7709g/lab-4-rmd-anova/">Lab 4 RMD - ANOVA</a></li>
 
 
 
@@ -755,11 +763,7 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents">
-  <ul>
-    <li><a href="#lessons-and-labs-from-psyc-7709g">Lessons and Labs from PSYC 7709G</a></li>
-  </ul>
-</nav>
+      
 
       
     </div>
@@ -775,6 +779,7 @@
   <nav class="d-none d-md-flex" aria-label="breadcrumb">
     <ol class="breadcrumb">
       
+  
   
   
 
@@ -796,8 +801,17 @@
   </li>
 
 
-      <li class="breadcrumb-item active" aria-current="page">
+  <li class="breadcrumb-item">
+    <a href="/courses/psyc7709g/">
+      
         Lessons
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        Lab 4 RMD - ANOVA
       </li>
     </ol>
   </nav>
@@ -805,35 +819,13 @@
 
           
 
-          <h1>PSYC 7709G - Using R for Reproducible Research</h1>
+          <h1>Lab 4 RMD - ANOVA</h1>
 
           <div class="article-style">
             
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img alt="" srcset="
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_e92fb95a0835a58217074dba42873826.png 400w,
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_72d92c3a7d7bfe61df7354cbabaa2d56.png 760w,
-               /courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_1200x1200_fit_lanczos_3.png 1200w"
-               src="/courses/psyc7709g/logo_hu5fb20424ca0265cbacad00351a7a21e0_245727_e92fb95a0835a58217074dba42873826.png"
-               width="360"
-               height="414"
-               loading="lazy" data-zoomable /></div>
-  </div></figure>
-<h2 id="lessons-and-labs-from-psyc-7709g">Lessons and Labs from PSYC 7709G</h2>
 
           </div>
 
@@ -848,6 +840,12 @@
 <div class="post-nav">
   
   
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/psyc7709g/lab-1-shaping-data/" rel="prev">Lab 1 - Shaping Data</a>
+  </div>
+  
 </div>
 
           </div>
@@ -855,7 +853,7 @@
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Jan 31, 2022</p>
+          <p>Last updated on Mar 10, 2022</p>
 
           
 

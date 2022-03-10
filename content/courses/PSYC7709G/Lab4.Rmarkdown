@@ -23,7 +23,7 @@ projects: []
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 library(tidyverse)
 library(papaja)
 ```
@@ -73,7 +73,7 @@ round(example_t_test$p.value, 5) == round(summary(example_anova)[[1]][1, 5], 5)
 
 Loading in the experimental data.
 
-```{r warning = FALSE, error = FALSE}
+```{r message = FALSE, warning = FALSE}
 data <- read_csv("https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/Jamesetal2015Experiment2.csv")
 
 ```

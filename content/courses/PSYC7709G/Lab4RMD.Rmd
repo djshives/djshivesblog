@@ -117,6 +117,6 @@ summary(anova)
 apa_output <- apa_print(anova)
 ```
 
-The main effect of condition was significant, 
+The main effect of condition was significant, {{< math >}} $`r apa_print(anova)$full_result`.$ {{< /math >}} 
 
 {{< math >}}$$\(F(3, 68) = 3.79\), \(\mathit{MSE} = 10.09\), \(p = .014\), \(\hat{\eta}^2_G = .143\)$${{< /math >}}

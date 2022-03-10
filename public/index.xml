@@ -596,7 +596,7 @@ summary(anova)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;reporting-the-result-using-papaja.&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Reporting the result using papaja.&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;apa_output &amp;lt;- apa_print(anova)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The main effect of condition was significant, {{&amp;lt; math &amp;gt;}} $&lt;span class=&#34;math inline&#34;&gt;\(F(3, 68) = 3.79\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\mathit{MSE} = 10.09\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(p = .014\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\hat{\eta}^2_G = .143\)&lt;/span&gt;.$ {{&amp;lt; /math &amp;gt;}}&lt;/p&gt;
+&lt;p&gt;The main effect of condition was significant, &lt;span class=&#34;math inline&#34;&gt;\(F(3, 68) = 3.79\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\mathit{MSE} = 10.09\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(p = .014\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\hat{\eta}^2_G = .143\)&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
@@ -774,7 +774,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-741523968&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-342689517&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -784,7 +784,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-741523968&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-342689517&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

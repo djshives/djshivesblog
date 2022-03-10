@@ -117,4 +117,4 @@ summary(anova)
 apa_output <- apa_print(anova)
 ```
 
-The main effect of condition was significant, {{< math >}} $`r apa_print(anova)$full_result`.$ {{< /math >}}
+The main effect of condition was significant, `r apa_print(anova)$full_result`

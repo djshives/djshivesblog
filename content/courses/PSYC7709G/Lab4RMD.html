@@ -21,3 +21,89 @@ projects: []
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<pre class="r"><code>library(tidyverse)
+library(papaja)</code></pre>
+<div id="question-1" class="section level2">
+<h2>Question (1)</h2>
+<div id="use-r-to-conduct-a-t.test-and-anova-on-the-below-example-data.-then-use-r-to-prove-that-the-results-of-both-analyses-are-the-same.-for-example-prove-that-the-p-values-are-the-same-and-prove-that-the-f-value-and-t-value-are-related." class="section level3">
+<h3>Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same. For example, prove that the p-values are the same, and prove that the F-value and T-value are related.</h3>
+<p>Loading in the example data.</p>
+<pre class="r"><code>example_data &lt;- tibble(Group = rep(c(&quot;A&quot;,&quot;B&quot;), each = 5),
+                       DV = c(2,4,3,5,4,7,6,5,6,7))</code></pre>
+<p>Running an ANOVA on the example data, saving it to an object, and displaying the summary.</p>
+<pre class="r"><code>example_anova &lt;- aov(DV ~ Group, example_data)
+summary(example_anova)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## Group        1   16.9    16.9    16.9 0.00339 **
+## Residuals    8    8.0     1.0                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Running a two sample t-test on the sample data, saving it to an object, and displaying the summary.</p>
+<pre class="r"><code>example_t_test &lt;- t.test(DV ~ Group, example_data, var.equal = TRUE)
+example_t_test</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  DV by Group
+## t = -4.111, df = 8, p-value = 0.003386
+## alternative hypothesis: true difference in means between group A and group B is not equal to 0
+## 95 percent confidence interval:
+##  -4.058445 -1.141555
+## sample estimates:
+## mean in group A mean in group B 
+##             3.6             6.2</code></pre>
+</div>
+<div id="showing-that-the-results-of-both-analyses-are-the-same." class="section level3">
+<h3>Showing that the results of both analyses are the same.</h3>
+<p>The square of the t-statistic and the F-statistic are the same.</p>
+<pre class="r"><code>round((example_t_test$statistic ^ 2), 5) == round(summary(example_anova)[[1]][1, 4], 5)</code></pre>
+<pre><code>##    t 
+## TRUE</code></pre>
+<p>The p-values for both are the same.</p>
+<pre class="r"><code>round(example_t_test$p.value, 5) == round(summary(example_anova)[[1]][1, 5], 5)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="question-2" class="section level2">
+<h2>Question (2)</h2>
+<div id="look-at-the-lab-on-anova-that-i-wrote-for-our-undergraduate-statistics-oer-lab-manual-httpscrumplab.github.iostatisticslablab-8-one-way-anova.html.-that-lab-shows-an-example-of-obtaining-data-from-a-published-paper-in-psych-science-where-a-one-factor-anova-was-used-as-a-part-of-the-analysis.-load-the-data-conduct-the-anova-report-a-ggplot-of-the-means-and-use-papaja-to-help-you-write-a-short-results-section-reporting-the-anova-result." class="section level3">
+<h3>Look at the lab on ANOVA that I wrote for our undergraduate statistics OER lab manual <a href="https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html" class="uri">https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html</a>. That lab shows an example of obtaining data from a published paper in psych science where a one-factor ANOVA was used as a part of the analysis. Load the data, conduct the ANOVA, report a ggplot of the means, and use papaja to help you write a short results section reporting the ANOVA result.</h3>
+<p>Loading in the experimental data.</p>
+<pre class="r"><code>data &lt;- read_csv(&quot;https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/Jamesetal2015Experiment2.csv&quot;)</code></pre>
+<p>Creating the factors and levels for “Condition”.</p>
+<pre class="r"><code>data$Condition &lt;- as.factor(data$Condition)
+
+levels(data$Condition) &lt;- c(&quot;Control&quot;, &quot;Reactivation+Tetris&quot;, &quot;Tetris_only&quot;, &quot;Reactivation_only&quot;)</code></pre>
+</div>
+<div id="graphing-the-means-standard-deviations-and-individual-scores." class="section level3">
+<h3>Graphing the means, standard deviations, and individual scores.</h3>
+<pre class="r"><code>descriptive_df &lt;- data %&gt;% 
+                    group_by(Condition) %&gt;% 
+                    summarise(means= mean(Days_One_to_Seven_Number_of_Intrusions),
+                              SEs = sd(Days_One_to_Seven_Number_of_Intrusions)/sqrt(length(Days_One_to_Seven_Number_of_Intrusions)))
+
+ggplot(descriptive_df, aes(x=Condition, y=means)) + 
+  geom_bar(stat=&quot;identity&quot;, aes(fill=Condition)) + 
+  geom_errorbar(aes(ymin=means-SEs,               
+                    ymax=means+SEs), width=.1) +
+  geom_point(data=data, aes(x=Condition, y=Days_One_to_Seven_Number_of_Intrusions), alpha=.5)+
+  geom_point(alpha=.25)+
+  ylab(&quot;Intrusive Memories (Mean for Week)&quot;)</code></pre>
+<p><img src="/courses/PSYC7709G/Lab4RMD_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Running an ANOVA on the experimental data, saving it to an object, and displaying the summary.</p>
+<pre class="r"><code>anova &lt;- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, data)
+
+summary(anova)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Condition    3  114.8   38.27   3.795 0.0141 *
+## Residuals   68  685.8   10.09                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="reporting-the-result-using-papaja." class="section level3">
+<h3>Reporting the result using papaja.</h3>
+<pre class="r"><code>apa_output &lt;- apa_print(anova)</code></pre>
+<p>The main effect of condition was significant, <code>$apa_output$</code>.</p>
+<p><code>$\(F(3, 68) = 3.79\), \(\mathit{MSE} = 10.09\), \(p = .014\), \(\hat{\eta}^2_G = .143\)$</code></p>
+</div>
+</div>

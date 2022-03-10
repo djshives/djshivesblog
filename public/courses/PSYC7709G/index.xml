@@ -576,7 +576,7 @@ summary(anova)
 &lt;h3 id=&#34;reporting-the-result-using-papaja&#34;&gt;Reporting the result using papaja.&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;apa_output &amp;lt;- apa_print(anova)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The main effect of condition was significant, &lt;code&gt;$apa_output$full_result$&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The main effect of condition was significant, &lt;code&gt;$r apa_output$full_result$&lt;/code&gt;.&lt;/p&gt;
 </description>
     </item>
     

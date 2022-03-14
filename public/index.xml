@@ -507,9 +507,9 @@ ggplot(
     
     <item>
       <title>Lab 4 - ANOVA</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-4-rmd-anova/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-4-rmd-anova/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/</guid>
       <description>
 &lt;script src=&#34;https://djshives.netlify.app/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
@@ -597,6 +597,360 @@ summary(anova)&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;Reporting the result using papaja.&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;apa_output &amp;lt;- apa_print(anova)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The main effect of condition was significant, &lt;span class=&#34;math inline&#34;&gt;\(F(3, 68) = 3.79\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\mathit{MSE} = 10.09\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(p = .014\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\hat{\eta}^2_G = .143\)&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lab 5 - ANOVA and Randomization</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-5-anova-randomization/</link>
+      <pubDate>Mon, 31 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-5-anova-randomization/</guid>
+      <description>
+&lt;script src=&#34;https://djshives.netlify.app/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://djshives.netlify.app/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;https://djshives.netlify.app/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(kableExtra)
+
+set.seed(1)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;consider-a-design-with-3-groups-and-10-people-per-group.-assume-that-the-dependent-variable-is-assumed-to-be-normally-distributed-and-use-unit-normal-distributions-with-mean-0-and-sd-1-in-your-simulations.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations.&lt;/h2&gt;
+&lt;div id=&#34;setting-the-parameters-for-the-data-and-subsequent-simulations.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Setting the parameters for the data and subsequent simulations.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;levels &amp;lt;- 3
+n_per_level &amp;lt;- 10
+n_samples &amp;lt;- 1000&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;creating-the-null-distribution.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Creating the null distribution.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gen_sim_f &amp;lt;- function(num_levels, num_per_level, num_samples) {
+  f_values &amp;lt;- length(num_samples)
+
+  for(i in 1:num_samples) {
+    sim_data &amp;lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rnorm(num_levels * num_per_level, 0, 1))
+    anova_out &amp;lt;- aov(DV ~ level, sim_data)
+    f_ &amp;lt;- summary(anova_out)[[1]]$`F value`[1]
+    f_values[i] &amp;lt;- f_
+    
+    f_values_df &amp;lt;- tibble(f_value = f_values,
+                          sample = 1:length(f_values))
+  }
+  return(f_values_df)
+}
+
+sim_f_values &amp;lt;- gen_sim_f(levels, n_per_level, n_samples)
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &amp;quot;red&amp;quot;), linetype = &amp;quot;dashed&amp;quot;) +
+  annotate(x = 4.737, y = 50, label = &amp;quot;Critical Value = 4.737&amp;quot;, geom = &amp;quot;label&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;creating-a-function-that-adds-an-effect-to-the-first-level.-this-will-allow-for-the-design-to-produce-an-f-value-that-is-smaller-or-larger-than-the-critical-f-value.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Creating a function that adds an effect to the first level. This will allow for the design to produce an F-value that is smaller or larger than the critical F-value.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gen_effect_data &amp;lt;- function(num_levels, num_per_level, num_samples, effect_size) {
+  
+  column_names = c(&amp;quot;subjects&amp;quot;, &amp;quot;IV&amp;quot;, &amp;quot;DV&amp;quot;, &amp;quot;sample&amp;quot;)
+  
+  total_sim_data &amp;lt;- as_tibble(t(column_names))[0, ]
+  
+  for(i in 1:num_samples) {
+    sim_data &amp;lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rnorm(num_levels * num_per_level, 0, 1),
+                       sample = i)
+    
+    sim_data[sim_data$level == 1, ]$DV &amp;lt;- sim_data[sim_data$level == 1, ]$DV + effect_size
+    
+    total_sim_data &amp;lt;- rbind(total_sim_data, sim_data)
+    
+  }
+  
+  total_sim_data &amp;lt;- total_sim_data %&amp;gt;%
+    group_by(subject, level) %&amp;gt;%
+    summarise(DV = mean(DV))
+  
+  return(total_sim_data)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(1)&lt;/h2&gt;
+&lt;p&gt;Create simulated data for the above design that could be produced by the null hypothesis, and that results in a 𝐹 value that is smaller than the critical value for 𝐹 in this design (assume alpha = .05). Report the ANOVA, and show a ggplot of the means in the simulated data. Furthermore, display the individual data points on top of the means. Would you reject the null hypothesis in this situation, and would you be incorrect or correct in rejecting the null?&lt;/p&gt;
+&lt;div id=&#34;creating-simulated-data-with-an-effect-size-applied-to-level-1-of-0.01-and-displaying-the-anova-summary.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Creating simulated data with an effect size applied to level 1 of 0.01 and displaying the ANOVA summary.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower_effect_data &amp;lt;- gen_effect_data(levels, n_per_level, n_samples, 0.01)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+## Using compatibility `.name_repair`.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` has grouped output by &amp;#39;subject&amp;#39;. You can override using the
+## `.groups` argument.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower_effect_anova &amp;lt;- aov(DV ~ level, lower_effect_data)
+
+unclass(summary(lower_effect_anova)) %&amp;gt;%
+  kbl(digits = 2) %&amp;gt;%
+  kable_classic(position = &amp;quot;center&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;kable_wrapper lightable-classic&#34; style=&#34;font-family: &amp;quot;Arial Narrow&amp;quot;, &amp;quot;Source Sans Pro&amp;quot;, sans-serif; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Df
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Sum Sq
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Mean Sq
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Pr(&amp;gt;F)
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+level
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.27
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Residuals
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;graphing-the-f-value-against-the-null-distribution.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Graphing the F value against the null distribution.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower_f_value &amp;lt;- summary(lower_effect_anova)[[1]]$`F value`[1]
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &amp;quot;red&amp;quot;), linetype = &amp;quot;dashed&amp;quot;) +
+  annotate(x = 4.737, y = 50, label = &amp;quot;Critical Value = 4.737&amp;quot;, geom = &amp;quot;label&amp;quot;) +
+  geom_vline(aes(xintercept = lower_f_value, color = &amp;quot;blue&amp;quot;)) +
+  annotate(x = lower_f_value, y = 75, xend = 0, label =  paste0(&amp;quot;Simulated F value = &amp;quot;, round(lower_f_value, 2)), geom = &amp;quot;label&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Ignoring unknown aesthetics: xend&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;graphing-the-means-of-the-simulated-data-where-the-effect-size-was-0.01.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Graphing the means of the simulated data where the effect size was 0.01.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower_effect_data_grouped &amp;lt;- lower_effect_data %&amp;gt;%
+  group_by(level) %&amp;gt;%
+  summarise(mean_DV = mean(DV),
+            SE = sd(DV)/length(DV))
+
+ggplot(lower_effect_data_grouped, aes(x = level, y = mean_DV)) +
+  geom_bar(stat = &amp;quot;identity&amp;quot;, aes(fill = level)) +
+  scale_y_continuous(limits = c(-0.05, 0.05)) +
+  geom_errorbar(aes(ymin=mean_DV - SE,
+                    ymax=mean_DV + SE), width=.1) + 
+  geom_point(data = lower_effect_data, mapping = aes(x = level, y = DV), alpha = 0.5) +
+  geom_point(alpha=.25) +
+  ylab(&amp;quot;DV&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Removed 4 rows containing missing values (geom_point).&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I would not reject the null in this situation as the F value calculated from the simulated data is less than the critical value. The parameters of the simulation, however, can produce data that leads to an F value greater than the critical value, but that is unlikely.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(2)&lt;/h2&gt;
+&lt;p&gt;Create simulated data for the above design that could be produced by the null hypothesis, and that results in a 𝐹 value that is larger than the critical value for 𝐹 in this design (assume alpha = .05). Report the ANOVA, and show a ggplot of the means in the simulated data. Furthermore, display the individual data points on top of the means. Would you reject the null hypothesis in this situation, and would you be incorrect or correct in rejecting the null?&lt;/p&gt;
+&lt;div id=&#34;creating-simulated-data-with-an-effect-size-applied-to-level-1-of-0.035-and-displaying-the-anova-summary.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Creating simulated data with an effect size applied to level 1 of 0.035 and displaying the ANOVA summary.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;higher_effect_data &amp;lt;- gen_effect_data(levels, n_per_level, n_samples, 0.035)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` has grouped output by &amp;#39;subject&amp;#39;. You can override using the
+## `.groups` argument.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;higher_effect_anova &amp;lt;- aov(DV ~ level, higher_effect_data)
+
+unclass(summary(higher_effect_anova)) %&amp;gt;%
+  kbl(digits = 2) %&amp;gt;%
+  kable_classic(position = &amp;quot;center&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;kable_wrapper lightable-classic&#34; style=&#34;font-family: &amp;quot;Arial Narrow&amp;quot;, &amp;quot;Source Sans Pro&amp;quot;, sans-serif; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Df
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Sum Sq
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Mean Sq
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F value
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Pr(&amp;gt;F)
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+level
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5.31
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.01
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Residuals
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;graphing-the-f-value-against-the-null-distribution.-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Graphing the F value against the null distribution.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;higher_f_value &amp;lt;- summary(higher_effect_anova)[[1]]$`F value`[1]
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &amp;quot;red&amp;quot;), linetype = &amp;quot;dashed&amp;quot;) +
+  annotate(x = 4.737, y = 50, label = &amp;quot;Critical Value = 4.737&amp;quot;, geom = &amp;quot;label&amp;quot;) +
+  geom_vline(aes(xintercept = higher_f_value, color = &amp;quot;blue&amp;quot;)) +
+  annotate(x = higher_f_value, y = 75, xend = 8.0, label =  paste0(&amp;quot;Simulated F value = &amp;quot;, round(higher_f_value, 2)), geom = &amp;quot;label&amp;quot;) +
+  expand_limits(x = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Ignoring unknown aesthetics: xend&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;graphing-the-means-of-the-simulated-data-where-the-effect-size-was-0.01.-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Graphing the means of the simulated data where the effect size was 0.01.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;higher_effect_data_grouped &amp;lt;- higher_effect_data %&amp;gt;%
+  group_by(level) %&amp;gt;%
+  summarise(mean_DV = mean(DV),
+            SE = sd(DV)/length(DV))
+
+ggplot(higher_effect_data_grouped, aes(x = level, y = mean_DV)) +
+  geom_bar(stat = &amp;quot;identity&amp;quot;, aes(fill = level)) +
+  scale_y_continuous(limits = c(-0.05, 0.05)) +
+  geom_errorbar(aes(ymin=mean_DV - SE,
+                    ymax=mean_DV + SE), width=.1) + 
+  geom_point(data = higher_effect_data, mapping = aes(x = level, y = DV), alpha = 0.5) +
+  geom_point(alpha=.25)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Removed 2 rows containing missing values (geom_point).&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I would reject the null in this situation as the F value calculated from the simulated data is greater than the critical value. The parameters of the simulation, however, can produce data that leads to an F value less than the critical value, but that is unlikely.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bonus-question&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bonus Question:&lt;/h2&gt;
+&lt;p&gt;In the lab we saw that F-distribution is robust to violations of the assumptions of ANOVA. For example, the simulation of the null based on a bi-modal distribution was very similar to the true F distribution. For this bonus question, show that you can “break” the F-distribution. Specifically, can you run a simulation that samples numbers from a non-normal distribution that does produce a very different looking F-distribution?&lt;/p&gt;
+&lt;div id=&#34;breaking-the-f-distribution-by-sampling-data-from-a-weibull-distribution-shape-0.1-scale-1000.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Breaking the F-distribution by sampling data from a Weibull distribution (shape = 0.1, scale = 1000).&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gen_sim_f &amp;lt;- function(num_levels, num_per_level, num_samples) {
+  f_values &amp;lt;- length(num_samples)
+
+  for(i in 1:num_samples) {
+    sim_data &amp;lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rweibull(num_levels * num_per_level, shape = 0.1, scale = 1000))
+    anova_out &amp;lt;- aov(DV ~ level, sim_data)
+    f_ &amp;lt;- summary(anova_out)[[1]]$`F value`[1]
+    f_values[i] &amp;lt;- f_
+    
+    f_values_df &amp;lt;- tibble(f_value = f_values,
+                          sample = 1:length(f_values))
+  }
+  return(f_values_df)
+}
+
+sim_f_values &amp;lt;- gen_sim_f(levels, n_per_level, n_samples)
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
@@ -774,7 +1128,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-253769148&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-479528631&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -784,7 +1138,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-253769148&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-479528631&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

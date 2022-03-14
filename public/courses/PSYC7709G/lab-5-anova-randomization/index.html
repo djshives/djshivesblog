@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="library(tidyverse) library(papaja) Question (1) Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same." />
+  <meta name="description" content="library(tidyverse) library(kableExtra) set.seed(1) Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations." />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/" />
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lab-5-anova-randomization/" />
 
   
 
@@ -277,7 +277,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/" />
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lab-5-anova-randomization/" />
 
   
   
@@ -294,15 +294,15 @@
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="Academic" />
-  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/" />
-  <meta property="og:title" content="Lab 4 - ANOVA | Academic" />
-  <meta property="og:description" content="library(tidyverse) library(papaja) Question (1) Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lab-5-anova-randomization/" />
+  <meta property="og:title" content="Lab 5 - ANOVA and Randomization | Academic" />
+  <meta property="og:description" content="library(tidyverse) library(kableExtra) set.seed(1) Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2022-02-01T00:00:00&#43;00:00"
+        content="2022-01-31T00:00:00&#43;00:00"
       />
     
     <meta property="article:modified_time" content="2022-03-10T13:31:58-05:00">
@@ -322,11 +322,11 @@
 
 
 
-  <title>Lab 4 - ANOVA | Academic</title>
+  <title>Lab 5 - ANOVA and Randomization | Academic</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="eae6096b2d1252eb13d092130061139e" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="3d26fb0c1f9f50c64fd392eacf59745e" >
 
   
   
@@ -761,11 +761,11 @@
 
 
 
-  <li class="active"><a href="/courses/psyc7709g/lab-4-anova/">Lab 4 - ANOVA</a></li>
+  <li class=""><a href="/courses/psyc7709g/lab-4-anova/">Lab 4 - ANOVA</a></li>
 
 
 
-  <li class=""><a href="/courses/psyc7709g/lab-5-anova-randomization/">Lab 5 - ANOVA and Randomization</a></li>
+  <li class="active"><a href="/courses/psyc7709g/lab-5-anova-randomization/">Lab 5 - ANOVA and Randomization</a></li>
 
       
         </ul>
@@ -839,7 +839,7 @@
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        Lab 4 - ANOVA
+        Lab 5 - ANOVA and Randomization
       </li>
     </ol>
   </nav>
@@ -847,96 +847,353 @@
 
           
 
-          <h1>Lab 4 - ANOVA</h1>
+          <h1>Lab 5 - ANOVA and Randomization</h1>
 
           <div class="article-style">
             
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <pre class="r"><code>library(tidyverse)
-library(papaja)</code></pre>
-<div id="question-1" class="section level2">
-<h2>Question (1)</h2>
-<div id="use-r-to-conduct-a-t.test-and-anova-on-the-below-example-data.-then-use-r-to-prove-that-the-results-of-both-analyses-are-the-same.-for-example-prove-that-the-p-values-are-the-same-and-prove-that-the-f-value-and-t-value-are-related." class="section level3">
-<h3>Use R to conduct a t.test and ANOVA on the below example data. Then use R to prove that the results of both analyses are the same. For example, prove that the p-values are the same, and prove that the F-value and T-value are related.</h3>
-<p>Loading in the example data.</p>
-<pre class="r"><code>example_data &lt;- tibble(Group = rep(c(&quot;A&quot;,&quot;B&quot;), each = 5),
-                       DV = c(2,4,3,5,4,7,6,5,6,7))</code></pre>
-<p>Running an ANOVA on the example data, saving it to an object, and displaying the summary.</p>
-<pre class="r"><code>example_anova &lt;- aov(DV ~ Group, example_data)
-summary(example_anova)</code></pre>
-<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
-## Group        1   16.9    16.9    16.9 0.00339 **
-## Residuals    8    8.0     1.0                   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>Running a two sample t-test on the sample data, saving it to an object, and displaying the summary.</p>
-<pre class="r"><code>example_t_test &lt;- t.test(DV ~ Group, example_data, var.equal = TRUE)
-example_t_test</code></pre>
-<pre><code>## 
-##  Two Sample t-test
-## 
-## data:  DV by Group
-## t = -4.111, df = 8, p-value = 0.003386
-## alternative hypothesis: true difference in means between group A and group B is not equal to 0
-## 95 percent confidence interval:
-##  -4.058445 -1.141555
-## sample estimates:
-## mean in group A mean in group B 
-##             3.6             6.2</code></pre>
-</div>
-<div id="showing-that-the-results-of-both-analyses-are-the-same." class="section level3">
-<h3>Showing that the results of both analyses are the same.</h3>
-<p>The square of the t-statistic and the F-statistic are the same.</p>
-<pre class="r"><code>round((example_t_test$statistic ^ 2), 5) == round(summary(example_anova)[[1]][1, 4], 5)</code></pre>
-<pre><code>##    t 
-## TRUE</code></pre>
-<p>The p-values for both are the same.</p>
-<pre class="r"><code>round(example_t_test$p.value, 5) == round(summary(example_anova)[[1]][1, 5], 5)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-</div>
-</div>
-<div id="question-2" class="section level2">
-<h2>Question (2)</h2>
-<div id="look-at-the-lab-on-anova-that-i-wrote-for-our-undergraduate-statistics-oer-lab-manual-httpscrumplab.github.iostatisticslablab-8-one-way-anova.html.-that-lab-shows-an-example-of-obtaining-data-from-a-published-paper-in-psych-science-where-a-one-factor-anova-was-used-as-a-part-of-the-analysis.-load-the-data-conduct-the-anova-report-a-ggplot-of-the-means-and-use-papaja-to-help-you-write-a-short-results-section-reporting-the-anova-result." class="section level3">
-<h3>Look at the lab on ANOVA that I wrote for our undergraduate statistics OER lab manual <a href="https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html" class="uri">https://crumplab.github.io/statisticsLab/lab-8-one-way-anova.html</a>. That lab shows an example of obtaining data from a published paper in psych science where a one-factor ANOVA was used as a part of the analysis. Load the data, conduct the ANOVA, report a ggplot of the means, and use papaja to help you write a short results section reporting the ANOVA result.</h3>
-<p>Loading in the experimental data.</p>
-<pre class="r"><code>data &lt;- read_csv(&quot;https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/Jamesetal2015Experiment2.csv&quot;)</code></pre>
-<p>Creating the factors and levels for “Condition”.</p>
-<pre class="r"><code>data$Condition &lt;- as.factor(data$Condition)
+library(kableExtra)
 
-levels(data$Condition) &lt;- c(&quot;Control&quot;, &quot;Reactivation+Tetris&quot;, &quot;Tetris_only&quot;, &quot;Reactivation_only&quot;)</code></pre>
+set.seed(1)</code></pre>
+<div id="consider-a-design-with-3-groups-and-10-people-per-group.-assume-that-the-dependent-variable-is-assumed-to-be-normally-distributed-and-use-unit-normal-distributions-with-mean-0-and-sd-1-in-your-simulations." class="section level2">
+<h2>Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations.</h2>
+<div id="setting-the-parameters-for-the-data-and-subsequent-simulations." class="section level3">
+<h3>Setting the parameters for the data and subsequent simulations.</h3>
+<pre class="r"><code>levels &lt;- 3
+n_per_level &lt;- 10
+n_samples &lt;- 1000</code></pre>
 </div>
-<div id="graphing-the-means-standard-deviations-and-individual-scores." class="section level3">
-<h3>Graphing the means, standard deviations, and individual scores.</h3>
-<pre class="r"><code>descriptive_df &lt;- data %&gt;% 
-                    group_by(Condition) %&gt;% 
-                    summarise(means= mean(Days_One_to_Seven_Number_of_Intrusions),
-                              SEs = sd(Days_One_to_Seven_Number_of_Intrusions)/sqrt(length(Days_One_to_Seven_Number_of_Intrusions)))
+<div id="creating-the-null-distribution." class="section level3">
+<h3>Creating the null distribution.</h3>
+<pre class="r"><code>gen_sim_f &lt;- function(num_levels, num_per_level, num_samples) {
+  f_values &lt;- length(num_samples)
 
-ggplot(descriptive_df, aes(x=Condition, y=means)) + 
-  geom_bar(stat=&quot;identity&quot;, aes(fill=Condition)) + 
-  geom_errorbar(aes(ymin=means-SEs,               
-                    ymax=means+SEs), width=.1) +
-  geom_point(data=data, aes(x=Condition, y=Days_One_to_Seven_Number_of_Intrusions), alpha=.5)+
-  geom_point(alpha=.25)+
-  ylab(&quot;Intrusive Memories (Mean for Week)&quot;)</code></pre>
-<p><img src="/courses/PSYC7709G/Lab4_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>Running an ANOVA on the experimental data, saving it to an object, and displaying the summary.</p>
-<pre class="r"><code>anova &lt;- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, data)
+  for(i in 1:num_samples) {
+    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rnorm(num_levels * num_per_level, 0, 1))
+    anova_out &lt;- aov(DV ~ level, sim_data)
+    f_ &lt;- summary(anova_out)[[1]]$`F value`[1]
+    f_values[i] &lt;- f_
+    
+    f_values_df &lt;- tibble(f_value = f_values,
+                          sample = 1:length(f_values))
+  }
+  return(f_values_df)
+}
 
-summary(anova)</code></pre>
-<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
-## Condition    3  114.8   38.27   3.795 0.0141 *
-## Residuals   68  685.8   10.09                 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+sim_f_values &lt;- gen_sim_f(levels, n_per_level, n_samples)
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
+  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;)</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="reporting-the-result-using-papaja." class="section level3">
-<h3>Reporting the result using papaja.</h3>
-<pre class="r"><code>apa_output &lt;- apa_print(anova)</code></pre>
-<p>The main effect of condition was significant, <span class="math inline">\(F(3, 68) = 3.79\)</span>, <span class="math inline">\(\mathit{MSE} = 10.09\)</span>, <span class="math inline">\(p = .014\)</span>, <span class="math inline">\(\hat{\eta}^2_G = .143\)</span></p>
+<div id="creating-a-function-that-adds-an-effect-to-the-first-level.-this-will-allow-for-the-design-to-produce-an-f-value-that-is-smaller-or-larger-than-the-critical-f-value." class="section level3">
+<h3>Creating a function that adds an effect to the first level. This will allow for the design to produce an F-value that is smaller or larger than the critical F-value.</h3>
+<pre class="r"><code>gen_effect_data &lt;- function(num_levels, num_per_level, num_samples, effect_size) {
+  
+  column_names = c(&quot;subjects&quot;, &quot;IV&quot;, &quot;DV&quot;, &quot;sample&quot;)
+  
+  total_sim_data &lt;- as_tibble(t(column_names))[0, ]
+  
+  for(i in 1:num_samples) {
+    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rnorm(num_levels * num_per_level, 0, 1),
+                       sample = i)
+    
+    sim_data[sim_data$level == 1, ]$DV &lt;- sim_data[sim_data$level == 1, ]$DV + effect_size
+    
+    total_sim_data &lt;- rbind(total_sim_data, sim_data)
+    
+  }
+  
+  total_sim_data &lt;- total_sim_data %&gt;%
+    group_by(subject, level) %&gt;%
+    summarise(DV = mean(DV))
+  
+  return(total_sim_data)
+}</code></pre>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2>(1)</h2>
+<p>Create simulated data for the above design that could be produced by the null hypothesis, and that results in a 𝐹 value that is smaller than the critical value for 𝐹 in this design (assume alpha = .05). Report the ANOVA, and show a ggplot of the means in the simulated data. Furthermore, display the individual data points on top of the means. Would you reject the null hypothesis in this situation, and would you be incorrect or correct in rejecting the null?</p>
+<div id="creating-simulated-data-with-an-effect-size-applied-to-level-1-of-0.01-and-displaying-the-anova-summary." class="section level3">
+<h3>Creating simulated data with an effect size applied to level 1 of 0.01 and displaying the ANOVA summary.</h3>
+<pre class="r"><code>lower_effect_data &lt;- gen_effect_data(levels, n_per_level, n_samples, 0.01)</code></pre>
+<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+## Using compatibility `.name_repair`.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;subject&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>lower_effect_anova &lt;- aov(DV ~ level, lower_effect_data)
+
+unclass(summary(lower_effect_anova)) %&gt;%
+  kbl(digits = 2) %&gt;%
+  kable_classic(position = &quot;center&quot;)</code></pre>
+<table class="kable_wrapper lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+level
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.36
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="graphing-the-f-value-against-the-null-distribution." class="section level3">
+<h3>Graphing the F value against the null distribution.</h3>
+<pre class="r"><code>lower_f_value &lt;- summary(lower_effect_anova)[[1]]$`F value`[1]
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
+  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;) +
+  geom_vline(aes(xintercept = lower_f_value, color = &quot;blue&quot;)) +
+  annotate(x = lower_f_value, y = 75, xend = 0, label =  paste0(&quot;Simulated F value = &quot;, round(lower_f_value, 2)), geom = &quot;label&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: xend</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="graphing-the-means-of-the-simulated-data-where-the-effect-size-was-0.01." class="section level3">
+<h3>Graphing the means of the simulated data where the effect size was 0.01.</h3>
+<pre class="r"><code>lower_effect_data_grouped &lt;- lower_effect_data %&gt;%
+  group_by(level) %&gt;%
+  summarise(mean_DV = mean(DV),
+            SE = sd(DV)/length(DV))
+
+ggplot(lower_effect_data_grouped, aes(x = level, y = mean_DV)) +
+  geom_bar(stat = &quot;identity&quot;, aes(fill = level)) +
+  scale_y_continuous(limits = c(-0.05, 0.05)) +
+  geom_errorbar(aes(ymin=mean_DV - SE,
+                    ymax=mean_DV + SE), width=.1) + 
+  geom_point(data = lower_effect_data, mapping = aes(x = level, y = DV), alpha = 0.5) +
+  geom_point(alpha=.25) +
+  ylab(&quot;DV&quot;)</code></pre>
+<pre><code>## Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>I would not reject the null in this situation as the F value calculated from the simulated data is less than the critical value. The parameters of the simulation, however, can produce data that leads to an F value greater than the critical value, but that is unlikely.</p>
+</div>
+</div>
+<div id="section-1" class="section level2">
+<h2>(2)</h2>
+<p>Create simulated data for the above design that could be produced by the null hypothesis, and that results in a 𝐹 value that is larger than the critical value for 𝐹 in this design (assume alpha = .05). Report the ANOVA, and show a ggplot of the means in the simulated data. Furthermore, display the individual data points on top of the means. Would you reject the null hypothesis in this situation, and would you be incorrect or correct in rejecting the null?</p>
+<div id="creating-simulated-data-with-an-effect-size-applied-to-level-1-of-0.035-and-displaying-the-anova-summary." class="section level3">
+<h3>Creating simulated data with an effect size applied to level 1 of 0.035 and displaying the ANOVA summary.</h3>
+<pre class="r"><code>higher_effect_data &lt;- gen_effect_data(levels, n_per_level, n_samples, 0.035)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;subject&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>higher_effect_anova &lt;- aov(DV ~ level, higher_effect_data)
+
+unclass(summary(higher_effect_anova)) %&gt;%
+  kbl(digits = 2) %&gt;%
+  kable_classic(position = &quot;center&quot;)</code></pre>
+<table class="kable_wrapper lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+level
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5.31
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="graphing-the-f-value-against-the-null-distribution.-1" class="section level3">
+<h3>Graphing the F value against the null distribution.</h3>
+<pre class="r"><code>higher_f_value &lt;- summary(higher_effect_anova)[[1]]$`F value`[1]
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
+  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;) +
+  geom_vline(aes(xintercept = higher_f_value, color = &quot;blue&quot;)) +
+  annotate(x = higher_f_value, y = 75, xend = 8.0, label =  paste0(&quot;Simulated F value = &quot;, round(higher_f_value, 2)), geom = &quot;label&quot;) +
+  expand_limits(x = 10)</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: xend</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="graphing-the-means-of-the-simulated-data-where-the-effect-size-was-0.01.-1" class="section level3">
+<h3>Graphing the means of the simulated data where the effect size was 0.01.</h3>
+<pre class="r"><code>higher_effect_data_grouped &lt;- higher_effect_data %&gt;%
+  group_by(level) %&gt;%
+  summarise(mean_DV = mean(DV),
+            SE = sd(DV)/length(DV))
+
+ggplot(higher_effect_data_grouped, aes(x = level, y = mean_DV)) +
+  geom_bar(stat = &quot;identity&quot;, aes(fill = level)) +
+  scale_y_continuous(limits = c(-0.05, 0.05)) +
+  geom_errorbar(aes(ymin=mean_DV - SE,
+                    ymax=mean_DV + SE), width=.1) + 
+  geom_point(data = higher_effect_data, mapping = aes(x = level, y = DV), alpha = 0.5) +
+  geom_point(alpha=.25)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>I would reject the null in this situation as the F value calculated from the simulated data is greater than the critical value. The parameters of the simulation, however, can produce data that leads to an F value less than the critical value, but that is unlikely.</p>
+</div>
+</div>
+<div id="bonus-question" class="section level2">
+<h2>Bonus Question:</h2>
+<p>In the lab we saw that F-distribution is robust to violations of the assumptions of ANOVA. For example, the simulation of the null based on a bi-modal distribution was very similar to the true F distribution. For this bonus question, show that you can “break” the F-distribution. Specifically, can you run a simulation that samples numbers from a non-normal distribution that does produce a very different looking F-distribution?</p>
+<div id="breaking-the-f-distribution-by-sampling-data-from-a-weibull-distribution-shape-0.1-scale-1000." class="section level3">
+<h3>Breaking the F-distribution by sampling data from a Weibull distribution (shape = 0.1, scale = 1000).</h3>
+<pre class="r"><code>gen_sim_f &lt;- function(num_levels, num_per_level, num_samples) {
+  f_values &lt;- length(num_samples)
+
+  for(i in 1:num_samples) {
+    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rweibull(num_levels * num_per_level, shape = 0.1, scale = 1000))
+    anova_out &lt;- aov(DV ~ level, sim_data)
+    f_ &lt;- summary(anova_out)[[1]]$`F value`[1]
+    f_values[i] &lt;- f_
+    
+    f_values_df &lt;- tibble(f_value = f_values,
+                          sample = 1:length(f_values))
+  }
+  return(f_values_df)
+}
+
+sim_f_values &lt;- gen_sim_f(levels, n_per_level, n_samples)
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100)</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 </div>
 
@@ -956,15 +1213,9 @@ summary(anova)</code></pre>
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/psyc7709g/lab-3-multiple-regression-ii/" rel="next">Lab 3 - Multiple Regression II</a>
+    <a href="/courses/psyc7709g/lab-4-anova/" rel="next">Lab 4 - ANOVA</a>
   </div>
   
-  
-  
-  <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/courses/psyc7709g/lab-5-anova-randomization/" rel="prev">Lab 5 - ANOVA and Randomization</a>
-  </div>
   
 </div>
 

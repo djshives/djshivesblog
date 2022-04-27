@@ -1,0 +1,1406 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Drew Shives" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Introduction The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.
+Data and Exploratory Data Analysis Let&rsquo;s begin by loading in the necessary packages&hellip;" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-3-multiple-regression-ii/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="rgb(251, 191, 183)" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.28abbab530024c259f6bd3996e4ce505.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-3-multiple-regression-ii/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="djshives" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-3-multiple-regression-ii/" />
+  <meta property="og:title" content="Lab 3 - Multiple Regression II | djshives" />
+  <meta property="og:description" content="Introduction The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.
+Data and Exploratory Data Analysis Let&rsquo;s begin by loading in the necessary packages&hellip;" /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2022-02-04T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2022-02-04T19:08:14-05:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Lab 3 - Multiple Regression II | djshives</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="bfce45a9750137ab35d27acb8a00ef24" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://djshives.myportfolio.com/home" target="_blank" rel="noopener"><span>Photos</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="https://twitter.com/shives_drew" data-toggle="tooltip" data-placement="bottom" title="Follow me on Twitter" target="_blank" rel="noopener" aria-label="Follow me on Twitter">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    
+
+
+
+
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      <form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-md-3 w-100" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <div class="d-flex">
+      <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
+        
+          Lessons
+        
+      </span>
+      <span><i class="fas fa-chevron-down"></i></span>
+    </div>
+  </button>
+
+  
+  <button class="form-control sidebar-search js-search d-none d-md-flex">
+    <i class="fas fa-search pr-2"></i>
+    <span class="sidebar-search-text">Search...</span>
+    <span class="sidebar-search-shortcut">/</span>
+  </button>
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  
+  
+  
+  
+
+  
+  
+    
+
+    
+      
+
+      <ul class="nav docs-sidenav">
+        <li><a href="/courses/"><i class="fas fa-arrow-left pr-1"></i>Courses</a></li>
+      </ul>
+
+      
+      
+        
+          
+        
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/psyc7709g/">Sections</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/psyc7709g/lessons/">Lessons</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-1-shaping-data/">Lab 1 - Shaping Data</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-2-multiple-regression-i/">Lab 2 - Multiple Regression I</a></li>
+
+
+
+  <li class="active"><a href="/courses/psyc7709g/lessons/lab-3-multiple-regression-ii/">Lab 3 - Multiple Regression II</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-4-anova/">Lab 4 - ANOVA</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-5-anova-randomization/">Lab 5 - ANOVA and Randomization</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-6-comparisons/">Lab 6 - Comparisons</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-7-factorial-anova/">Lab 7 - Factorial ANOVA</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-8-contrast-analyses/">Lab 8 - Contrast Analyses</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+    
+  
+</nav>
+
+    </div>
+
+    
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      
+
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li><a href="#data-and-exploratory-data-analysis">Data and Exploratory Data Analysis</a></li>
+      </ul>
+    </li>
+    <li><a href="#no-pooling-models">No Pooling Models</a></li>
+    <li><a href="#partial-pooling-model-multilevel">Partial-Pooling Model: Multilevel</a></li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          
+            
+  <nav class="d-none d-md-flex" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      
+  
+  
+  
+  
+
+  <li class="breadcrumb-item">
+    <a href="/">
+      
+        Home
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/">
+      
+        Courses
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/psyc7709g/">
+      
+        Sections
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/psyc7709g/lessons/">
+      
+        Lessons
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        Lab 3 - Multiple Regression II
+      </li>
+    </ol>
+  </nav>
+
+
+          
+
+          <h1>Lab 3 - Multiple Regression II</h1>
+
+          <div class="article-style">
+            <h2 id="introduction">Introduction</h2>
+<p>The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.</p>
+<h3 id="data-and-exploratory-data-analysis">Data and Exploratory Data Analysis</h3>
+<p>Let&rsquo;s begin by loading in the necessary packages&hellip;</p>
+<pre><code class="language-r">library(MASS)
+library(tidyverse)
+library(ggrepel)
+library(extraDistr)
+library(loo)
+library(bridgesampling)
+library(brms)
+library(rstan)
+library(bayesplot)
+library(tictoc)
+library(hypr)
+library(tidybayes)
+rstan_options(auto_write = FALSE)
+options(mc.cores = parallel::detectCores())
+select &lt;- dplyr::select
+</code></pre>
+<p>&hellip;And create a toy dataset. For this lab, we will be using the research design by Hulme et al. (1984) that investigates whether age and speech rate are involed with memory ability.</p>
+<pre><code class="language-r">data &lt;- tibble(age = c(4,4,7,7,10,10),
+               speech_rate = c(1,2,2,4,3,6),
+               memory = c(14,23,30,50,39,67),
+               id = c(1, 2, 3, 4, 5, 6))
+
+data
+</code></pre>
+<pre><code>## # A tibble: 6 × 4
+##     age speech_rate memory    id
+##   &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     4           1     14     1
+## 2     4           2     23     2
+## 3     7           2     30     3
+## 4     7           4     50     4
+## 5    10           3     39     5
+## 6    10           6     67     6
+</code></pre>
+<p>As we can see from the above as speech rate increases, so does memory ability. The same, however, can be said for age and memory ability. This can be better illustrated visually.</p>
+<pre><code class="language-r">data %&gt;%
+  ggplot(aes(x = speech_rate, y = memory, group = age)) +
+  geom_point() +
+  facet_wrap(~age) +
+  geom_label_repel(aes(label = memory), nudge_x = 1, na.rm = TRUE) +
+  scale_x_continuous(
+    limits = c(0, 7),
+    sec.axis = sec_axis(~ . , name = &quot;Age&quot;, breaks = NULL, labels = NULL)
+    ) +
+  ggtitle(&quot;Memory by Speech Rate&quot;) +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Unfortunately, it looks like we have an issue of independent variables being correlated with one another, known as multicollinearity.</p>
+<pre><code class="language-r">cor(data)
+</code></pre>
+<pre><code>##                   age speech_rate    memory        id
+## age         1.0000000   0.7500000 0.8027961 0.9561829
+## speech_rate 0.7500000   1.0000000 0.9889517 0.8964215
+## memory      0.8027961   0.9889517 1.0000000 0.9261501
+## id          0.9561829   0.8964215 0.9261501 1.0000000
+</code></pre>
+<p>As we can see from the above, there is a 75% correlation between age and speech_rate. This means that a complete pooling regression model, where all of the data is pooled together, is not appropriate.</p>
+<p>We can build the complete pooling model using the lm() function. The dependent variable, memory, is placed to the left of the &ldquo;~&rdquo; in the function, and the independent variables, age and speech_rate, to the right. The &ldquo;data&rdquo; parameter is filled by data.</p>
+<p>The summary() function is then used to view the regression output.</p>
+<pre><code class="language-r">complete_pool &lt;- lm(
+  memory ~ 1 + speech_rate + age,
+  data = data
+  )
+
+summary(complete_pool)
+</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = memory ~ 1 + speech_rate + age, data = data)
+## 
+## Residuals:
+##      1      2      3      4      5      6 
+## -1.167 -1.667  2.333  3.333 -1.167 -1.667 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)    1.667      3.598   0.463  0.67470   
+## speech_rate    9.500      1.087   8.736  0.00316 **
+## age            1.000      0.725   1.379  0.26162   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.877 on 3 degrees of freedom
+## Multiple R-squared:  0.9866,	Adjusted R-squared:  0.9776 
+## F-statistic: 110.1 on 2 and 3 DF,  p-value: 0.001559
+</code></pre>
+<p>There is a high R^2 for the model, but when looking at the individual r^2 for the independent variables&hellip;</p>
+<pre><code class="language-r">cor(data) ^ 2
+</code></pre>
+<pre><code>##                   age speech_rate    memory        id
+## age         1.0000000   0.5625000 0.6444815 0.9142857
+## speech_rate 0.5625000   1.0000000 0.9780254 0.8035714
+## memory      0.6444815   0.9780254 1.0000000 0.8577539
+## id          0.9142857   0.8035714 0.8577539 1.0000000
+</code></pre>
+<p>&hellip;They sum to greater than 1!</p>
+<p>So what is to be done?</p>
+<h2 id="no-pooling-models">No Pooling Models</h2>
+<p>One possible solution is to not pool any data and create an individual model for each age bucket&hellip;</p>
+<pre><code class="language-r">ggplot(
+  data = data,
+  aes(
+    x = speech_rate,
+    y = memory,
+    col = age,
+    group = age
+  )
+) +
+  geom_point() +
+  geom_smooth(
+    method = lm
+  )
+</code></pre>
+<pre><code>## `geom_smooth()` using formula 'y ~ x'
+</code></pre>
+<pre><code>## Warning in qt((1 - level)/2, df): NaNs produced
+
+## Warning in qt((1 - level)/2, df): NaNs produced
+
+## Warning in qt((1 - level)/2, df): NaNs produced
+</code></pre>
+<pre><code>## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
+
+## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
+
+## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+## -Inf
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>But this looses the relationship between speech rate and age. In large data sets, this can become especially confusing and time consuming.</p>
+<h2 id="partial-pooling-model-multilevel">Partial-Pooling Model: Multilevel</h2>
+<p>Rather than no pooling or complete pooling, we can create a partially-pooled multilevel model! Partial pooling is a process where population-level and individual-level effects are estimated simultaneously. By doing so, each individual&rsquo;s estimated effect is a reflection of the weighted combination of their own data and the population average. This allows us to account for the relationship between speech rate and age.</p>
+<p>Using the brms package, we can easily fit a multilevel model in a very similar fashion to the lm() function. The dependent variable for the model again falls to the left of the &ldquo;~&rdquo; and the independent variables are placed to the right. What is different, however, is in the parentheses, &ldquo;(speech_rate|age)&rdquo;. What this parameter does is specify that we want varying slopes and intercepts for speech rate for each age grouping.</p>
+<p>(Aside: we also specify several other things unique to Bayesian models, most notably priors. Prior specification is a topic in it of itself, and for this model we can use vaguely informative priors based on the means and standard deviations of the data itself.)</p>
+<pre><code class="language-r">priors &lt;- c(
+  prior(normal(3, 2), class = b, coef = speech_rate),
+  prior(normal(0, 2), class = Intercept),
+  prior(normal(0, 2), class = sigma),
+  prior(normal(0, 2), class = sd, coef = Intercept, group = age),
+  prior(normal(3, 2), class = sd, coef = speech_rate, group = age)
+)
+
+partial_pool_model &lt;- brm(
+  memory ~ 1 + speech_rate + (speech_rate|age),
+  data = data,
+  prior= priors,
+  iter = 4000,
+  control = list(
+    adapt_delta = 0.99,
+    max_treedepth = 20
+    )
+)
+</code></pre>
+<p>Similar to using the &ldquo;summary()&rdquo; function for the complete pooling model, we can use it here for the multilevel model.</p>
+<pre><code class="language-r">summary(partial_pool_model)
+</code></pre>
+<pre><code>## Warning: There were 278 divergent transitions after warmup. Increasing
+## adapt_delta above 0.99 may help. See http://mc-stan.org/misc/
+## warnings.html#divergent-transitions-after-warmup
+</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: memory ~ 1 + speech_rate + (speech_rate | age) 
+##    Data: data (Number of observations: 6) 
+##   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
+##          total post-warmup draws = 8000
+## 
+## Group-Level Effects: 
+## ~age (Number of levels: 3) 
+##                            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+## sd(Intercept)                  2.66      1.58     0.16     5.97 1.00     1534
+## sd(speech_rate)                6.18      1.25     3.98     8.83 1.01      439
+## cor(Intercept,speech_rate)     0.50      0.44    -0.70     0.99 1.01     1247
+##                            Tail_ESS
+## sd(Intercept)                  2288
+## sd(speech_rate)                3105
+## cor(Intercept,speech_rate)     1383
+## 
+## Population-Level Effects: 
+##             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept       3.67      3.53    -4.17     9.77 1.02     2575     4009
+## speech_rate    -0.50      1.21    -2.67     2.03 1.02     2718     3747
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma     1.69      1.03     0.17     4.19 1.03      137       33
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).
+</code></pre>
+<pre><code class="language-r">mcmc_areas(
+  partial_pool_model,
+  pars = c(
+    &quot;b_Intercept&quot;,
+    &quot;b_speech_rate&quot;,
+    &quot;sd_age__Intercept&quot;,
+    &quot;sd_age__speech_rate&quot;
+  ),
+  prob_outer = 0.99,
+  prob = 0.95
+)
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>While the summary table is useful to get a sense of the model, and the subsequent chart visualizes the coefficients of the model for both the population and group levels, looking at the effect sizes for speech rate per age group is most illustrative.</p>
+<pre><code class="language-r">model_summary &lt;- summary(partial_pool_model)
+</code></pre>
+<pre><code>## Warning: There were 278 divergent transitions after warmup. Increasing
+## adapt_delta above 0.99 may help. See http://mc-stan.org/misc/
+## warnings.html#divergent-transitions-after-warmup
+</code></pre>
+<pre><code class="language-r">effect_estimates &lt;- as_tibble(ranef(partial_pool_model)[[1]]) %&gt;%
+  mutate(Estimate.speech_rate_with_fixed = Estimate.speech_rate + model_summary$fixed[2, 1])
+  
+
+ggplot(
+  data = effect_estimates,
+  aes(
+    x = c(4, 7, 10),
+    y = Estimate.speech_rate_with_fixed
+  )
+) +
+  geom_point() +
+  geom_errorbar(
+    aes(
+      ymin = Estimate.speech_rate_with_fixed - 2 * Est.Error.speech_rate,
+      ymax = Estimate.speech_rate_with_fixed + 2 * Est.Error.speech_rate
+    )
+  ) +
+  scale_x_continuous(
+    breaks = c(4, 7, 10),
+  ) +
+  xlab(&quot;Age&quot;) +
+  ylab(&quot;Estimated Effect of Speech Rate on Memory (-/+ 2sd)&quot;) +
+  geom_label_repel(
+    aes(
+      label = round(Estimate.speech_rate_with_fixed, 2)
+    ),
+    nudge_y = 1
+  )
+</code></pre>
+<p><img src="/courses/PSYC7709G/Lab3_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>The above chart shows the estimated effect of speech rate on memory by age. We can see that, somewhat surprisingly, age 7 is where the effect of speech rate on memory is greatest while at age 4 it is the lowest.</p>
+
+          </div>
+
+          
+
+
+
+          
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/psyc7709g/lessons/lab-2-multiple-regression-i/" rel="next">Lab 2 - Multiple Regression I</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/psyc7709g/lessons/lab-4-anova/" rel="prev">Lab 4 - ANOVA</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Feb 4, 2022</p>
+
+          
+
+
+
+
+
+          
+
+
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+  </div>
+
+  <div class="page-footer">
+    
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  
+
+
+
+
+
+</body>
+</html>

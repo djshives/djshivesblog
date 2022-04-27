@@ -1,0 +1,1489 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Drew Shives" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="library(tidyverse) library(kableExtra) set.seed(1) Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-5-anova-randomization/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="rgb(251, 191, 183)" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.28abbab530024c259f6bd3996e4ce505.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-5-anova-randomization/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="djshives" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-5-anova-randomization/" />
+  <meta property="og:title" content="Lab 5 - ANOVA and Randomization | djshives" />
+  <meta property="og:description" content="library(tidyverse) library(kableExtra) set.seed(1) Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2022-01-31T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2022-03-10T13:31:58-05:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Lab 5 - ANOVA and Randomization | djshives</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="7b4a60b2f038d9521dbbdd5e5fd3f257" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Courses</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://djshives.myportfolio.com/home" target="_blank" rel="noopener"><span>Photos</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="https://twitter.com/shives_drew" data-toggle="tooltip" data-placement="bottom" title="Follow me on Twitter" target="_blank" rel="noopener" aria-label="Follow me on Twitter">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    
+
+
+
+
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      <form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-md-3 w-100" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <div class="d-flex">
+      <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
+        
+          Lessons
+        
+      </span>
+      <span><i class="fas fa-chevron-down"></i></span>
+    </div>
+  </button>
+
+  
+  <button class="form-control sidebar-search js-search d-none d-md-flex">
+    <i class="fas fa-search pr-2"></i>
+    <span class="sidebar-search-text">Search...</span>
+    <span class="sidebar-search-shortcut">/</span>
+  </button>
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  
+  
+  
+  
+
+  
+  
+    
+
+    
+      
+
+      <ul class="nav docs-sidenav">
+        <li><a href="/courses/"><i class="fas fa-arrow-left pr-1"></i>Courses</a></li>
+      </ul>
+
+      
+      
+        
+          
+        
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/psyc7709g/">Sections</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/courses/psyc7709g/lessons/">Lessons</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-1-shaping-data/">Lab 1 - Shaping Data</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-2-multiple-regression-i/">Lab 2 - Multiple Regression I</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-3-multiple-regression-ii/">Lab 3 - Multiple Regression II</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-4-anova/">Lab 4 - ANOVA</a></li>
+
+
+
+  <li class="active"><a href="/courses/psyc7709g/lessons/lab-5-anova-randomization/">Lab 5 - ANOVA and Randomization</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-6-comparisons/">Lab 6 - Comparisons</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-7-factorial-anova/">Lab 7 - Factorial ANOVA</a></li>
+
+
+
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-8-contrast-analyses/">Lab 8 - Contrast Analyses</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+    
+  
+</nav>
+
+    </div>
+
+    
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      
+
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          
+            
+  <nav class="d-none d-md-flex" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      
+  
+  
+  
+  
+
+  <li class="breadcrumb-item">
+    <a href="/">
+      
+        Home
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/">
+      
+        Courses
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/psyc7709g/">
+      
+        Sections
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/courses/psyc7709g/lessons/">
+      
+        Lessons
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        Lab 5 - ANOVA and Randomization
+      </li>
+    </ol>
+  </nav>
+
+
+          
+
+          <h1>Lab 5 - ANOVA and Randomization</h1>
+
+          <div class="article-style">
+            
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<pre class="r"><code>library(tidyverse)
+library(kableExtra)
+
+set.seed(1)</code></pre>
+<div id="consider-a-design-with-3-groups-and-10-people-per-group.-assume-that-the-dependent-variable-is-assumed-to-be-normally-distributed-and-use-unit-normal-distributions-with-mean-0-and-sd-1-in-your-simulations." class="section level2">
+<h2>Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations.</h2>
+<div id="setting-the-parameters-for-the-data-and-subsequent-simulations." class="section level3">
+<h3>Setting the parameters for the data and subsequent simulations.</h3>
+<pre class="r"><code>levels &lt;- 3
+n_per_level &lt;- 10
+n_samples &lt;- 1000</code></pre>
+</div>
+<div id="creating-the-null-distribution." class="section level3">
+<h3>Creating the null distribution.</h3>
+<pre class="r"><code>gen_sim_f &lt;- function(num_levels, num_per_level, num_samples) {
+  f_values &lt;- length(num_samples)
+
+  for(i in 1:num_samples) {
+    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rnorm(num_levels * num_per_level, 0, 1))
+    anova_out &lt;- aov(DV ~ level, sim_data)
+    f_ &lt;- summary(anova_out)[[1]]$`F value`[1]
+    f_values[i] &lt;- f_
+    
+    f_values_df &lt;- tibble(f_value = f_values,
+                          sample = 1:length(f_values))
+  }
+  return(f_values_df)
+}
+
+sim_f_values &lt;- gen_sim_f(levels, n_per_level, n_samples)
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
+  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;)</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="creating-a-function-that-adds-an-effect-to-the-first-level.-this-will-allow-for-the-design-to-produce-an-f-value-that-is-smaller-or-larger-than-the-critical-f-value." class="section level3">
+<h3>Creating a function that adds an effect to the first level. This will allow for the design to produce an F-value that is smaller or larger than the critical F-value.</h3>
+<pre class="r"><code>gen_effect_data &lt;- function(num_levels, num_per_level, num_samples, effect_size) {
+  
+  column_names = c(&quot;subjects&quot;, &quot;IV&quot;, &quot;DV&quot;, &quot;sample&quot;)
+  
+  total_sim_data &lt;- as_tibble(t(column_names))[0, ]
+  
+  for(i in 1:num_samples) {
+    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rnorm(num_levels * num_per_level, 0, 1),
+                       sample = i)
+    
+    sim_data[sim_data$level == 1, ]$DV &lt;- sim_data[sim_data$level == 1, ]$DV + effect_size
+    
+    total_sim_data &lt;- rbind(total_sim_data, sim_data)
+    
+  }
+  
+  total_sim_data &lt;- total_sim_data %&gt;%
+    group_by(subject, level) %&gt;%
+    summarise(DV = mean(DV))
+  
+  return(total_sim_data)
+}</code></pre>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2>(1)</h2>
+<p>Create simulated data for the above design that could be produced by the null hypothesis, and that results in a 𝐹 value that is smaller than the critical value for 𝐹 in this design (assume alpha = .05). Report the ANOVA, and show a ggplot of the means in the simulated data. Furthermore, display the individual data points on top of the means. Would you reject the null hypothesis in this situation, and would you be incorrect or correct in rejecting the null?</p>
+<div id="creating-simulated-data-with-an-effect-size-applied-to-level-1-of-0.01-and-displaying-the-anova-summary." class="section level3">
+<h3>Creating simulated data with an effect size applied to level 1 of 0.01 and displaying the ANOVA summary.</h3>
+<pre class="r"><code>lower_effect_data &lt;- gen_effect_data(levels, n_per_level, n_samples, 0.01)</code></pre>
+<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+## Using compatibility `.name_repair`.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;subject&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>lower_effect_anova &lt;- aov(DV ~ level, lower_effect_data)
+
+unclass(summary(lower_effect_anova)) %&gt;%
+  kbl(digits = 2) %&gt;%
+  kable_classic(position = &quot;center&quot;)</code></pre>
+<table class="kable_wrapper lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+level
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.36
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="graphing-the-f-value-against-the-null-distribution." class="section level3">
+<h3>Graphing the F value against the null distribution.</h3>
+<pre class="r"><code>lower_f_value &lt;- summary(lower_effect_anova)[[1]]$`F value`[1]
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
+  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;) +
+  geom_vline(aes(xintercept = lower_f_value, color = &quot;blue&quot;)) +
+  annotate(x = lower_f_value, y = 75, xend = 0, label =  paste0(&quot;Simulated F value = &quot;, round(lower_f_value, 2)), geom = &quot;label&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: xend</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="graphing-the-means-of-the-simulated-data-where-the-effect-size-was-0.01." class="section level3">
+<h3>Graphing the means of the simulated data where the effect size was 0.01.</h3>
+<pre class="r"><code>lower_effect_data_grouped &lt;- lower_effect_data %&gt;%
+  group_by(level) %&gt;%
+  summarise(mean_DV = mean(DV),
+            SE = sd(DV)/length(DV))
+
+ggplot(lower_effect_data_grouped, aes(x = level, y = mean_DV)) +
+  geom_bar(stat = &quot;identity&quot;, aes(fill = level)) +
+  scale_y_continuous(limits = c(-0.05, 0.05)) +
+  geom_errorbar(aes(ymin=mean_DV - SE,
+                    ymax=mean_DV + SE), width=.1) + 
+  geom_point(data = lower_effect_data, mapping = aes(x = level, y = DV), alpha = 0.5) +
+  geom_point(alpha=.25) +
+  ylab(&quot;DV&quot;)</code></pre>
+<pre><code>## Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>I would not reject the null in this situation as the F value calculated from the simulated data is less than the critical value. The parameters of the simulation, however, can produce data that leads to an F value greater than the critical value, but that is unlikely.</p>
+</div>
+</div>
+<div id="section-1" class="section level2">
+<h2>(2)</h2>
+<p>Create simulated data for the above design that could be produced by the null hypothesis, and that results in a 𝐹 value that is larger than the critical value for 𝐹 in this design (assume alpha = .05). Report the ANOVA, and show a ggplot of the means in the simulated data. Furthermore, display the individual data points on top of the means. Would you reject the null hypothesis in this situation, and would you be incorrect or correct in rejecting the null?</p>
+<div id="creating-simulated-data-with-an-effect-size-applied-to-level-1-of-0.035-and-displaying-the-anova-summary." class="section level3">
+<h3>Creating simulated data with an effect size applied to level 1 of 0.035 and displaying the ANOVA summary.</h3>
+<pre class="r"><code>higher_effect_data &lt;- gen_effect_data(levels, n_per_level, n_samples, 0.035)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;subject&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>higher_effect_anova &lt;- aov(DV ~ level, higher_effect_data)
+
+unclass(summary(higher_effect_anova)) %&gt;%
+  kbl(digits = 2) %&gt;%
+  kable_classic(position = &quot;center&quot;)</code></pre>
+<table class="kable_wrapper lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+level
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5.31
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="graphing-the-f-value-against-the-null-distribution.-1" class="section level3">
+<h3>Graphing the F value against the null distribution.</h3>
+<pre class="r"><code>higher_f_value &lt;- summary(higher_effect_anova)[[1]]$`F value`[1]
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100) +
+  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
+  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;) +
+  geom_vline(aes(xintercept = higher_f_value, color = &quot;blue&quot;)) +
+  annotate(x = higher_f_value, y = 75, xend = 8.0, label =  paste0(&quot;Simulated F value = &quot;, round(higher_f_value, 2)), geom = &quot;label&quot;) +
+  expand_limits(x = 10)</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: xend</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="graphing-the-means-of-the-simulated-data-where-the-effect-size-was-0.01.-1" class="section level3">
+<h3>Graphing the means of the simulated data where the effect size was 0.01.</h3>
+<pre class="r"><code>higher_effect_data_grouped &lt;- higher_effect_data %&gt;%
+  group_by(level) %&gt;%
+  summarise(mean_DV = mean(DV),
+            SE = sd(DV)/length(DV))
+
+ggplot(higher_effect_data_grouped, aes(x = level, y = mean_DV)) +
+  geom_bar(stat = &quot;identity&quot;, aes(fill = level)) +
+  scale_y_continuous(limits = c(-0.05, 0.05)) +
+  geom_errorbar(aes(ymin=mean_DV - SE,
+                    ymax=mean_DV + SE), width=.1) + 
+  geom_point(data = higher_effect_data, mapping = aes(x = level, y = DV), alpha = 0.5) +
+  geom_point(alpha=.25)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>I would reject the null in this situation as the F value calculated from the simulated data is greater than the critical value. The parameters of the simulation, however, can produce data that leads to an F value less than the critical value, but that is unlikely.</p>
+</div>
+</div>
+<div id="bonus-question" class="section level2">
+<h2>Bonus Question:</h2>
+<p>In the lab we saw that F-distribution is robust to violations of the assumptions of ANOVA. For example, the simulation of the null based on a bi-modal distribution was very similar to the true F distribution. For this bonus question, show that you can “break” the F-distribution. Specifically, can you run a simulation that samples numbers from a non-normal distribution that does produce a very different looking F-distribution?</p>
+<div id="breaking-the-f-distribution-by-sampling-data-from-a-weibull-distribution-shape-0.1-scale-1000." class="section level3">
+<h3>Breaking the F-distribution by sampling data from a Weibull distribution (shape = 0.1, scale = 1000).</h3>
+<pre class="r"><code>gen_sim_f &lt;- function(num_levels, num_per_level, num_samples) {
+  f_values &lt;- length(num_samples)
+
+  for(i in 1:num_samples) {
+    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
+                       level = as.factor(rep(1:num_levels, each = num_per_level)),
+                       DV = rweibull(num_levels * num_per_level, shape = 0.1, scale = 1000))
+    anova_out &lt;- aov(DV ~ level, sim_data)
+    f_ &lt;- summary(anova_out)[[1]]$`F value`[1]
+    f_values[i] &lt;- f_
+    
+    f_values_df &lt;- tibble(f_value = f_values,
+                          sample = 1:length(f_values))
+  }
+  return(f_values_df)
+}
+
+sim_f_values &lt;- gen_sim_f(levels, n_per_level, n_samples)
+
+ggplot(sim_f_values) +
+  geom_histogram(aes(x = f_value), bins = 100)</code></pre>
+<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+</div>
+
+          </div>
+
+          
+
+
+
+          
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/psyc7709g/lessons/lab-4-anova/" rel="next">Lab 4 - ANOVA</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/psyc7709g/lessons/lab-6-comparisons/" rel="prev">Lab 6 - Comparisons</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Mar 10, 2022</p>
+
+          
+
+
+
+
+
+          
+
+
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+  </div>
+
+  <div class="page-footer">
+    
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  
+
+
+
+
+
+</body>
+</html>

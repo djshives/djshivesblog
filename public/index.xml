@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Academic</title>
+    <title>djshives</title>
     <link>https://djshives.netlify.app/</link>
       <atom:link href="https://djshives.netlify.app/index.xml" rel="self" type="application/rss+xml" />
-    <description>Academic</description>
+    <description>djshives</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     <image>
       <url>https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
-      <title>Academic</title>
+      <title>djshives</title>
       <link>https://djshives.netlify.app/</link>
     </image>
     
@@ -34,9 +34,9 @@
     
     <item>
       <title>Lab 1 - Shaping Data</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-1-shaping-data/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-1-shaping-data/</link>
       <pubDate>Sun, 06 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-1-shaping-data/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-1-shaping-data/</guid>
       <description>&lt;h2 id=&#34;loading-libraries&#34;&gt;Loading libraries.&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
 library(readxl)
@@ -127,9 +127,9 @@ data_headerless
     
     <item>
       <title>Lab 2 - Multiple Regression I</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-2-multiple-regression-i/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-2-multiple-regression-i/</link>
       <pubDate>Sat, 05 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-2-multiple-regression-i/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-2-multiple-regression-i/</guid>
       <description>&lt;h2 id=&#34;loading-libraries&#34;&gt;Loading libraries.&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
 library(ggrepel)
@@ -248,9 +248,9 @@ ggplot(slamecka_design2,aes(x=number_of_IL,
     
     <item>
       <title>Lab 3 - Multiple Regression II</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-3-multiple-regression-ii/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-3-multiple-regression-ii/</link>
       <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-3-multiple-regression-ii/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-3-multiple-regression-ii/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;The mechanics of multivariate regression in R are relatively straightforward. By using the lm() function, building complex linear models is a quick and efficient affair.&lt;/p&gt;
 &lt;h3 id=&#34;data-and-exploratory-data-analysis&#34;&gt;Data and Exploratory Data Analysis&lt;/h3&gt;
@@ -507,9 +507,9 @@ ggplot(
     
     <item>
       <title>Lab 4 - ANOVA</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-4-anova/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-4-anova/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-4-anova/</guid>
       <description>
 &lt;script src=&#34;https://djshives.netlify.app/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
@@ -604,9 +604,9 @@ summary(anova)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Lab 5 - ANOVA and Randomization</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-5-anova-randomization/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-5-anova-randomization/</link>
       <pubDate>Mon, 31 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-5-anova-randomization/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-5-anova-randomization/</guid>
       <description>
 &lt;script src=&#34;https://djshives.netlify.app/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;script src=&#34;https://djshives.netlify.app/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
@@ -958,9 +958,9 @@ ggplot(sim_f_values) +
     
     <item>
       <title>Lab 6 - Comparisons</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-6-comparisons/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-6-comparisons/</link>
       <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-6-comparisons/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-6-comparisons/</guid>
       <description>
 
 
@@ -969,9 +969,9 @@ ggplot(sim_f_values) +
     
     <item>
       <title>Lab 7 - Factorial ANOVA</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-7-factorial-anova/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-7-factorial-anova/</link>
       <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-7-factorial-anova/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-7-factorial-anova/</guid>
       <description>
 
 
@@ -980,9 +980,9 @@ ggplot(sim_f_values) +
     
     <item>
       <title>Lab 8 - Contrast Analyses</title>
-      <link>https://djshives.netlify.app/courses/psyc7709g/lab-8-contrast-analyses/</link>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-8-contrast-analyses/</link>
       <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-8-contrast-analyses/</guid>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lessons/lab-8-contrast-analyses/</guid>
       <description>
 
 
@@ -1161,7 +1161,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-261498573&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-314958267&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -1171,7 +1171,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-261498573&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-314958267&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

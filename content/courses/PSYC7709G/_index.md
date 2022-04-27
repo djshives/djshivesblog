@@ -2,13 +2,7 @@
 date: "2022-01-31"
 linkTitle: Lessons
 summary: Course lessons and assignments.
-type: book
----
-
----
-date: "2022-01-31"
-linkTitle: Project
-summary: Semester-long project.
+title: "PSYC 7709G - Using R for Reproducible Research"
 type: book
 ---
 

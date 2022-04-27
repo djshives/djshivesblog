@@ -936,5 +936,38 @@ ggplot(sim_f_values) +
 </description>
     </item>
     
+    <item>
+      <title>Lab 6 - Comparisons</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-6-comparisons/</link>
+      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-6-comparisons/</guid>
+      <description>
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Lab 7 - Factorial ANOVA</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-7-factorial-anova/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-7-factorial-anova/</guid>
+      <description>
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Lab 8 - Contrast Analyses</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-8-contrast-analyses/</link>
+      <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-8-contrast-analyses/</guid>
+      <description>
+
+
+</description>
+    </item>
+    
   </channel>
 </rss>

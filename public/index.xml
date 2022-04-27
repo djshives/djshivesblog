@@ -957,6 +957,39 @@ ggplot(sim_f_values) +
     </item>
     
     <item>
+      <title>Lab 6 - Comparisons</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-6-comparisons/</link>
+      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-6-comparisons/</guid>
+      <description>
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Lab 7 - Factorial ANOVA</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-7-factorial-anova/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-7-factorial-anova/</guid>
+      <description>
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Lab 8 - Contrast Analyses</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/lab-8-contrast-analyses/</link>
+      <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/lab-8-contrast-analyses/</guid>
+      <description>
+
+
+</description>
+    </item>
+    
+    <item>
       <title>Hi Hugo</title>
       <link>https://djshives.netlify.app/post/hi-hugo/</link>
       <pubDate>Tue, 07 Sep 2021 00:00:00 +0000</pubDate>
@@ -1128,7 +1161,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-925163784&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-261498573&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -1138,7 +1171,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-925163784&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-261498573&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

@@ -1,0 +1,29 @@
+---
+title: "Lab 8 - Contrast Analyses"
+author: "Drew Shives"
+date: "2022-01-28"
+slug: lab-8-contrast-analyses
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-04-27T13:31:58-05:00'
+featured: no
+type: book
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+
+

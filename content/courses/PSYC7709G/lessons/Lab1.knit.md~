@@ -1,0 +1,40 @@
+---
+title: Lab 1 - Shaping Data
+author: Drew Shives
+date: '2022-02-06'
+slug: lab-1-shaping-data
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-02-06T23:27:47-05:00'
+featured: no
+type: book
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+## Loading libraries.
+
+
+```r
+library(tidyverse)
+library(readxl)
+library(tidyxl)
+library(unpivotr)
+library(reshape2)
+```
+
+## Loading data.
+
+
+
+
+
+

@@ -30,7 +30,7 @@
   
     
   
-  <meta name="description" content="" />
+  <meta name="description" content="library(tidyverse) (3) In chapter 10 of Crump et al. (2018), there is a discussion of patterns of main effects and interactions that can occur in a 2x2 design, which represents perhaps the simplest factorial design." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-7-factorial-anova/" />
@@ -296,7 +296,7 @@
   <meta property="og:site_name" content="djshives" />
   <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-7-factorial-anova/" />
   <meta property="og:title" content="Lab 7 - Factorial ANOVA | djshives" />
-  <meta property="og:description" content="" /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:description" content="library(tidyverse) (3) In chapter 10 of Crump et al. (2018), there is a discussion of patterns of main effects and interactions that can occur in a 2x2 design, which represents perhaps the simplest factorial design." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -922,6 +922,99 @@
             
 
 
+<pre class="r"><code>library(tidyverse)</code></pre>
+<div id="in-chapter-10-of-crump-et-al.-2018-there-is-a-discussion-of-patterns-of-main-effects-and-interactions-that-can-occur-in-a-2x2-design-which-represents-perhaps-the-simplest-factorial-design.-there-are-8-possible-outcomes-discussed-httpscrumplab.github.iostatisticsmore-on-factorial-designs.htmllooking-at-main-effects-and-interactions.-examples-of-these-8-outcomes-are-shown-in-two-figures-one-with-bar-graphs-and-one-with-line-graphs.-reproduce-either-of-these-figures-using-ggplot2." class="section level2">
+<h2>(3) In chapter 10 of Crump et al. (2018), there is a discussion of patterns of main effects and interactions that can occur in a 2x2 design, which represents perhaps the simplest factorial design. There are 8 possible outcomes discussed <a href="https://crumplab.github.io/statistics/more-on-factorial-designs.html#looking-at-main-effects-and-interactions" class="uri">https://crumplab.github.io/statistics/more-on-factorial-designs.html#looking-at-main-effects-and-interactions</a>. Examples of these 8 outcomes are shown in two figures, one with bar graphs, and one with line graphs. Reproduce either of these figures using ggplot2.</h2>
+<pre class="r"><code>pattern1 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
+                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
+                means = c(6,6,6,6))
+
+pattern2 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
+                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
+                means = c(10,10,5,5))
+
+pattern3 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
+                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
+                means = c(10,13,5,2))
+
+pattern4 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
+                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
+                means = c(5,10,10,15))
+
+pattern5 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
+                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
+                means = c(10,18,5,7))
+
+pattern6 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
+                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
+                means = c(10,2,10,2))
+
+pattern7 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
+                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
+                means = c(2,12,5,9))
+
+pattern8 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
+                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
+                means = c(5,10,10,5))
+
+all &lt;- rbind(pattern1, pattern2, pattern3, pattern4, pattern5, pattern6, pattern7, pattern8)
+type &lt;- c(rep(&quot;~1, ~2, ~1x2&quot;,4),
+          rep(&quot;1, ~2, ~1x2&quot;,4),
+          rep(&quot;1, ~2, 1x2&quot;,4),
+          rep(&quot;1, 2, ~1x2&quot;,4),
+          rep(&quot;1, 2, 1x2&quot;,4),
+          rep(&quot;~1, 2, ~1x2&quot;,4),
+          rep(&quot;~1, 2, 1x2&quot;,4),
+          rep(&quot;~1, ~2, 1x2&quot;,4))
+type&lt;-as.factor(type)
+
+all &lt;- cbind(all,type)
+
+ggplot(all, aes(x=IV1, y=means, group=IV2, fill=IV2))+
+  geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)+
+  theme_classic()+
+  facet_wrap(~type, nrow=2)+
+  theme(legend.position = &quot;top&quot;)</code></pre>
+<p><img src="/courses/PSYC7709G/lessons/Lab7_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(all, aes(x=IV1, y=means, group=IV2, color=IV2))+
+  geom_point()+
+  geom_line()+
+  theme_classic()+
+  facet_wrap(~type, nrow=2)+
+  theme(legend.position = &quot;top&quot;)</code></pre>
+<p><img src="/courses/PSYC7709G/lessons/Lab7_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+</div>
+<div id="in-the-conceptual-section-of-this-lab-we-used-an-r-simulation-to-find-the-family-wise-type-i-error-rate-for-a-simple-factorial-design-with-2-independent-variables.-use-an-r-simulation-to-find-the-family-wise-type-i-error-rate-for-a-factorial-design-with-3-independent-variables." class="section level2">
+<h2>(4) In the conceptual section of this lab we used an R simulation to find the family-wise type I error rate for a simple factorial design with 2 independent variables. Use an R simulation to find the family-wise type I error rate for a factorial design with 3 independent variables.</h2>
+<pre class="r"><code>simulation &lt;- rbinom(10000,7,.05)
+length(simulation[simulation &gt; 0])/10000</code></pre>
+<pre><code>## [1] 0.2995</code></pre>
+<pre class="r"><code>simulation_save &lt;- tibble()
+
+for(i in 1:10000){
+  n &lt;- 12
+  factorial_data &lt;- tibble(A = factor(rep(c(&quot;L1&quot;,&quot;L2&quot;), each = n)),
+                         B = factor(rep(rep(c(&quot;L1&quot;,&quot;L2&quot;), each = n/2),2)),
+                         C = factor(rep(c(&quot;L1&quot;,&quot;L2&quot;), n)),
+                         DV = rnorm(n*2,0,1))
+
+  output &lt;- summary(aov(DV ~ A*B*C, data = factorial_data))
+
+  simulation_tibble &lt;- tibble(p_values = output[[1]]$`Pr(&gt;F)`[1:7],
+                       effect = c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;AxB&quot;,&quot;AxC&quot;,&quot;BxC&quot;,&quot;AxBxC&quot;),
+                       simulation = rep(i,7))
+
+  simulation_save &lt;-rbind(simulation_save, simulation_tibble)
+}
+
+type_I_errors &lt;- simulation_save %&gt;%
+  filter(p_values &lt; .05) %&gt;%
+  group_by(simulation) %&gt;%
+  count()
+
+dim(type_I_errors)[1]/10000</code></pre>
+<pre><code>## [1] 0.2815</code></pre>
+</div>
 
           </div>
 

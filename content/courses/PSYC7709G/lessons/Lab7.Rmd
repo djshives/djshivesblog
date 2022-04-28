@@ -22,7 +22,103 @@ projects: []
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r message = FALSE, warning = FALSE}
+library(tidyverse)
+```
 
+## (3) In chapter 10 of Crump et al. (2018), there is a discussion of patterns of main effects and interactions that can occur in a 2x2 design, which represents perhaps the simplest factorial design. There are 8 possible outcomes discussed https://crumplab.github.io/statistics/more-on-factorial-designs.html#looking-at-main-effects-and-interactions. Examples of these 8 outcomes are shown in two figures, one with bar graphs, and one with line graphs. Reproduce either of these figures using ggplot2.
+
+```{r}
+pattern1 <- tibble(IV1 = c("A","A","B","B"),
+                IV2 = c("1","2","1","2"),
+                means = c(6,6,6,6))
+
+pattern2 <- tibble(IV1 = c("A","A","B","B"),
+                IV2 = c("1","2","1","2"),
+                means = c(10,10,5,5))
+
+pattern3 <- tibble(IV1 = c("A","A","B","B"),
+                IV2 = c("1","2","1","2"),
+                means = c(10,13,5,2))
+
+pattern4 <- tibble(IV1 = c("A","A","B","B"),
+                IV2 = c("1","2","1","2"),
+                means = c(5,10,10,15))
+
+pattern5 <- tibble(IV1 = c("A","A","B","B"),
+                IV2 = c("1","2","1","2"),
+                means = c(10,18,5,7))
+
+pattern6 <- tibble(IV1 = c("A","A","B","B"),
+                IV2 = c("1","2","1","2"),
+                means = c(10,2,10,2))
+
+pattern7 <- tibble(IV1 = c("A","A","B","B"),
+                IV2 = c("1","2","1","2"),
+                means = c(2,12,5,9))
+
+pattern8 <- tibble(IV1 = c("A","A","B","B"),
+                IV2 = c("1","2","1","2"),
+                means = c(5,10,10,5))
+
+all <- rbind(pattern1, pattern2, pattern3, pattern4, pattern5, pattern6, pattern7, pattern8)
+type <- c(rep("~1, ~2, ~1x2",4),
+          rep("1, ~2, ~1x2",4),
+          rep("1, ~2, 1x2",4),
+          rep("1, 2, ~1x2",4),
+          rep("1, 2, 1x2",4),
+          rep("~1, 2, ~1x2",4),
+          rep("~1, 2, 1x2",4),
+          rep("~1, ~2, 1x2",4))
+type<-as.factor(type)
+
+all <- cbind(all,type)
+
+ggplot(all, aes(x=IV1, y=means, group=IV2, fill=IV2))+
+  geom_bar(stat="identity", position="dodge")+
+  theme_classic()+
+  facet_wrap(~type, nrow=2)+
+  theme(legend.position = "top")
+
+ggplot(all, aes(x=IV1, y=means, group=IV2, color=IV2))+
+  geom_point()+
+  geom_line()+
+  theme_classic()+
+  facet_wrap(~type, nrow=2)+
+  theme(legend.position = "top")
+```
+
+## (4) In the conceptual section of this lab we used an R simulation to find the family-wise type I error rate for a simple factorial design with 2 independent variables. Use an R simulation to find the family-wise type I error rate for a factorial design with 3 independent variables.
+
+```{r}
+simulation <- rbinom(10000,7,.05)
+length(simulation[simulation > 0])/10000
+
+simulation_save <- tibble()
+
+for(i in 1:10000){
+  n <- 12
+  factorial_data <- tibble(A = factor(rep(c("L1","L2"), each = n)),
+                         B = factor(rep(rep(c("L1","L2"), each = n/2),2)),
+                         C = factor(rep(c("L1","L2"), n)),
+                         DV = rnorm(n*2,0,1))
+
+  output <- summary(aov(DV ~ A*B*C, data = factorial_data))
+
+  simulation_tibble <- tibble(p_values = output[[1]]$`Pr(>F)`[1:7],
+                       effect = c("A","B","C","AxB","AxC","BxC","AxBxC"),
+                       simulation = rep(i,7))
+
+  simulation_save <-rbind(simulation_save, simulation_tibble)
+}
+
+type_I_errors <- simulation_save %>%
+  filter(p_values < .05) %>%
+  group_by(simulation) %>%
+  count()
+
+dim(type_I_errors)[1]/10000
+```
 
 
 

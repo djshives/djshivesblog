@@ -944,6 +944,45 @@ ggplot(sim_f_values) +
       <description>
 
 
+&lt;div id=&#34;section-12.3.3-from-your-textbook-refers-to-the-problem-with-replications-of-a-meaningless-experiment-alpha-and-the-captains-age.-the-issue-here-is-that-if-you-run-an-ineffectual-experiment-enough-times-you-can-always-find-a-significant-result-by-chance.-the-textbook-mentions-that-if-you-repeat-an-experiment-20-times-you-are-guaranteed-to-find-a-significant-result-with-.64-probability-and-the-probability-is-.92-if-you-repeat-the-experiment-50-times.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(1) Section 12.3.3 from your textbook refers to: The problem with replications of a meaningless experiment: ‘alpha and the captain’s age’. The issue here is that if you run an ineffectual experiment enough times you can always find a significant result by chance. The textbook mentions that if you repeat an experiment 20 times, you are guaranteed to find a significant result with .64 probability, and the probability is .92 if you repeat the experiment 50 times.&lt;/h2&gt;
+&lt;div id=&#34;a-make-use-of-the-rbinom-function-to-show-you-can-reproduce-both-probabilities.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;(1a) Make use of the rbinom() function to show you can reproduce both probabilities.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a_20 &amp;lt;- rbinom(10000, 20, 0.05)
+
+hist(a_20)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/lessons/Lab6_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;length(a_20[a_20 &amp;gt; 0]) / 10000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.6455&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;a_50 &amp;lt;- rbinom(10000, 50, 0.05)
+
+hist(a_50)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/lessons/Lab6_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;length(a_50[a_50 &amp;gt; 0]) / 10000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9291&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;b-if-the-ineffectual-experiment-was-conducted-20-times-and-there-were-four-groups-and-the-experimenter-would-accept-a-significant-result-from-any-of-the-orthogonal-linear-contrasts-what-would-be-the-probability-of-finding-a-significant-result-here&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;(1b) If the ineffectual experiment was conducted 20 times, and there were four groups, and the experimenter would accept a significant result from any of the orthogonal linear contrasts, what would be the probability of finding a significant result here?&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;B &amp;lt;- replicate(10000, sum(rbinom(20, 3, 0.05)))
+
+length(B[B &amp;gt; 0]) / 10000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.952&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;consider-that-a-researcher-publishes-a-study-showing-a-significant-effect-p-.-05-but-in-reality-the-researcher-makes-a-type-i-error-and-the-manipulation-did-not-cause-any-difference.-if-many-other-researchers-replicated-the-study-what-kind-of-p-values-would-they-find-use-r-to-create-a-sampling-distribution-of-p-values-that-would-be-expected-in-this-situation.-what-shape-does-this-distribution-have&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(2) Consider that a researcher publishes a study showing a significant effect, p &amp;lt;. 05; but, in reality the researcher makes a type I error, and the manipulation did not cause any difference. If many other researchers replicated the study, what kind of p-values would they find? Use R to create a sampling distribution of p-values that would be expected in this situation. What shape does this distribution have?&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p_values &amp;lt;- replicate(10000, t.test(rnorm(10, 0, 1), rnorm(10, 0, 1), var.equal = TRUE)$p.value)
+
+hist(p_values)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/lessons/Lab6_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;now-assume-that-the-published-result-reflects-a-true-effect.-specifically-lets-imagine-the-study-had-two-groups-between-subjects-with-20-subjects-in-each-group.-assume-that-scores-for-subjects-are-all-sampled-from-a-normal-distribution-and-that-group-a-has-larger-mean-than-group-b-by-.5-standard-deviations-e.g.-cohens-d-.5.-if-many-other-researchers-replicated-the-study-what-kind-of-p-values-would-they-find-use-r-to-create-a-sampling-distribution-of-p-values-that-would-be-expected-in-this-situation.-what-shape-does-this-distribution-have&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(3) Now assume that the published result reflects a true effect. Specifically, let’s imagine the study had two groups (between-subjects), with 20 subjects in each group. Assume that scores for subjects are all sampled from a normal distribution, and that group A has larger mean than group B by .5 standard deviations (e.g., Cohen’s d = .5). If many other researchers replicated the study, what kind of p-values would they find? Use R to create a sampling distribution of p-values that would be expected in this situation. What shape does this distribution have?&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p_values &amp;lt;- replicate(10000, t.test(rnorm(20, 0, 1), rnorm(20, 0.5, 1), var.equal = TRUE)$p.value)
+
+hist(p_values)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/lessons/Lab6_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -955,6 +994,99 @@ ggplot(sim_f_values) +
       <description>
 
 
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;in-chapter-10-of-crump-et-al.-2018-there-is-a-discussion-of-patterns-of-main-effects-and-interactions-that-can-occur-in-a-2x2-design-which-represents-perhaps-the-simplest-factorial-design.-there-are-8-possible-outcomes-discussed-httpscrumplab.github.iostatisticsmore-on-factorial-designs.htmllooking-at-main-effects-and-interactions.-examples-of-these-8-outcomes-are-shown-in-two-figures-one-with-bar-graphs-and-one-with-line-graphs.-reproduce-either-of-these-figures-using-ggplot2.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(3) In chapter 10 of Crump et al. (2018), there is a discussion of patterns of main effects and interactions that can occur in a 2x2 design, which represents perhaps the simplest factorial design. There are 8 possible outcomes discussed &lt;a href=&#34;https://crumplab.github.io/statistics/more-on-factorial-designs.html#looking-at-main-effects-and-interactions&#34; class=&#34;uri&#34;&gt;https://crumplab.github.io/statistics/more-on-factorial-designs.html#looking-at-main-effects-and-interactions&lt;/a&gt;. Examples of these 8 outcomes are shown in two figures, one with bar graphs, and one with line graphs. Reproduce either of these figures using ggplot2.&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pattern1 &amp;lt;- tibble(IV1 = c(&amp;quot;A&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B&amp;quot;),
+                IV2 = c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;),
+                means = c(6,6,6,6))
+
+pattern2 &amp;lt;- tibble(IV1 = c(&amp;quot;A&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B&amp;quot;),
+                IV2 = c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;),
+                means = c(10,10,5,5))
+
+pattern3 &amp;lt;- tibble(IV1 = c(&amp;quot;A&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B&amp;quot;),
+                IV2 = c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;),
+                means = c(10,13,5,2))
+
+pattern4 &amp;lt;- tibble(IV1 = c(&amp;quot;A&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B&amp;quot;),
+                IV2 = c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;),
+                means = c(5,10,10,15))
+
+pattern5 &amp;lt;- tibble(IV1 = c(&amp;quot;A&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B&amp;quot;),
+                IV2 = c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;),
+                means = c(10,18,5,7))
+
+pattern6 &amp;lt;- tibble(IV1 = c(&amp;quot;A&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B&amp;quot;),
+                IV2 = c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;),
+                means = c(10,2,10,2))
+
+pattern7 &amp;lt;- tibble(IV1 = c(&amp;quot;A&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B&amp;quot;),
+                IV2 = c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;),
+                means = c(2,12,5,9))
+
+pattern8 &amp;lt;- tibble(IV1 = c(&amp;quot;A&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B&amp;quot;),
+                IV2 = c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;),
+                means = c(5,10,10,5))
+
+all &amp;lt;- rbind(pattern1, pattern2, pattern3, pattern4, pattern5, pattern6, pattern7, pattern8)
+type &amp;lt;- c(rep(&amp;quot;~1, ~2, ~1x2&amp;quot;,4),
+          rep(&amp;quot;1, ~2, ~1x2&amp;quot;,4),
+          rep(&amp;quot;1, ~2, 1x2&amp;quot;,4),
+          rep(&amp;quot;1, 2, ~1x2&amp;quot;,4),
+          rep(&amp;quot;1, 2, 1x2&amp;quot;,4),
+          rep(&amp;quot;~1, 2, ~1x2&amp;quot;,4),
+          rep(&amp;quot;~1, 2, 1x2&amp;quot;,4),
+          rep(&amp;quot;~1, ~2, 1x2&amp;quot;,4))
+type&amp;lt;-as.factor(type)
+
+all &amp;lt;- cbind(all,type)
+
+ggplot(all, aes(x=IV1, y=means, group=IV2, fill=IV2))+
+  geom_bar(stat=&amp;quot;identity&amp;quot;, position=&amp;quot;dodge&amp;quot;)+
+  theme_classic()+
+  facet_wrap(~type, nrow=2)+
+  theme(legend.position = &amp;quot;top&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/lessons/Lab7_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(all, aes(x=IV1, y=means, group=IV2, color=IV2))+
+  geom_point()+
+  geom_line()+
+  theme_classic()+
+  facet_wrap(~type, nrow=2)+
+  theme(legend.position = &amp;quot;top&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/lessons/Lab7_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;in-the-conceptual-section-of-this-lab-we-used-an-r-simulation-to-find-the-family-wise-type-i-error-rate-for-a-simple-factorial-design-with-2-independent-variables.-use-an-r-simulation-to-find-the-family-wise-type-i-error-rate-for-a-factorial-design-with-3-independent-variables.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(4) In the conceptual section of this lab we used an R simulation to find the family-wise type I error rate for a simple factorial design with 2 independent variables. Use an R simulation to find the family-wise type I error rate for a factorial design with 3 independent variables.&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;simulation &amp;lt;- rbinom(10000,7,.05)
+length(simulation[simulation &amp;gt; 0])/10000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.2995&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;simulation_save &amp;lt;- tibble()
+
+for(i in 1:10000){
+  n &amp;lt;- 12
+  factorial_data &amp;lt;- tibble(A = factor(rep(c(&amp;quot;L1&amp;quot;,&amp;quot;L2&amp;quot;), each = n)),
+                         B = factor(rep(rep(c(&amp;quot;L1&amp;quot;,&amp;quot;L2&amp;quot;), each = n/2),2)),
+                         C = factor(rep(c(&amp;quot;L1&amp;quot;,&amp;quot;L2&amp;quot;), n)),
+                         DV = rnorm(n*2,0,1))
+
+  output &amp;lt;- summary(aov(DV ~ A*B*C, data = factorial_data))
+
+  simulation_tibble &amp;lt;- tibble(p_values = output[[1]]$`Pr(&amp;gt;F)`[1:7],
+                       effect = c(&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;,&amp;quot;AxB&amp;quot;,&amp;quot;AxC&amp;quot;,&amp;quot;BxC&amp;quot;,&amp;quot;AxBxC&amp;quot;),
+                       simulation = rep(i,7))
+
+  simulation_save &amp;lt;-rbind(simulation_save, simulation_tibble)
+}
+
+type_I_errors &amp;lt;- simulation_save %&amp;gt;%
+  filter(p_values &amp;lt; .05) %&amp;gt;%
+  group_by(simulation) %&amp;gt;%
+  count()
+
+dim(type_I_errors)[1]/10000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.2815&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -966,6 +1098,212 @@ ggplot(sim_f_values) +
       <description>
 
 
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(usefun)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;consider-a-2x2-design.-assume-the-dv-is-measured-from-a-normal-distribution-with-mean-0-and-standard-deviation-1.-assume-that-the-main-effect-of-a-causes-a-total-shift-of-.5-standard-deviations-of-the-mean-between-the-levels.-assume-that-level-1-of-b-is-a-control-where-you-expect-to-measure-the-standard-effect-of-a.-assume-that-level-2-of-b-is-an-experimental-factor-intended-to-reduce-the-effect-of-a-by-.25-standard-deviations.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(1) Consider a 2x2 design. Assume the DV is measured from a normal distribution with mean 0, and standard deviation 1. Assume that the main effect of A causes a total shift of .5 standard deviations of the mean between the levels. Assume that level 1 of B is a control, where you expect to measure the standard effect of A. Assume that level 2 of B is an experimental factor intended to reduce the effect of A by .25 standard deviations.&lt;/h2&gt;
+&lt;div id=&#34;a-create-a-ggplot2-figure-that-depicts-the-expected-results-from-this-design.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;(1a) Create a ggplot2 figure that depicts the expected results from this design.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grand_mean &amp;lt;- 0
+A &amp;lt;- c(0,.5)
+B &amp;lt;- c(0,0)
+AB &amp;lt;- c(0,0,0,-.25)
+
+model_data &amp;lt;- tibble()
+
+for(i in 1:length(A)){
+  for(j in 1:length(B)){
+    IVA &amp;lt;- i 
+    IVB &amp;lt;- j
+    DV &amp;lt;- grand_mean + A[i] + B[j] + AB[(i-1) * length(B) + j]
+    sc_GM &amp;lt;- grand_mean
+    sc_A &amp;lt;- A[i]
+    sc_B &amp;lt;- B[j]
+    sc_AB &amp;lt;- AB[(i-1) * length(B) + j] 
+    row_entry &amp;lt;- tibble(IVA,IVB,DV,
+                        sc_GM,sc_A,sc_B,sc_AB)
+    model_data &amp;lt;- rbind(model_data,row_entry)
+  }
+}
+
+knitr::kable(model_data)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;IVA&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;IVB&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;DV&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;sc_GM&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;sc_A&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;sc_B&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;sc_AB&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.50&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.25&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bar_graph &amp;lt;- ggplot(model_data, 
+                    aes(y=DV,
+                        x=as.factor(IVA),
+                        fill=as.factor(IVB))) + 
+  geom_bar(stat=&amp;#39;identity&amp;#39;, position=&amp;#39;dodge&amp;#39;)
+
+line_graph &amp;lt;- ggplot(model_data, 
+                     aes(y=DV,
+                         x=IVA,
+                         linetype=as.factor(IVB))) + 
+  geom_line() + 
+  geom_point()
+
+bar_graph&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/lessons/Lab8_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;line_graph&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/lessons/Lab8_files/figure-html/unnamed-chunk-2-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;b-how-many-subjects-are-needed-to-detect-the-main-effect-of-a-with-power-.8&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;(1b) How many subjects are needed to detect the main effect of A with power = .8?&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;power_function &amp;lt;- function(num_subjects, effect) {
+  
+  p_value &amp;lt;- c()
+  
+  effect_num = c()
+  
+  if(effect == &amp;quot;A&amp;quot;) {
+    effect_num = 1
+  } else if(effect == &amp;quot;B&amp;quot;) {
+    effect_num = 2
+  } else if(effect == &amp;quot;AB&amp;quot;) {
+    effect_num =3
+  }
+
+  for(i in 1:1000){
+    
+    simulation_df &amp;lt;- tibble(
+      IVA = rep(rep(c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;), each = 2), num_subjects),
+      IVB = rep(rep(c(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;), 2), num_subjects),
+      DV = rnorm(4 * num_subjects, c(0,0,.5,.25), 1)
+    )
+    aov_results &amp;lt;- summary(aov(DV ~ IVA * IVB, simulation_df))
+    p_value[i] &amp;lt;- aov_results[[1]]$`Pr(&amp;gt;F)`[effect_num]
+  }
+  
+  length(p_value[p_value &amp;lt; 0.05]) / 1000
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n &amp;lt;- c(seq(50, 60))
+
+
+for(i in n) {
+  print(i)
+  print(power_function(i, &amp;quot;A&amp;quot;))
+  print_empty_line()
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 50
+## [1] 0.77
+## 
+## [1] 51
+## [1] 0.765
+## 
+## [1] 52
+## [1] 0.77
+## 
+## [1] 53
+## [1] 0.779
+## 
+## [1] 54
+## [1] 0.784
+## 
+## [1] 55
+## [1] 0.776
+## 
+## [1] 56
+## [1] 0.789
+## 
+## [1] 57
+## [1] 0.802
+## 
+## [1] 58
+## [1] 0.804
+## 
+## [1] 59
+## [1] 0.83
+## 
+## [1] 60
+## [1] 0.828&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;c-how-many-subjects-are-needed-to-detect-the-interaction-effect-with-power-.8&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;(1c) How many subjects are needed to detect the interaction effect with power = .8?&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n &amp;lt;- c(400, 425, 450, 475, 500, 525, 550, 575, 600)
+
+
+for(i in n) {
+  print(i)
+  print(power_function(i, &amp;quot;AB&amp;quot;))
+  print_empty_line()
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 400
+## [1] 0.702
+## 
+## [1] 425
+## [1] 0.732
+## 
+## [1] 450
+## [1] 0.765
+## 
+## [1] 475
+## [1] 0.771
+## 
+## [1] 500
+## [1] 0.787
+## 
+## [1] 525
+## [1] 0.814
+## 
+## [1] 550
+## [1] 0.838
+## 
+## [1] 575
+## [1] 0.847
+## 
+## [1] 600
+## [1] 0.852&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     

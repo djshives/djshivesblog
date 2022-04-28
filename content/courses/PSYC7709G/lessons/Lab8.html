@@ -20,3 +20,209 @@ projects: []
 
 
 
+<pre class="r"><code>library(tidyverse)
+library(usefun)</code></pre>
+<div id="consider-a-2x2-design.-assume-the-dv-is-measured-from-a-normal-distribution-with-mean-0-and-standard-deviation-1.-assume-that-the-main-effect-of-a-causes-a-total-shift-of-.5-standard-deviations-of-the-mean-between-the-levels.-assume-that-level-1-of-b-is-a-control-where-you-expect-to-measure-the-standard-effect-of-a.-assume-that-level-2-of-b-is-an-experimental-factor-intended-to-reduce-the-effect-of-a-by-.25-standard-deviations." class="section level2">
+<h2>(1) Consider a 2x2 design. Assume the DV is measured from a normal distribution with mean 0, and standard deviation 1. Assume that the main effect of A causes a total shift of .5 standard deviations of the mean between the levels. Assume that level 1 of B is a control, where you expect to measure the standard effect of A. Assume that level 2 of B is an experimental factor intended to reduce the effect of A by .25 standard deviations.</h2>
+<div id="a-create-a-ggplot2-figure-that-depicts-the-expected-results-from-this-design." class="section level3">
+<h3>(1a) Create a ggplot2 figure that depicts the expected results from this design.</h3>
+<pre class="r"><code>grand_mean &lt;- 0
+A &lt;- c(0,.5)
+B &lt;- c(0,0)
+AB &lt;- c(0,0,0,-.25)
+
+model_data &lt;- tibble()
+
+for(i in 1:length(A)){
+  for(j in 1:length(B)){
+    IVA &lt;- i 
+    IVB &lt;- j
+    DV &lt;- grand_mean + A[i] + B[j] + AB[(i-1) * length(B) + j]
+    sc_GM &lt;- grand_mean
+    sc_A &lt;- A[i]
+    sc_B &lt;- B[j]
+    sc_AB &lt;- AB[(i-1) * length(B) + j] 
+    row_entry &lt;- tibble(IVA,IVB,DV,
+                        sc_GM,sc_A,sc_B,sc_AB)
+    model_data &lt;- rbind(model_data,row_entry)
+  }
+}
+
+knitr::kable(model_data)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">IVA</th>
+<th align="right">IVB</th>
+<th align="right">DV</th>
+<th align="right">sc_GM</th>
+<th align="right">sc_A</th>
+<th align="right">sc_B</th>
+<th align="right">sc_AB</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.00</td>
+<td align="right">0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0.00</td>
+<td align="right">0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0.50</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0.25</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+<td align="right">0</td>
+<td align="right">-0.25</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>bar_graph &lt;- ggplot(model_data, 
+                    aes(y=DV,
+                        x=as.factor(IVA),
+                        fill=as.factor(IVB))) + 
+  geom_bar(stat=&#39;identity&#39;, position=&#39;dodge&#39;)
+
+line_graph &lt;- ggplot(model_data, 
+                     aes(y=DV,
+                         x=IVA,
+                         linetype=as.factor(IVB))) + 
+  geom_line() + 
+  geom_point()
+
+bar_graph</code></pre>
+<p><img src="/courses/PSYC7709G/lessons/Lab8_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>line_graph</code></pre>
+<p><img src="/courses/PSYC7709G/lessons/Lab8_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+</div>
+<div id="b-how-many-subjects-are-needed-to-detect-the-main-effect-of-a-with-power-.8" class="section level3">
+<h3>(1b) How many subjects are needed to detect the main effect of A with power = .8?</h3>
+<pre class="r"><code>power_function &lt;- function(num_subjects, effect) {
+  
+  p_value &lt;- c()
+  
+  effect_num = c()
+  
+  if(effect == &quot;A&quot;) {
+    effect_num = 1
+  } else if(effect == &quot;B&quot;) {
+    effect_num = 2
+  } else if(effect == &quot;AB&quot;) {
+    effect_num =3
+  }
+
+  for(i in 1:1000){
+    
+    simulation_df &lt;- tibble(
+      IVA = rep(rep(c(&quot;1&quot;,&quot;2&quot;), each = 2), num_subjects),
+      IVB = rep(rep(c(&quot;1&quot;,&quot;2&quot;), 2), num_subjects),
+      DV = rnorm(4 * num_subjects, c(0,0,.5,.25), 1)
+    )
+    aov_results &lt;- summary(aov(DV ~ IVA * IVB, simulation_df))
+    p_value[i] &lt;- aov_results[[1]]$`Pr(&gt;F)`[effect_num]
+  }
+  
+  length(p_value[p_value &lt; 0.05]) / 1000
+}</code></pre>
+<pre class="r"><code>n &lt;- c(seq(50, 60))
+
+
+for(i in n) {
+  print(i)
+  print(power_function(i, &quot;A&quot;))
+  print_empty_line()
+}</code></pre>
+<pre><code>## [1] 50
+## [1] 0.751
+## 
+## [1] 51
+## [1] 0.766
+## 
+## [1] 52
+## [1] 0.773
+## 
+## [1] 53
+## [1] 0.79
+## 
+## [1] 54
+## [1] 0.789
+## 
+## [1] 55
+## [1] 0.789
+## 
+## [1] 56
+## [1] 0.801
+## 
+## [1] 57
+## [1] 0.813
+## 
+## [1] 58
+## [1] 0.801
+## 
+## [1] 59
+## [1] 0.8
+## 
+## [1] 60
+## [1] 0.842</code></pre>
+</div>
+<div id="c-how-many-subjects-are-needed-to-detect-the-interaction-effect-with-power-.8" class="section level3">
+<h3>(1c) How many subjects are needed to detect the interaction effect with power = .8?</h3>
+<pre class="r"><code>n &lt;- c(400, 425, 450, 475, 500, 525, 550, 575, 600)
+
+
+for(i in n) {
+  print(i)
+  print(power_function(i, &quot;AB&quot;))
+  print_empty_line()
+}</code></pre>
+<pre><code>## [1] 400
+## [1] 0.725
+## 
+## [1] 425
+## [1] 0.733
+## 
+## [1] 450
+## [1] 0.747
+## 
+## [1] 475
+## [1] 0.784
+## 
+## [1] 500
+## [1] 0.787
+## 
+## [1] 525
+## [1] 0.821
+## 
+## [1] 550
+## [1] 0.835
+## 
+## [1] 575
+## [1] 0.853
+## 
+## [1] 600
+## [1] 0.858</code></pre>
+</div>
+</div>

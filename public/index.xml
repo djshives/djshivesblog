@@ -1254,37 +1254,37 @@ for(i in n) {
   print_empty_line()
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 50
-## [1] 0.77
+## [1] 0.751
 ## 
 ## [1] 51
-## [1] 0.765
+## [1] 0.766
 ## 
 ## [1] 52
-## [1] 0.77
+## [1] 0.773
 ## 
 ## [1] 53
-## [1] 0.779
+## [1] 0.79
 ## 
 ## [1] 54
-## [1] 0.784
-## 
-## [1] 55
-## [1] 0.776
-## 
-## [1] 56
 ## [1] 0.789
 ## 
+## [1] 55
+## [1] 0.789
+## 
+## [1] 56
+## [1] 0.801
+## 
 ## [1] 57
-## [1] 0.802
+## [1] 0.813
 ## 
 ## [1] 58
-## [1] 0.804
+## [1] 0.801
 ## 
 ## [1] 59
-## [1] 0.83
+## [1] 0.8
 ## 
 ## [1] 60
-## [1] 0.828&lt;/code&gt;&lt;/pre&gt;
+## [1] 0.842&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;c-how-many-subjects-are-needed-to-detect-the-interaction-effect-with-power-.8&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;(1c) How many subjects are needed to detect the interaction effect with power = .8?&lt;/h3&gt;
@@ -1297,31 +1297,31 @@ for(i in n) {
   print_empty_line()
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 400
-## [1] 0.702
+## [1] 0.725
 ## 
 ## [1] 425
-## [1] 0.732
+## [1] 0.733
 ## 
 ## [1] 450
-## [1] 0.765
+## [1] 0.747
 ## 
 ## [1] 475
-## [1] 0.771
+## [1] 0.784
 ## 
 ## [1] 500
 ## [1] 0.787
 ## 
 ## [1] 525
-## [1] 0.814
+## [1] 0.821
 ## 
 ## [1] 550
-## [1] 0.838
+## [1] 0.835
 ## 
 ## [1] 575
-## [1] 0.847
+## [1] 0.853
 ## 
 ## [1] 600
-## [1] 0.852&lt;/code&gt;&lt;/pre&gt;
+## [1] 0.858&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
@@ -1499,7 +1499,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-936182457&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-321678594&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -1509,7 +1509,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-936182457&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-321678594&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="library(tidyverse) library(kableExtra) set.seed(1) Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations." />
+  <meta name="description" content="library(tidyverse) ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ── ## ✔ ggplot2 3.3.6 ✔ purrr 0.3.4 ## ✔ tibble 3.1.7 ✔ dplyr 1.0.9 ## ✔ tidyr 1.2.0 ✔ stringr 1." />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-5-anova-randomization/" />
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-9-rm-anova/" />
 
   
 
@@ -277,7 +277,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-5-anova-randomization/" />
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-9-rm-anova/" />
 
   
   
@@ -294,18 +294,18 @@
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="djshives" />
-  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-5-anova-randomization/" />
-  <meta property="og:title" content="Lab 5 - ANOVA and Randomization | djshives" />
-  <meta property="og:description" content="library(tidyverse) library(kableExtra) set.seed(1) Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-9-rm-anova/" />
+  <meta property="og:title" content="Lab 9 - RM ANOVA | djshives" />
+  <meta property="og:description" content="library(tidyverse) ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ── ## ✔ ggplot2 3.3.6 ✔ purrr 0.3.4 ## ✔ tibble 3.1.7 ✔ dplyr 1.0.9 ## ✔ tidyr 1.2.0 ✔ stringr 1." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2022-01-31T00:00:00&#43;00:00"
+        content="2022-01-27T00:00:00&#43;00:00"
       />
     
-    <meta property="article:modified_time" content="2022-03-10T13:31:58-05:00">
+    <meta property="article:modified_time" content="2022-04-27T13:31:58-05:00">
   
 
   
@@ -322,11 +322,11 @@
 
 
 
-  <title>Lab 5 - ANOVA and Randomization | djshives</title>
+  <title>Lab 9 - RM ANOVA | djshives</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="7b4a60b2f038d9521dbbdd5e5fd3f257" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="a507b944a7bf1082501b86809e1ec15a" >
 
   
   
@@ -783,7 +783,7 @@
 
 
 
-  <li class="active"><a href="/courses/psyc7709g/lessons/lab-5-anova-randomization/">Lab 5 - ANOVA and Randomization</a></li>
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-5-anova-randomization/">Lab 5 - ANOVA and Randomization</a></li>
 
 
 
@@ -799,7 +799,7 @@
 
 
 
-  <li class=""><a href="/courses/psyc7709g/lessons/lab-9-rm-anova/">Lab 9 - RM ANOVA</a></li>
+  <li class="active"><a href="/courses/psyc7709g/lessons/lab-9-rm-anova/">Lab 9 - RM ANOVA</a></li>
 
       
         </ul>
@@ -912,7 +912,7 @@
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        Lab 5 - ANOVA and Randomization
+        Lab 9 - RM ANOVA
       </li>
     </ol>
   </nav>
@@ -920,354 +920,265 @@
 
           
 
-          <h1>Lab 5 - ANOVA and Randomization</h1>
+          <h1>Lab 9 - RM ANOVA</h1>
 
           <div class="article-style">
             
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
-<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 
-<pre class="r"><code>library(tidyverse)
-library(kableExtra)
-
-set.seed(1)</code></pre>
-<div id="consider-a-design-with-3-groups-and-10-people-per-group.-assume-that-the-dependent-variable-is-assumed-to-be-normally-distributed-and-use-unit-normal-distributions-with-mean-0-and-sd-1-in-your-simulations." class="section level2">
-<h2>Consider a design with 3 groups, and 10 people per group. Assume that the dependent variable is assumed to be normally distributed, and use unit normal distributions with mean = 0, and sd = 1 in your simulations.</h2>
-<div id="setting-the-parameters-for-the-data-and-subsequent-simulations." class="section level3">
-<h3>Setting the parameters for the data and subsequent simulations.</h3>
-<pre class="r"><code>levels &lt;- 3
-n_per_level &lt;- 10
-n_samples &lt;- 1000</code></pre>
-</div>
-<div id="creating-the-null-distribution." class="section level3">
-<h3>Creating the null distribution.</h3>
-<pre class="r"><code>gen_sim_f &lt;- function(num_levels, num_per_level, num_samples) {
-  f_values &lt;- length(num_samples)
-
-  for(i in 1:num_samples) {
-    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
-                       level = as.factor(rep(1:num_levels, each = num_per_level)),
-                       DV = rnorm(num_levels * num_per_level, 0, 1))
-    anova_out &lt;- aov(DV ~ level, sim_data)
-    f_ &lt;- summary(anova_out)[[1]]$`F value`[1]
-    f_values[i] &lt;- f_
-    
-    f_values_df &lt;- tibble(f_value = f_values,
-                          sample = 1:length(f_values))
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
+## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
+## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
+## ✔ readr   2.1.2     ✔ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(foreach)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;foreach&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:purrr&#39;:
+## 
+##     accumulate, when</code></pre>
+<div id="create-an-r-script-that-can-generate-simulated-data-for-the-following-repeated-measures-design." class="section level2">
+<h2>(1) Create an R script that can generate simulated data for the following repeated measures design.</h2>
+<ol style="list-style-type: lower-alpha">
+<li><p>The dependent variable is assumed to come from a normal distribution with mean = 0 and standard deviation = 1.</p></li>
+<li><p>There is one repeated measures factor with 5 levels (Down1, Down2, Control, Up1, Up2). The control group is assumed to have no effect. The Down1 and Down2 levels shift the mean down by 1 and 2 standard deviations, respectively. The Up1 and Up2 levels shift the mean up by 1 and 2 standard deviations, respectively.</p></li>
+<li><p>There are 6 subjects in the experiment, and they are each measured once in each condition. The 6 subjects are assumed to be different from one another (e.g., they will have different baseline means in the control condition), but they will all be influenced by the IV in the exact same way (e.g., no interaction).</p></li>
+</ol>
+<pre class="r"><code>make_subject_data &lt;- function(num_subjects, level_names, baseline_mean, baseline_sd, variation_vector) {
+  
+  simulated_data &lt;- tibble(
+    subject = as.factor(rep(1:num_subjects, each = length(level_names))),
+    IV = as.factor(rep(level_names, num_subjects)),
+    DV = rnorm(num_subjects * length(level_names), base_mean + var_vector, base_sd)
+  )
+  
+  return(simulated_data)
+  
+  
+}</code></pre>
+<pre class="r"><code>norm_function &lt;- function(means_vector, sds_vector) {
+  norm_vector &lt;- c()
+  
+  foreach(i = means_vector, j= sds_vector) %do% {
+    norm_vector &lt;- append(norm_vector, rnorm(1, i, j))
   }
-  return(f_values_df)
+  
+  return(norm_vector)
 }
 
-sim_f_values &lt;- gen_sim_f(levels, n_per_level, n_samples)
-
-ggplot(sim_f_values) +
-  geom_histogram(aes(x = f_value), bins = 100) +
-  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
-  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;)</code></pre>
-<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-</div>
-<div id="creating-a-function-that-adds-an-effect-to-the-first-level.-this-will-allow-for-the-design-to-produce-an-f-value-that-is-smaller-or-larger-than-the-critical-f-value." class="section level3">
-<h3>Creating a function that adds an effect to the first level. This will allow for the design to produce an F-value that is smaller or larger than the critical F-value.</h3>
-<pre class="r"><code>gen_effect_data &lt;- function(num_levels, num_per_level, num_samples, effect_size) {
+make_subject_data_shift &lt;- function(num_subjects, level_names, baseline_mean, baseline_sd, variation_vector, shift_means, shift_sd, randomize = FALSE) {
   
-  column_names = c(&quot;subjects&quot;, &quot;IV&quot;, &quot;DV&quot;, &quot;sample&quot;)
-  
-  total_sim_data &lt;- as_tibble(t(column_names))[0, ]
-  
-  for(i in 1:num_samples) {
-    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
-                       level = as.factor(rep(1:num_levels, each = num_per_level)),
-                       DV = rnorm(num_levels * num_per_level, 0, 1),
-                       sample = i)
-    
-    sim_data[sim_data$level == 1, ]$DV &lt;- sim_data[sim_data$level == 1, ]$DV + effect_size
-    
-    total_sim_data &lt;- rbind(total_sim_data, sim_data)
-    
+  if(randomize == TRUE) {
+    shift_means &lt;- sample(shift_means)
+    shift_sd &lt;- sample(shift_sd)
   }
   
-  total_sim_data &lt;- total_sim_data %&gt;%
-    group_by(subject, level) %&gt;%
-    summarise(DV = mean(DV))
-  
-  return(total_sim_data)
+  simulated_data &lt;- tibble(
+    subject = as.factor(rep(1:num_subjects, each = length(level_names))),
+    IV = as.factor(rep(level_names, num_subjects)),
+    DV = rnorm(num_subjects * length(level_names), base_mean + var_vector, base_sd),
+    shift = as.vector(t(replicate(length(level_names), sapply(shift_means, norm_function, sds_vector = shift_sd)))),
+    DV_shift = DV + shift
+  )
+  return(simulated_data)
 }</code></pre>
 </div>
-</div>
-<div id="section" class="section level2">
-<h2>(1)</h2>
-<p>Create simulated data for the above design that could be produced by the null hypothesis, and that results in a 𝐹 value that is smaller than the critical value for 𝐹 in this design (assume alpha = .05). Report the ANOVA, and show a ggplot of the means in the simulated data. Furthermore, display the individual data points on top of the means. Would you reject the null hypothesis in this situation, and would you be incorrect or correct in rejecting the null?</p>
-<div id="creating-simulated-data-with-an-effect-size-applied-to-level-1-of-0.01-and-displaying-the-anova-summary." class="section level3">
-<h3>Creating simulated data with an effect size applied to level 1 of 0.01 and displaying the ANOVA summary.</h3>
-<pre class="r"><code>lower_effect_data &lt;- gen_effect_data(levels, n_per_level, n_samples, 0.01)</code></pre>
-<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
-## Using compatibility `.name_repair`.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;subject&#39;. You can override using the
-## `.groups` argument.</code></pre>
-<pre class="r"><code>lower_effect_anova &lt;- aov(DV ~ level, lower_effect_data)
+<div id="run-a-simulation-to-determine-the-proportion-of-experiments-that-would-return-a-significant-result-for-the-above-design.-assume-that-the-effect-of-the-levels-of-the-iv-are-increments-of-.1-of-a-standard-deviation-rather-than-increments-of-1-as-in-the-above-design." class="section level2">
+<h2>(2) Run a simulation to determine the proportion of experiments that would return a significant result for the above design. Assume that the effect of the levels of the IV are increments of .1 of a standard deviation, rather than increments of 1 as in the above design.</h2>
+<pre class="r"><code>num_subs &lt;- 6
+lev_nam &lt;- c(&quot;Down2&quot;, &quot;Down1&quot;, &quot;Control&quot;, &quot;Up1&quot;, &quot;Up2&quot;)
+base_mean &lt;- 0
+base_sd &lt;- 1
+var_vector &lt;- c(-0.2, -0.1, 0, 0.1, 0.2)
 
-unclass(summary(lower_effect_anova)) %&gt;%
-  kbl(digits = 2) %&gt;%
-  kable_classic(position = &quot;center&quot;)</code></pre>
-<table class="kable_wrapper lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
-<tbody>
-<tr>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Df
-</th>
-<th style="text-align:right;">
-Sum Sq
-</th>
-<th style="text-align:right;">
-Mean Sq
-</th>
-<th style="text-align:right;">
-F value
-</th>
-<th style="text-align:right;">
-Pr(&gt;F)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-level
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.00
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1.36
-</td>
-<td style="text-align:right;">
-0.27
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Residuals
-</td>
-<td style="text-align:right;">
-27
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="graphing-the-f-value-against-the-null-distribution." class="section level3">
-<h3>Graphing the F value against the null distribution.</h3>
-<pre class="r"><code>lower_f_value &lt;- summary(lower_effect_anova)[[1]]$`F value`[1]
+one_factor_rm_sim &lt;- make_subject_data(num_subs, lev_nam, base_mean, base_sd, var_vector)</code></pre>
+<pre class="r"><code>anova_summary &lt;- summary(aov(DV ~ IV + Error(subject), data = one_factor_rm_sim))
 
-ggplot(sim_f_values) +
-  geom_histogram(aes(x = f_value), bins = 100) +
-  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
-  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;) +
-  geom_vline(aes(xintercept = lower_f_value, color = &quot;blue&quot;)) +
-  annotate(x = lower_f_value, y = 75, xend = 0, label =  paste0(&quot;Simulated F value = &quot;, round(lower_f_value, 2)), geom = &quot;label&quot;)</code></pre>
-<pre><code>## Warning: Ignoring unknown aesthetics: xend</code></pre>
-<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-</div>
-<div id="graphing-the-means-of-the-simulated-data-where-the-effect-size-was-0.01." class="section level3">
-<h3>Graphing the means of the simulated data where the effect size was 0.01.</h3>
-<pre class="r"><code>lower_effect_data_grouped &lt;- lower_effect_data %&gt;%
-  group_by(level) %&gt;%
-  summarise(mean_DV = mean(DV),
-            SE = sd(DV)/length(DV))
+anova_summary[[2]][[1]]$`Pr(&gt;F)`[1]</code></pre>
+<pre><code>## [1] 0.509994</code></pre>
+<pre class="r"><code>p_values &lt;- c()
 
-ggplot(lower_effect_data_grouped, aes(x = level, y = mean_DV)) +
-  geom_bar(stat = &quot;identity&quot;, aes(fill = level)) +
-  scale_y_continuous(limits = c(-0.05, 0.05)) +
-  geom_errorbar(aes(ymin=mean_DV - SE,
-                    ymax=mean_DV + SE), width=.1) + 
-  geom_point(data = lower_effect_data, mapping = aes(x = level, y = DV), alpha = 0.5) +
-  geom_point(alpha=.25) +
-  ylab(&quot;DV&quot;)</code></pre>
-<pre><code>## Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
-<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>I would not reject the null in this situation as the F value calculated from the simulated data is less than the critical value. The parameters of the simulation, however, can produce data that leads to an F value greater than the critical value, but that is unlikely.</p>
-</div>
-</div>
-<div id="section-1" class="section level2">
-<h2>(2)</h2>
-<p>Create simulated data for the above design that could be produced by the null hypothesis, and that results in a 𝐹 value that is larger than the critical value for 𝐹 in this design (assume alpha = .05). Report the ANOVA, and show a ggplot of the means in the simulated data. Furthermore, display the individual data points on top of the means. Would you reject the null hypothesis in this situation, and would you be incorrect or correct in rejecting the null?</p>
-<div id="creating-simulated-data-with-an-effect-size-applied-to-level-1-of-0.035-and-displaying-the-anova-summary." class="section level3">
-<h3>Creating simulated data with an effect size applied to level 1 of 0.035 and displaying the ANOVA summary.</h3>
-<pre class="r"><code>higher_effect_data &lt;- gen_effect_data(levels, n_per_level, n_samples, 0.035)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;subject&#39;. You can override using the
-## `.groups` argument.</code></pre>
-<pre class="r"><code>higher_effect_anova &lt;- aov(DV ~ level, higher_effect_data)
-
-unclass(summary(higher_effect_anova)) %&gt;%
-  kbl(digits = 2) %&gt;%
-  kable_classic(position = &quot;center&quot;)</code></pre>
-<table class="kable_wrapper lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
-<tbody>
-<tr>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Df
-</th>
-<th style="text-align:right;">
-Sum Sq
-</th>
-<th style="text-align:right;">
-Mean Sq
-</th>
-<th style="text-align:right;">
-F value
-</th>
-<th style="text-align:right;">
-Pr(&gt;F)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-level
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-5.31
-</td>
-<td style="text-align:right;">
-0.01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Residuals
-</td>
-<td style="text-align:right;">
-27
-</td>
-<td style="text-align:right;">
-0.02
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="graphing-the-f-value-against-the-null-distribution.-1" class="section level3">
-<h3>Graphing the F value against the null distribution.</h3>
-<pre class="r"><code>higher_f_value &lt;- summary(higher_effect_anova)[[1]]$`F value`[1]
-
-ggplot(sim_f_values) +
-  geom_histogram(aes(x = f_value), bins = 100) +
-  geom_vline(aes(xintercept = 4.737, color = &quot;red&quot;), linetype = &quot;dashed&quot;) +
-  annotate(x = 4.737, y = 50, label = &quot;Critical Value = 4.737&quot;, geom = &quot;label&quot;) +
-  geom_vline(aes(xintercept = higher_f_value, color = &quot;blue&quot;)) +
-  annotate(x = higher_f_value, y = 75, xend = 8.0, label =  paste0(&quot;Simulated F value = &quot;, round(higher_f_value, 2)), geom = &quot;label&quot;) +
-  expand_limits(x = 10)</code></pre>
-<pre><code>## Warning: Ignoring unknown aesthetics: xend</code></pre>
-<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-</div>
-<div id="graphing-the-means-of-the-simulated-data-where-the-effect-size-was-0.01.-1" class="section level3">
-<h3>Graphing the means of the simulated data where the effect size was 0.01.</h3>
-<pre class="r"><code>higher_effect_data_grouped &lt;- higher_effect_data %&gt;%
-  group_by(level) %&gt;%
-  summarise(mean_DV = mean(DV),
-            SE = sd(DV)/length(DV))
-
-ggplot(higher_effect_data_grouped, aes(x = level, y = mean_DV)) +
-  geom_bar(stat = &quot;identity&quot;, aes(fill = level)) +
-  scale_y_continuous(limits = c(-0.05, 0.05)) +
-  geom_errorbar(aes(ymin=mean_DV - SE,
-                    ymax=mean_DV + SE), width=.1) + 
-  geom_point(data = higher_effect_data, mapping = aes(x = level, y = DV), alpha = 0.5) +
-  geom_point(alpha=.25)</code></pre>
-<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>I would reject the null in this situation as the F value calculated from the simulated data is greater than the critical value. The parameters of the simulation, however, can produce data that leads to an F value less than the critical value, but that is unlikely.</p>
-</div>
-</div>
-<div id="bonus-question" class="section level2">
-<h2>Bonus Question:</h2>
-<p>In the lab we saw that F-distribution is robust to violations of the assumptions of ANOVA. For example, the simulation of the null based on a bi-modal distribution was very similar to the true F distribution. For this bonus question, show that you can “break” the F-distribution. Specifically, can you run a simulation that samples numbers from a non-normal distribution that does produce a very different looking F-distribution?</p>
-<div id="breaking-the-f-distribution-by-sampling-data-from-a-weibull-distribution-shape-0.1-scale-1000." class="section level3">
-<h3>Breaking the F-distribution by sampling data from a Weibull distribution (shape = 0.1, scale = 1000).</h3>
-<pre class="r"><code>gen_sim_f &lt;- function(num_levels, num_per_level, num_samples) {
-  f_values &lt;- length(num_samples)
-
-  for(i in 1:num_samples) {
-    sim_data &lt;- tibble(subject = 1:(num_levels * num_per_level),
-                       level = as.factor(rep(1:num_levels, each = num_per_level)),
-                       DV = rweibull(num_levels * num_per_level, shape = 0.1, scale = 1000))
-    anova_out &lt;- aov(DV ~ level, sim_data)
-    f_ &lt;- summary(anova_out)[[1]]$`F value`[1]
-    f_values[i] &lt;- f_
-    
-    f_values_df &lt;- tibble(f_value = f_values,
-                          sample = 1:length(f_values))
-  }
-  return(f_values_df)
+for(i in 1:1000) {
+  one_factor &lt;- make_subject_data(num_subs, lev_nam, base_mean, base_sd, var_vector)
+  anova_summary &lt;- summary(aov(DV ~ IV + Error(subject), data = one_factor))
+  p_values &lt;- append(p_values, anova_summary[[2]][[1]]$`Pr(&gt;F)`[1])
 }
 
-sim_f_values &lt;- gen_sim_f(levels, n_per_level, n_samples)
-
-ggplot(sim_f_values) +
-  geom_histogram(aes(x = f_value), bins = 100)</code></pre>
-<p><img src="/courses/PSYC7709G/Lab5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+hist(p_values)</code></pre>
+<p><img src="/courses/PSYC7709G/lessons/Lab9_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
+<div id="demonstrate-that-the-godden-and-baddeley-example-data-from-the-textbook-19.5-which-used-a-2x2-repeated-measures-design-can-be-be-analyzed-with-one-sample-t-tests-to-return-the-same-results.-specifically-show-the-one-sample-t-tests-for-each-main-effect-and-the-interaction." class="section level2">
+<h2>(3) Demonstrate that the Godden and Baddeley example data from the textbook (19.5), which used a 2x2 repeated measures design, can be be analyzed with one-sample t-tests to return the same results. Specifically, show the one-sample t-tests for each main effect and the interaction.</h2>
+<pre class="r"><code>df_gb &lt;- tribble(~subjects,~learning_place,~testing_place,~recall,
+        &quot;s1&quot;,&quot;On Land&quot;,&quot;On Land&quot;,34,
+        &quot;s2&quot;,&quot;On Land&quot;,&quot;On Land&quot;,37,
+        &quot;s3&quot;,&quot;On Land&quot;,&quot;On Land&quot;,27,
+        &quot;s4&quot;,&quot;On Land&quot;,&quot;On Land&quot;,43,
+        &quot;s5&quot;,&quot;On Land&quot;,&quot;On Land&quot;,44,
+        &quot;s1&quot;,&quot;On Land&quot;,&quot;Under Sea&quot;,18,
+        &quot;s2&quot;,&quot;On Land&quot;,&quot;Under Sea&quot;,21,
+        &quot;s3&quot;,&quot;On Land&quot;,&quot;Under Sea&quot;,25,
+        &quot;s4&quot;,&quot;On Land&quot;,&quot;Under Sea&quot;,37,
+        &quot;s5&quot;,&quot;On Land&quot;,&quot;Under Sea&quot;,34,
+        &quot;s1&quot;,&quot;Under Sea&quot;,&quot;On Land&quot;,14,
+        &quot;s2&quot;,&quot;Under Sea&quot;,&quot;On Land&quot;,21,
+        &quot;s3&quot;,&quot;Under Sea&quot;,&quot;On Land&quot;,31,
+        &quot;s4&quot;,&quot;Under Sea&quot;,&quot;On Land&quot;,27,
+        &quot;s5&quot;,&quot;Under Sea&quot;,&quot;On Land&quot;,32,
+        &quot;s1&quot;,&quot;Under Sea&quot;,&quot;Under Sea&quot;,22,
+        &quot;s2&quot;,&quot;Under Sea&quot;,&quot;Under Sea&quot;,25,
+        &quot;s3&quot;,&quot;Under Sea&quot;,&quot;Under Sea&quot;,33,
+        &quot;s4&quot;,&quot;Under Sea&quot;,&quot;Under Sea&quot;,33,
+        &quot;s5&quot;,&quot;Under Sea&quot;,&quot;Under Sea&quot;,42
+        )
+
+df_gb &lt;- df_gb %&gt;%
+  mutate(subjects = as.factor(subjects),
+         learning_place = as.factor(learning_place),
+         testing_place = as.factor(testing_place))
+
+aov_out &lt;- aov(recall ~ learning_place*testing_place + Error(subjects/(learning_place*testing_place)), df_gb)
+
+summary(aov_out)</code></pre>
+<pre><code>## 
+## Error: subjects
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  4    680     170               
+## 
+## Error: subjects:learning_place
+##                Df Sum Sq Mean Sq F value Pr(&gt;F)
+## learning_place  1     80      80       2   0.23
+## Residuals       4    160      40               
+## 
+## Error: subjects:testing_place
+##               Df Sum Sq Mean Sq F value Pr(&gt;F)
+## testing_place  1     20      20     2.5  0.189
+## Residuals      4     32       8               
+## 
+## Error: subjects:learning_place:testing_place
+##                              Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## learning_place:testing_place  1    320     320      20 0.0111 *
+## Residuals                     4     64      16                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>ggplot(df_gb, aes(x=testing_place, 
+                  y=recall,
+                  shape=learning_place,
+                  group=learning_place))+
+  geom_point(stat=&quot;summary&quot;,fun=&quot;mean&quot;)+
+  geom_line(stat=&quot;summary&quot;,fun=&quot;mean&quot;)+
+  theme_classic(base_size=12)</code></pre>
+<p><img src="/courses/PSYC7709G/lessons/Lab9_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>learning_place_means &lt;- df_gb %&gt;%
+  group_by(subjects,learning_place) %&gt;%
+  summarize(mean_recall = mean(recall))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;subjects&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>t.test(mean_recall ~ learning_place, paired=TRUE, data=learning_place_means)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  mean_recall by learning_place
+## t = 1.4142, df = 4, p-value = 0.2302
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -3.852973 11.852973
+## sample estimates:
+## mean of the differences 
+##                       4</code></pre>
+<pre class="r"><code>learning_land &lt;- learning_place_means %&gt;%
+  filter(learning_place == &quot;On Land&quot;) %&gt;%
+  select(mean_recall)</code></pre>
+<pre><code>## Adding missing grouping variables: `subjects`</code></pre>
+<pre class="r"><code>learning_sea &lt;- learning_place_means %&gt;%
+  filter(learning_place == &quot;Under Sea&quot;) %&gt;%
+  select(mean_recall)</code></pre>
+<pre><code>## Adding missing grouping variables: `subjects`</code></pre>
+<pre class="r"><code>t.test(learning_land$mean_recall - learning_sea$mean_recall, mu=0)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  learning_land$mean_recall - learning_sea$mean_recall
+## t = 1.4142, df = 4, p-value = 0.2302
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -3.852973 11.852973
+## sample estimates:
+## mean of x 
+##         4</code></pre>
+<pre class="r"><code>testing_place_means &lt;- df_gb %&gt;%
+  group_by(subjects,testing_place) %&gt;%
+  summarize(mean_recall = mean(recall))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;subjects&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>t.test(mean_recall ~ testing_place, paired=TRUE, data=testing_place_means)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  mean_recall by testing_place
+## t = 1.5811, df = 4, p-value = 0.189
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.511956  5.511956
+## sample estimates:
+## mean of the differences 
+##                       2</code></pre>
+<pre class="r"><code>testing_land &lt;- testing_place_means %&gt;%
+  filter(testing_place == &quot;On Land&quot;) %&gt;%
+  select(mean_recall)</code></pre>
+<pre><code>## Adding missing grouping variables: `subjects`</code></pre>
+<pre class="r"><code>testing_sea &lt;- testing_place_means %&gt;%
+  filter(testing_place == &quot;Under Sea&quot;) %&gt;%
+  select(mean_recall)</code></pre>
+<pre><code>## Adding missing grouping variables: `subjects`</code></pre>
+<pre class="r"><code>t.test(testing_land$mean_recall - testing_sea$mean_recall, mu=0)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  testing_land$mean_recall - testing_sea$mean_recall
+## t = 1.5811, df = 4, p-value = 0.189
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -1.511956  5.511956
+## sample estimates:
+## mean of x 
+##         2</code></pre>
+<pre class="r"><code>land_land &lt;- df_gb %&gt;%
+  filter(learning_place == &quot;On Land&quot;,
+         testing_place == &quot;On Land&quot;) %&gt;%
+  pull(recall)
+
+land_sea &lt;- df_gb %&gt;%
+  filter(learning_place == &quot;On Land&quot;,
+         testing_place == &quot;Under Sea&quot;) %&gt;%
+  pull(recall)
+
+sea_land &lt;- df_gb %&gt;%
+  filter(learning_place == &quot;Under Sea&quot;,
+         testing_place == &quot;On Land&quot;) %&gt;%
+  pull(recall)
+
+sea_sea &lt;- df_gb %&gt;%
+  filter(learning_place == &quot;Under Sea&quot;,
+         testing_place == &quot;Under Sea&quot;) %&gt;%
+  pull(recall)
+
+t.test((land_land - land_sea) - (sea_land - sea_sea), mu=0)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  (land_land - land_sea) - (sea_land - sea_sea)
+## t = 4.4721, df = 4, p-value = 0.01106
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##   6.066688 25.933312
+## sample estimates:
+## mean of x 
+##        16</code></pre>
 </div>
 
           </div>
@@ -1286,15 +1197,9 @@ ggplot(sim_f_values) +
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/psyc7709g/lessons/lab-4-anova/" rel="next">Lab 4 - ANOVA</a>
+    <a href="/courses/psyc7709g/lessons/lab-8-contrast-analyses/" rel="next">Lab 8 - Contrast Analyses</a>
   </div>
   
-  
-  
-  <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/courses/psyc7709g/lessons/lab-6-comparisons/" rel="prev">Lab 6 - Comparisons</a>
-  </div>
   
 </div>
 
@@ -1303,7 +1208,7 @@ ggplot(sim_f_values) +
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Mar 10, 2022</p>
+          <p>Last updated on Apr 27, 2022</p>
 
           
 

@@ -89,12 +89,8 @@ lev_nam <- c("Down2", "Down1", "Control", "Up1", "Up2")
 base_mean <- 0
 base_sd <- 1
 var_vector <- c(-0.2, -0.1, 0, 0.1, 0.2)
-shift_m <- c(1, 5, 3, 4, 2, 1)
-shift_s <- c(1, 3, 1, 2, 1, 1)
 
-one_factor_rm_sim_shift <- make_subject_data_shift(num_subs, lev_nam, base_mean, base_sd, var_vector, shift_m, shift_s)
-
-one_factor_rm_sim_shift
+one_factor_rm_sim <- make_subject_data(num_subs, lev_nam, base_mean, base_sd, var_vector)
 
 ```
 

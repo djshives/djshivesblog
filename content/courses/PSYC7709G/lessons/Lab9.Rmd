@@ -61,7 +61,7 @@ norm_function <- function(means_vector, sds_vector) {
   return(norm_vector)
 }
 
-make_subject_data_shift <- function(num_subjects, level_names, baseline_mean, baseline_sd, variation_vector, shift_means, shift_sd, randomize = FAland_seaE) {
+make_subject_data_shift <- function(num_subjects, level_names, baseline_mean, baseline_sd, variation_vector, shift_means, shift_sd, randomize = FALSE) {
   
   if(randomize == TRUE) {
     shift_means <- sample(shift_means)

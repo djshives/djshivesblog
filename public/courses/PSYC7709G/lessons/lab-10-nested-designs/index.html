@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="library(tidyverse) (3) In chapter 10 of Crump et al. (2018), there is a discussion of patterns of main effects and interactions that can occur in a 2x2 design, which represents perhaps the simplest factorial design." />
+  <meta name="description" content="library(tidyverse) (1) From Chapter 20, reproduce the bat and hat example (20.2) in R. Your code should represent the data in long-form, conduct the ANOVA, and report the ANOVA table." />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-7-factorial-anova/" />
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-10-nested-designs/" />
 
   
 
@@ -277,7 +277,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-7-factorial-anova/" />
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-10-nested-designs/" />
 
   
   
@@ -294,15 +294,15 @@
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="djshives" />
-  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-7-factorial-anova/" />
-  <meta property="og:title" content="Lab 7 - Factorial ANOVA | djshives" />
-  <meta property="og:description" content="library(tidyverse) (3) In chapter 10 of Crump et al. (2018), there is a discussion of patterns of main effects and interactions that can occur in a 2x2 design, which represents perhaps the simplest factorial design." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-10-nested-designs/" />
+  <meta property="og:title" content="Lab 10 - Nested Designs | djshives" />
+  <meta property="og:description" content="library(tidyverse) (1) From Chapter 20, reproduce the bat and hat example (20.2) in R. Your code should represent the data in long-form, conduct the ANOVA, and report the ANOVA table." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2022-01-29T00:00:00&#43;00:00"
+        content="2022-01-26T00:00:00&#43;00:00"
       />
     
     <meta property="article:modified_time" content="2022-04-27T13:31:58-05:00">
@@ -322,11 +322,11 @@
 
 
 
-  <title>Lab 7 - Factorial ANOVA | djshives</title>
+  <title>Lab 10 - Nested Designs | djshives</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="4bf1f2697e5e2b96ba4b1dad2e2fdcaa" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="ab317e05cebbeb9eccbb706fdf559b5d" >
 
   
   
@@ -791,7 +791,7 @@
 
 
 
-  <li class="active"><a href="/courses/psyc7709g/lessons/lab-7-factorial-anova/">Lab 7 - Factorial ANOVA</a></li>
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-7-factorial-anova/">Lab 7 - Factorial ANOVA</a></li>
 
 
 
@@ -803,7 +803,7 @@
 
 
 
-  <li class=""><a href="/courses/psyc7709g/lessons/lab-10-nested-designs/">Lab 10 - Nested Designs</a></li>
+  <li class="active"><a href="/courses/psyc7709g/lessons/lab-10-nested-designs/">Lab 10 - Nested Designs</a></li>
 
       
         </ul>
@@ -916,7 +916,7 @@
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        Lab 7 - Factorial ANOVA
+        Lab 10 - Nested Designs
       </li>
     </ol>
   </nav>
@@ -924,104 +924,92 @@
 
           
 
-          <h1>Lab 7 - Factorial ANOVA</h1>
+          <h1>Lab 10 - Nested Designs</h1>
 
           <div class="article-style">
             
 
 
 <pre class="r"><code>library(tidyverse)</code></pre>
-<div id="in-chapter-10-of-crump-et-al.-2018-there-is-a-discussion-of-patterns-of-main-effects-and-interactions-that-can-occur-in-a-2x2-design-which-represents-perhaps-the-simplest-factorial-design.-there-are-8-possible-outcomes-discussed-httpscrumplab.github.iostatisticsmore-on-factorial-designs.htmllooking-at-main-effects-and-interactions.-examples-of-these-8-outcomes-are-shown-in-two-figures-one-with-bar-graphs-and-one-with-line-graphs.-reproduce-either-of-these-figures-using-ggplot2." class="section level2">
-<h2>(3) In chapter 10 of Crump et al. (2018), there is a discussion of patterns of main effects and interactions that can occur in a 2x2 design, which represents perhaps the simplest factorial design. There are 8 possible outcomes discussed <a href="https://crumplab.github.io/statistics/more-on-factorial-designs.html#looking-at-main-effects-and-interactions" class="uri">https://crumplab.github.io/statistics/more-on-factorial-designs.html#looking-at-main-effects-and-interactions</a>. Examples of these 8 outcomes are shown in two figures, one with bar graphs, and one with line graphs. Reproduce either of these figures using ggplot2.</h2>
-<pre class="r"><code>pattern1 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
-                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
-                means = c(6,6,6,6))
+<div id="from-chapter-20-reproduce-the-bat-and-hat-example-20.2-in-r.-your-code-should-represent-the-data-in-long-form-conduct-the-anova-and-report-the-anova-table.-you-will-know-if-you-did-it-correctly-if-you-can-reproduce-the-anova-table-from-the-textbook." class="section level2">
+<h2>(1) From Chapter 20, reproduce the bat and hat example (20.2) in R. Your code should represent the data in long-form, conduct the ANOVA, and report the ANOVA table. You will know if you did it correctly if you can reproduce the ANOVA table from the textbook.</h2>
+<pre class="r"><code>subject &lt;- c(rep(c(&quot;s1&quot;,&quot;s2&quot;,&quot;s3&quot;,&quot;s4&quot;,&quot;s5&quot;),2),
+             rep(c(&quot;s6&quot;,&quot;s7&quot;,&quot;s8&quot;,&quot;s9&quot;,&quot;s10&quot;),2))
+phon_sim &lt;- rep(rep(c(&quot;b1&quot;,&quot;b2&quot;), each=5),2)
+age &lt;- rep(c(&quot;a1&quot;,&quot;a2&quot;), each=10)
+correct &lt;- c(15,23,12,16,14,
+                 13,19,10,16,12,
+                 39,31,40,32,38,
+                 29,15,30,26,30)
 
-pattern2 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
-                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
-                means = c(10,10,5,5))
+df_bh &lt;- tibble(subject,
+                       phon_sim,
+                       age,
+                       correct)
 
-pattern3 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
-                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
-                means = c(10,13,5,2))
+# run ANOVA
+aov_output &lt;- aov(correct ~ phon_sim*age + Error(subject/phon_sim), data = df_bh)
 
-pattern4 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
-                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
-                means = c(5,10,10,15))
-
-pattern5 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
-                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
-                means = c(10,18,5,7))
-
-pattern6 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
-                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
-                means = c(10,2,10,2))
-
-pattern7 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
-                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
-                means = c(2,12,5,9))
-
-pattern8 &lt;- tibble(IV1 = c(&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;),
-                IV2 = c(&quot;1&quot;,&quot;2&quot;,&quot;1&quot;,&quot;2&quot;),
-                means = c(5,10,10,5))
-
-all &lt;- rbind(pattern1, pattern2, pattern3, pattern4, pattern5, pattern6, pattern7, pattern8)
-type &lt;- c(rep(&quot;~1, ~2, ~1x2&quot;,4),
-          rep(&quot;1, ~2, ~1x2&quot;,4),
-          rep(&quot;1, ~2, 1x2&quot;,4),
-          rep(&quot;1, 2, ~1x2&quot;,4),
-          rep(&quot;1, 2, 1x2&quot;,4),
-          rep(&quot;~1, 2, ~1x2&quot;,4),
-          rep(&quot;~1, 2, 1x2&quot;,4),
-          rep(&quot;~1, ~2, 1x2&quot;,4))
-type&lt;-as.factor(type)
-
-all &lt;- cbind(all,type)
-
-ggplot(all, aes(x=IV1, y=means, group=IV2, fill=IV2))+
-  geom_bar(stat=&quot;identity&quot;, position=&quot;dodge&quot;)+
-  theme_classic()+
-  facet_wrap(~type, nrow=2)+
-  theme(legend.position = &quot;top&quot;)</code></pre>
-<p><img src="/courses/PSYC7709G/lessons/Lab7_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>ggplot(all, aes(x=IV1, y=means, group=IV2, color=IV2))+
-  geom_point()+
-  geom_line()+
-  theme_classic()+
-  facet_wrap(~type, nrow=2)+
-  theme(legend.position = &quot;top&quot;)</code></pre>
-<p><img src="/courses/PSYC7709G/lessons/Lab7_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+summary(aov_output)</code></pre>
+<pre><code>## 
+## Error: subject
+##           Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## age        1   1280    1280      32 0.000478 ***
+## Residuals  8    320      40                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: subject:phon_sim
+##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## phon_sim      1    180     180      45 0.000151 ***
+## phon_sim:age  1     80      80      20 0.002077 ** 
+## Residuals     8     32       4                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
-<div id="in-the-conceptual-section-of-this-lab-we-used-an-r-simulation-to-find-the-family-wise-type-i-error-rate-for-a-simple-factorial-design-with-2-independent-variables.-use-an-r-simulation-to-find-the-family-wise-type-i-error-rate-for-a-factorial-design-with-3-independent-variables." class="section level2">
-<h2>(4) In the conceptual section of this lab we used an R simulation to find the family-wise type I error rate for a simple factorial design with 2 independent variables. Use an R simulation to find the family-wise type I error rate for a factorial design with 3 independent variables.</h2>
-<pre class="r"><code>simulation &lt;- rbinom(10000,7,.05)
-length(simulation[simulation &gt; 0])/10000</code></pre>
-<pre><code>## [1] 0.2995</code></pre>
-<pre class="r"><code>simulation_save &lt;- tibble()
+<div id="from-chapter-21-reproduce-the-phonological-similarity-example-21.2.1-in-r.-your-code-should-represent-the-data-in-long-form-conduct-the-anova-and-report-the-anova-table.-you-will-know-if-you-did-it-correctly-if-you-can-reproduce-the-anova-table-from-the-textbook." class="section level2">
+<h2>(2) From Chapter 21, reproduce the phonological similarity example (21.2.1) in R. Your code should represent the data in long-form, conduct the ANOVA, and report the ANOVA table. You will know if you did it correctly if you can reproduce the ANOVA table from the textbook.</h2>
+<pre class="r"><code>subject &lt;- rep(c(&quot;s1&quot;,&quot;s2&quot;,&quot;s3&quot;,&quot;s4&quot;), each=10)
+typ_b &lt;- rep(rep(c(&quot;b1&quot;,&quot;b2&quot;), each=5),4)
+faces_a &lt;- rep(c(&quot;a1&quot;,&quot;a2&quot;,&quot;a3&quot;,&quot;a4&quot;,&quot;a5&quot;),8)
+centiseconds &lt;- c(20,22,25,24,19,37,37,43,48,45,
+                   9,8,21,21,21,34,35,35,37,39,
+                   18,20,18,21,33,35,39,39,37,40,
+                   5,14,16,22,23,38,49,51,50,52)
 
-for(i in 1:10000){
-  n &lt;- 12
-  factorial_data &lt;- tibble(A = factor(rep(c(&quot;L1&quot;,&quot;L2&quot;), each = n)),
-                         B = factor(rep(rep(c(&quot;L1&quot;,&quot;L2&quot;), each = n/2),2)),
-                         C = factor(rep(c(&quot;L1&quot;,&quot;L2&quot;), n)),
-                         DV = rnorm(n*2,0,1))
+df_face &lt;-  tibble(subject,
+                     typ_b,
+                     faces_a,
+                     centiseconds)
 
-  output &lt;- summary(aov(DV ~ A*B*C, data = factorial_data))
+aov_output &lt;- aov(centiseconds  ~ typ_b + (faces_a%in%typ_b) +
+                       Error(subject + subject:faces_a + subject:typ_b),
+               data = df_face)
 
-  simulation_tibble &lt;- tibble(p_values = output[[1]]$`Pr(&gt;F)`[1:7],
-                       effect = c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;AxB&quot;,&quot;AxC&quot;,&quot;BxC&quot;,&quot;AxBxC&quot;),
-                       simulation = rep(i,7))
-
-  simulation_save &lt;-rbind(simulation_save, simulation_tibble)
-}
-
-type_I_errors &lt;- simulation_save %&gt;%
-  filter(p_values &lt; .05) %&gt;%
-  group_by(simulation) %&gt;%
-  count()
-
-dim(type_I_errors)[1]/10000</code></pre>
-<pre><code>## [1] 0.2815</code></pre>
+summary(aov_output)</code></pre>
+<pre><code>## 
+## Error: subject
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  3    240      80               
+## 
+## Error: subject:faces_a
+##               Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## typ_b:faces_a  4    460  115.00   7.263 0.00327 **
+## Residuals     12    190   15.83                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: subject:typ_b
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)   
+## typ_b      1   4840    4840   40.33 0.0079 **
+## Residuals  3    360     120                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Within
+##               Df Sum Sq Mean Sq F value Pr(&gt;F)
+## typ_b:faces_a  4     20    5.00   0.353  0.837
+## Residuals     12    170   14.17</code></pre>
 </div>
 
           </div>
@@ -1040,15 +1028,9 @@ dim(type_I_errors)[1]/10000</code></pre>
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/courses/psyc7709g/lessons/lab-6-comparisons/" rel="next">Lab 6 - Comparisons</a>
+    <a href="/courses/psyc7709g/lessons/lab-9-rm-anova/" rel="next">Lab 9 - RM ANOVA</a>
   </div>
   
-  
-  
-  <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/courses/psyc7709g/lessons/lab-8-contrast-analyses/" rel="prev">Lab 8 - Contrast Analyses</a>
-  </div>
   
 </div>
 

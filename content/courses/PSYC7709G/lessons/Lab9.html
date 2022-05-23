@@ -20,21 +20,8 @@ projects: []
 
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
-## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-## ✔ readr   2.1.2     ✔ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(foreach)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;foreach&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:purrr&#39;:
-## 
-##     accumulate, when</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(foreach)</code></pre>
 <div id="create-an-r-script-that-can-generate-simulated-data-for-the-following-repeated-measures-design." class="section level2">
 <h2>(1) Create an R script that can generate simulated data for the following repeated measures design.</h2>
 <ol style="list-style-type: lower-alpha">
@@ -93,7 +80,7 @@ one_factor_rm_sim &lt;- make_subject_data(num_subs, lev_nam, base_mean, base_sd,
 <pre class="r"><code>anova_summary &lt;- summary(aov(DV ~ IV + Error(subject), data = one_factor_rm_sim))
 
 anova_summary[[2]][[1]]$`Pr(&gt;F)`[1]</code></pre>
-<pre><code>## [1] 0.509994</code></pre>
+<pre><code>## [1] 0.1399453</code></pre>
 <pre class="r"><code>p_values &lt;- c()
 
 for(i in 1:1000) {

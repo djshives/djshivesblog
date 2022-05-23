@@ -22,7 +22,7 @@ projects: []
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r message = FALSE, warning = FALSE}
 library(tidyverse)
 library(foreach)
 ```

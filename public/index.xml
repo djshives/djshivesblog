@@ -1335,21 +1335,8 @@ for(i in n) {
       <description>
 
 
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
-## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-## ✔ readr   2.1.2     ✔ forcats 0.5.1&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(foreach)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Attaching package: &amp;#39;foreach&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:purrr&amp;#39;:
-## 
-##     accumulate, when&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(foreach)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;create-an-r-script-that-can-generate-simulated-data-for-the-following-repeated-measures-design.&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;(1) Create an R script that can generate simulated data for the following repeated measures design.&lt;/h2&gt;
 &lt;ol style=&#34;list-style-type: lower-alpha&#34;&gt;
@@ -1408,7 +1395,7 @@ one_factor_rm_sim &amp;lt;- make_subject_data(num_subs, lev_nam, base_mean, base
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova_summary &amp;lt;- summary(aov(DV ~ IV + Error(subject), data = one_factor_rm_sim))
 
 anova_summary[[2]][[1]]$`Pr(&amp;gt;F)`[1]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.509994&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1399453&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p_values &amp;lt;- c()
 
 for(i in 1:1000) {
@@ -1764,7 +1751,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-687145329&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-795384162&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -1774,7 +1761,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-687145329&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-795384162&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

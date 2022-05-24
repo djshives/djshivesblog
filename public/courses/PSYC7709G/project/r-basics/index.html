@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="Loading libraries. library(tidyverse) library(ggrepel)  Original Graph slamecka_design &lt;- tibble(number_of_learning_trials = rep(c(2,4,8), each=6), number_of_IL = rep(rep(c(2,4,8), 2), 3), subjects = 1:18, recall = c(35,21,6, 39,31,8, 40,34,18, 52,42,26, 61,58,46, 73,66,52 ) ) ggplot(slamecka_design,aes(x=number_of_IL, group = number_of_learning_trials, y=recall))&#43; geom_line(stat = &quot;summary&quot;, fun = &quot;mean&quot;)&#43; geom_point(stat = &quot;summary&quot;, fun = &quot;mean&quot;)&#43; theme_classic()  Modified graph to match Figure 5." />
+  <meta name="description" content="library(tidyverse) (1) Different object types, including vectors and data.frames. Also, demonstrate your knowledge of at least two or more object types that are not vectors or data.frames. # Vectors vector1 &lt;- c(1, 2, 3, 4, 5) vector2 &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;) # Lists list1 &lt;- list(1, 2, 3, 4, 5) list2 &lt;- list(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;) # Tibbles tibble1 &lt;- tibble( numbers = c(1, 2, 3, 4, 5), letters = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;) ) # Matrices matrix1 &lt;- matrix(data = tibble1) # Dataframes df1 &lt;- data." />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-2-multiple-regression-i/" />
+  <link rel="alternate" hreflang="en-us" href="https://djshives.netlify.app/courses/psyc7709g/project/r-basics/" />
 
   
 
@@ -277,7 +277,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
 
-  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-2-multiple-regression-i/" />
+  <link rel="canonical" href="https://djshives.netlify.app/courses/psyc7709g/project/r-basics/" />
 
   
   
@@ -294,18 +294,18 @@
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="djshives" />
-  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/lessons/lab-2-multiple-regression-i/" />
-  <meta property="og:title" content="Lab 2 - Multiple Regression I | djshives" />
-  <meta property="og:description" content="Loading libraries. library(tidyverse) library(ggrepel)  Original Graph slamecka_design &lt;- tibble(number_of_learning_trials = rep(c(2,4,8), each=6), number_of_IL = rep(rep(c(2,4,8), 2), 3), subjects = 1:18, recall = c(35,21,6, 39,31,8, 40,34,18, 52,42,26, 61,58,46, 73,66,52 ) ) ggplot(slamecka_design,aes(x=number_of_IL, group = number_of_learning_trials, y=recall))&#43; geom_line(stat = &quot;summary&quot;, fun = &quot;mean&quot;)&#43; geom_point(stat = &quot;summary&quot;, fun = &quot;mean&quot;)&#43; theme_classic()  Modified graph to match Figure 5." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:url" content="https://djshives.netlify.app/courses/psyc7709g/project/r-basics/" />
+  <meta property="og:title" content="R Basics | djshives" />
+  <meta property="og:description" content="library(tidyverse) (1) Different object types, including vectors and data.frames. Also, demonstrate your knowledge of at least two or more object types that are not vectors or data.frames. # Vectors vector1 &lt;- c(1, 2, 3, 4, 5) vector2 &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;) # Lists list1 &lt;- list(1, 2, 3, 4, 5) list2 &lt;- list(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;) # Tibbles tibble1 &lt;- tibble( numbers = c(1, 2, 3, 4, 5), letters = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;) ) # Matrices matrix1 &lt;- matrix(data = tibble1) # Dataframes df1 &lt;- data." /><meta property="og:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://djshives.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2022-02-05T00:00:00&#43;00:00"
+        content="2022-01-31T00:00:00&#43;00:00"
       />
     
-    <meta property="article:modified_time" content="2022-02-05T22:44:07-05:00">
+    <meta property="article:modified_time" content="2022-04-27T13:31:58-05:00">
   
 
   
@@ -322,11 +322,11 @@
 
 
 
-  <title>Lab 2 - Multiple Regression I | djshives</title>
+  <title>R Basics | djshives</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="541c8ec21a71a336b6af7a9c0900259b" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="b5b667ffbc1a4f15a2a3fa52519660ef" >
 
   
   
@@ -688,7 +688,7 @@
     <div class="d-flex">
       <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
         
-          Lessons
+          Project
         
       </span>
       <span><i class="fas fa-chevron-down"></i></span>
@@ -771,7 +771,7 @@
 
 
 
-  <li class="active"><a href="/courses/psyc7709g/lessons/lab-2-multiple-regression-i/">Lab 2 - Multiple Regression I</a></li>
+  <li class=""><a href="/courses/psyc7709g/lessons/lab-2-multiple-regression-i/">Lab 2 - Multiple Regression I</a></li>
 
 
 
@@ -834,7 +834,7 @@
       
 
 
-  <li class=""><a href="/courses/psyc7709g/project/r-basics/">R Basics</a></li>
+  <li class="active"><a href="/courses/psyc7709g/project/r-basics/">R Basics</a></li>
 
       
         </ul>
@@ -869,14 +869,7 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents">
-  <ul>
-    <li><a href="#loading-libraries">Loading libraries.</a></li>
-    <li><a href="#original-graph">Original Graph</a></li>
-    <li><a href="#modified-graph-to-match-figure-55-in-the-textbook">Modified graph to match Figure 5.5 in the textbook.</a></li>
-    <li><a href="#3x3x3-design-and-graph">3x3x3 Design and Graph</a></li>
-  </ul>
-</nav>
+      
 
       
     </div>
@@ -925,16 +918,16 @@
 
 
   <li class="breadcrumb-item">
-    <a href="/courses/psyc7709g/lessons/">
+    <a href="/courses/psyc7709g/project/">
       
-        Lessons
+        Project
       
     </a>
   </li>
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        Lab 2 - Multiple Regression I
+        R Basics
       </li>
     </ol>
   </nav>
@@ -942,122 +935,197 @@
 
           
 
-          <h1>Lab 2 - Multiple Regression I</h1>
+          <h1>R Basics</h1>
 
           <div class="article-style">
-            <h2 id="loading-libraries">Loading libraries.</h2>
-<pre><code class="language-r">library(tidyverse)
-library(ggrepel)
-</code></pre>
-<h2 id="original-graph">Original Graph</h2>
-<pre><code class="language-r">slamecka_design &lt;- tibble(number_of_learning_trials = rep(c(2,4,8), each=6),
-                          number_of_IL = rep(rep(c(2,4,8), 2), 3),
-                          subjects = 1:18,
-                          recall = c(35,21,6,
-                                   39,31,8,
-                                   40,34,18,
-                                   52,42,26,
-                                   61,58,46,
-                                   73,66,52
-                                   )
-                          )
+            
 
-ggplot(slamecka_design,aes(x=number_of_IL,
-                           group = number_of_learning_trials,
-                           y=recall))+
-  geom_line(stat = &quot;summary&quot;, fun = &quot;mean&quot;)+
-  geom_point(stat = &quot;summary&quot;, fun = &quot;mean&quot;)+
+
+<pre class="r"><code>library(tidyverse)</code></pre>
+<div id="different-object-types-including-vectors-and-data.frames.-also-demonstrate-your-knowledge-of-at-least-two-or-more-object-types-that-are-not-vectors-or-data.frames." class="section level2">
+<h2>(1) Different object types, including vectors and data.frames. Also, demonstrate your knowledge of at least two or more object types that are not vectors or data.frames.</h2>
+<pre class="r"><code># Vectors
+
+vector1 &lt;- c(1, 2, 3, 4, 5)
+vector2 &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)
+
+# Lists
+
+list1 &lt;- list(1, 2, 3, 4, 5)
+list2 &lt;- list(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)
+
+# Tibbles
+
+tibble1 &lt;- tibble(
+  numbers = c(1, 2, 3, 4, 5),
+  letters = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)
+)
+
+# Matrices
+
+matrix1 &lt;- matrix(data = tibble1)
+
+# Dataframes
+
+df1 &lt;- data.frame(
+  numbers = c(1, 2, 3, 4, 5),
+  letters = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)
+)</code></pre>
+</div>
+<div id="loops.-there-are-multiple-ways-to-iterate-in-r.-demonstrate-at-least-two-ways-including-a-for-loop.-show-that-you-know-how-to-break-a-loop.-highlight-one-thing-about-loops-in-r-that-was-not-obvious-to-you-or-you-think-might-not-be-obvious-to-someone-else." class="section level2">
+<h2>(2) Loops. There are multiple ways to iterate in R. Demonstrate at least two ways, including a FOR loop. Show that you know how to break a loop. Highlight one thing about loops in R that was not obvious to you, or you think might not be obvious to someone else.</h2>
+<pre class="r"><code># For loops
+
+for(i in 1:5) {
+  print(i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5</code></pre>
+<pre class="r"><code># While loop
+
+loop_var = 0
+
+while(loop_var &lt;= 5) {
+  print(loop_var)
+  loop_var = loop_var + 1
+}</code></pre>
+<pre><code>## [1] 0
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5</code></pre>
+<pre class="r"><code># I think one thing about loops that is not initially obvious is their utility. The ability to iterate over a variable (or two+ variables if using the foreach library) is incredibly useful when trying to create data, run a function multiple times, etc.</code></pre>
+</div>
+<div id="logic.-show-that-you-understand-logical-operations-in-r.-show-that-you-know-how-to-use-logical-operations-for-indexing.-for-example-use-logical-operations-to-index-a-vector-and-to-index-a-data.frame." class="section level2">
+<h2>(3) Logic. Show that you understand logical operations in R. Show that you know how to use logical operations for indexing. For example, use logical operations to index a vector, and to index a data.frame.</h2>
+<pre class="r"><code># If statements
+
+if_var &lt;- sample(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 1)
+
+if(if_var == &quot;a&quot;) {
+  print(vector1[1])
+} else if(if_var == &quot;b&quot;) {
+  print(vector1[2])
+} else if(if_var == &quot;c&quot;) {
+  print(tibble1[3, ])
+} else {
+  print(tibble1[4, ])
+}</code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="loops-and-logic.-demonstrate-that-you-can-combine-loops-and-logic-to-solve-some-problem.-for-example-use-loops-and-logic-to-solve-the-fizz-buzz-problem." class="section level2">
+<h2>(4) Loops and logic. Demonstrate that you can combine loops and logic to solve some problem. For example, use loops and logic to solve the fizz buzz problem.</h2>
+<pre class="r"><code># Loops and logic: For loop with an if statement
+
+for(i in sample(c(1:5), 1)) {
+  if(i &lt;= 3) {
+    print(&quot;low&quot;)
+    break
+  } else {
+    print(&quot;high&quot;)
+    break
+  }
+}</code></pre>
+<pre><code>## [1] &quot;low&quot;</code></pre>
+</div>
+<div id="pick-at-least-one-advanced-problem-from-this-list-of-problems-and-show-that-you-can-solve-it-in-r.---snakes-and-ladders" class="section level2">
+<h2>(5) Pick at least one advanced problem from this list of problems, and show that you can solve it in R. - SNAKES AND LADDERS</h2>
+<pre class="r"><code># Ladders:
+# 3 goes to 11
+# 6 goes to 17
+# 10 goes to 12
+# 9 goes to 16
+
+# Snakes:
+# 14 goes to 4
+# 19 goes to 8
+# 22 goes to 20
+# 24 goes to 16
+
+
+total_rolls &lt;- c()
+
+for(i in 1:1000) {
   
-  theme_classic()
-</code></pre>
-<p><img src="/courses/PSYC7709G/Lab2_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<h2 id="modified-graph-to-match-figure-55-in-the-textbook">Modified graph to match Figure 5.5 in the textbook.</h2>
-<p>Modifications include:</p>
-<ul>
-<li>Changing the x-axis title.</li>
-<li>Changing the y-axis title.</li>
-<li>Making the x-axis and y-axis ticks the same as in the textbook.</li>
-<li>Including different symbols to differentiate the lines.</li>
-</ul>
-<pre><code class="language-r">labels = c(&quot;2 learning trials&quot;, &quot;4 learning trials&quot;, &quot;8 learning trials&quot;)
+  end_state &lt;- 0
+  num_rolls &lt;- 0
+  
+  while(end_state &lt; 25) {
+    
+    num_rolls &lt;- num_rolls + 1
+    roll &lt;- sample(1:6, 1)
+    end_state &lt;- end_state + roll
+    
+    if(end_state == 3) {
+      end_state = 11
+    } else if (end_state == 6) {
+      end_state = 17
+    } else if (end_state == 10) {
+      end_state = 12
+    } else if (end_state == 9) {
+      end_state = 16
+    } else if (end_state == 14) {
+      end_state = 4
+    } else if (end_state == 19) {
+      end_state = 8
+    } else if (end_state == 22) {
+      end_state = 20
+    } else if (end_state == 24) {
+      end_state = 16
+    }
+  }
+  total_rolls &lt;- append(total_rolls, num_rolls)
+}
 
-slamecka_design &lt;- tibble(number_of_learning_trials = rep(c(2,4,8), each=6),
-                          number_of_IL = rep(rep(c(2,4,8), 2), 3),
-                          subjects = 1:18,
-                          recall = c(35,21,6,
-                                   39,31,8,
-                                   40,34,18,
-                                   52,42,26,
-                                   61,58,46,
-                                   73,66,52
-                                   )
-                          )
+mean(total_rolls)</code></pre>
+<pre><code>## [1] 8.738</code></pre>
+<pre class="r"><code>means &lt;- c()
 
-slamecka_design &lt;- slamecka_design %&gt;%
-  mutate(
-    label = case_when(
-      (number_of_IL == 8 &amp; subjects == 6) ~ &quot;2 learning trials&quot;,
-      (number_of_IL == 8 &amp; subjects == 12) ~ &quot;4 learning trials&quot;,
-      (number_of_IL == 8 &amp; subjects == 18) ~ &quot;8 learning trials&quot;
-    )
-  )
-           
-ggplot(slamecka_design,aes(x=number_of_IL,
-                           group = number_of_learning_trials,
-                           y=recall)) +
-  geom_line(stat = &quot;summary&quot;, fun = &quot;mean&quot;) +
-  geom_text_repel(aes(label = label), nudge_x = 1, na.rm = TRUE) +
-  geom_point(stat = &quot;summary&quot;, fun = &quot;mean&quot;, aes(shape = factor(number_of_learning_trials)), show.legend = FALSE) +
-  xlab(&quot;Number of interpolated lists&quot;) +
-  ylab(&quot;Number of words correct&quot;) +
-  scale_x_continuous(breaks = c(2, 4, 8),
-                   labels = c(2, 4, 8)) +
-  ylim(0, 80) +
-  expand_limits(x = 9) +
-  theme_classic()
-</code></pre>
-<p><img src="/courses/PSYC7709G/Lab2_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<h2 id="3x3x3-design-and-graph">3x3x3 Design and Graph</h2>
-<pre><code class="language-r">labels = c(&quot;2 learning trials&quot;, &quot;4 learning trials&quot;, &quot;8 learning trials&quot;)
+for(i in 1:1000) {
+  total_rolls &lt;- c()
+  
+  for(i in 1:1000) {
+    
+    end_state &lt;- 0
+    num_rolls &lt;- 0
+    
+    while(end_state &lt; 25) {
+      
+      num_rolls &lt;- num_rolls + 1
+      roll &lt;- sample(1:6, 1)
+      end_state &lt;- end_state + roll
+      
+      if(end_state == 3) {
+        end_state = 11
+      } else if (end_state == 6) {
+        end_state = 17
+      } else if (end_state == 10) {
+        end_state = 12
+      } else if (end_state == 9) {
+        end_state = 16
+      } else if (end_state == 14) {
+        end_state = 4
+      } else if (end_state == 19) {
+        end_state = 8
+      } else if (end_state == 22) {
+        end_state = 20
+      } else if (end_state == 24) {
+        end_state = 16
+      }
+    }
+    total_rolls &lt;- append(total_rolls, num_rolls)
+  }
+  
+  means &lt;- append(means, mean(total_rolls))
+}
 
-slamecka_design2 &lt;- tibble(number_of_learning_trials = rep(c(2,4,8), each=18),
-                          number_of_IL = rep(rep(c(2,4,8), 2), 9),
-                          reward = rep(c(rep(0, 6), rep(50, 6), rep(1000, 6)), 3),
-                          subjects = 1:54,
-                          recall = sample(1:100, 54, replace = TRUE)
-                          )
-
-slamecka_design2 &lt;- slamecka_design2 %&gt;%
-  mutate(
-    label = case_when(
-      (number_of_IL == 8 &amp; subjects == 6) ~ &quot;2 learning trials&quot;,
-      (number_of_IL == 8 &amp; subjects == 12) ~ &quot;4 learning trials&quot;,
-      (number_of_IL == 8 &amp; subjects == 18) ~ &quot;8 learning trials&quot;
-    )
-  )
-           
-ggplot(slamecka_design2,aes(x=number_of_IL,
-                           group = number_of_learning_trials,
-                           y=recall)) +
-  facet_wrap(~reward) +
-  geom_line(stat = &quot;summary&quot;, fun = &quot;mean&quot;) +
-  geom_point(stat = &quot;summary&quot;, fun = &quot;mean&quot;, aes(shape = factor(number_of_learning_trials))) +
-  xlab(&quot;Number of interpolated lists&quot;) +
-  ylab(&quot;Number of words correct&quot;) +
-  theme(legend.title = element_text(size = 1), 
-               legend.text = element_text(size = 1)) +
-  labs(shape = &quot;Number of learning trials&quot;) +
-  scale_x_continuous(breaks = c(2, 4, 8),
-                   labels = c(2, 4, 8),
-                   sec.axis = sec_axis(~ . , name = &quot;Reward&quot;, breaks = NULL, labels = NULL)) +
-  ylim(0, 80) +
-  expand_limits(x = 9) +
-  theme_classic()
-</code></pre>
-<pre><code>## Warning: Removed 11 rows containing non-finite values (stat_summary).
-## Removed 11 rows containing non-finite values (stat_summary).
-</code></pre>
-<p><img src="/courses/PSYC7709G/Lab2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+hist(means)</code></pre>
+<p><img src="/courses/PSYC7709G/project/r_basics_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
 
           </div>
 
@@ -1072,19 +1140,6 @@ ggplot(slamecka_design2,aes(x=number_of_IL,
 <div class="post-nav">
   
   
-  
-  <div class="post-nav-item">
-    <div class="meta-nav">Previous</div>
-    <a href="/courses/psyc7709g/lessons/lab-1-shaping-data/" rel="next">Lab 1 - Shaping Data</a>
-  </div>
-  
-  
-  
-  <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/courses/psyc7709g/lessons/lab-3-multiple-regression-ii/" rel="prev">Lab 3 - Multiple Regression II</a>
-  </div>
-  
 </div>
 
           </div>
@@ -1092,7 +1147,7 @@ ggplot(slamecka_design2,aes(x=number_of_IL,
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Feb 5, 2022</p>
+          <p>Last updated on Apr 27, 2022</p>
 
           
 

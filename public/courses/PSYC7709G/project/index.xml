@@ -12,5 +12,201 @@
       <link>https://djshives.netlify.app/courses/psyc7709g/project/</link>
     </image>
     
+    <item>
+      <title>R Basics</title>
+      <link>https://djshives.netlify.app/courses/psyc7709g/project/r-basics/</link>
+      <pubDate>Mon, 31 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://djshives.netlify.app/courses/psyc7709g/project/r-basics/</guid>
+      <description>
+
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;different-object-types-including-vectors-and-data.frames.-also-demonstrate-your-knowledge-of-at-least-two-or-more-object-types-that-are-not-vectors-or-data.frames.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(1) Different object types, including vectors and data.frames. Also, demonstrate your knowledge of at least two or more object types that are not vectors or data.frames.&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Vectors
+
+vector1 &amp;lt;- c(1, 2, 3, 4, 5)
+vector2 &amp;lt;- c(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;e&amp;quot;)
+
+# Lists
+
+list1 &amp;lt;- list(1, 2, 3, 4, 5)
+list2 &amp;lt;- list(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;e&amp;quot;)
+
+# Tibbles
+
+tibble1 &amp;lt;- tibble(
+  numbers = c(1, 2, 3, 4, 5),
+  letters = c(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;e&amp;quot;)
+)
+
+# Matrices
+
+matrix1 &amp;lt;- matrix(data = tibble1)
+
+# Dataframes
+
+df1 &amp;lt;- data.frame(
+  numbers = c(1, 2, 3, 4, 5),
+  letters = c(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;e&amp;quot;)
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;loops.-there-are-multiple-ways-to-iterate-in-r.-demonstrate-at-least-two-ways-including-a-for-loop.-show-that-you-know-how-to-break-a-loop.-highlight-one-thing-about-loops-in-r-that-was-not-obvious-to-you-or-you-think-might-not-be-obvious-to-someone-else.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(2) Loops. There are multiple ways to iterate in R. Demonstrate at least two ways, including a FOR loop. Show that you know how to break a loop. Highlight one thing about loops in R that was not obvious to you, or you think might not be obvious to someone else.&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# For loops
+
+for(i in 1:5) {
+  print(i)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# While loop
+
+loop_var = 0
+
+while(loop_var &amp;lt;= 5) {
+  print(loop_var)
+  loop_var = loop_var + 1
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# I think one thing about loops that is not initially obvious is their utility. The ability to iterate over a variable (or two+ variables if using the foreach library) is incredibly useful when trying to create data, run a function multiple times, etc.&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;logic.-show-that-you-understand-logical-operations-in-r.-show-that-you-know-how-to-use-logical-operations-for-indexing.-for-example-use-logical-operations-to-index-a-vector-and-to-index-a-data.frame.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(3) Logic. Show that you understand logical operations in R. Show that you know how to use logical operations for indexing. For example, use logical operations to index a vector, and to index a data.frame.&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# If statements
+
+if_var &amp;lt;- sample(c(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;), 1)
+
+if(if_var == &amp;quot;a&amp;quot;) {
+  print(vector1[1])
+} else if(if_var == &amp;quot;b&amp;quot;) {
+  print(vector1[2])
+} else if(if_var == &amp;quot;c&amp;quot;) {
+  print(tibble1[3, ])
+} else {
+  print(tibble1[4, ])
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;loops-and-logic.-demonstrate-that-you-can-combine-loops-and-logic-to-solve-some-problem.-for-example-use-loops-and-logic-to-solve-the-fizz-buzz-problem.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(4) Loops and logic. Demonstrate that you can combine loops and logic to solve some problem. For example, use loops and logic to solve the fizz buzz problem.&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Loops and logic: For loop with an if statement
+
+for(i in sample(c(1:5), 1)) {
+  if(i &amp;lt;= 3) {
+    print(&amp;quot;low&amp;quot;)
+    break
+  } else {
+    print(&amp;quot;high&amp;quot;)
+    break
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;low&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pick-at-least-one-advanced-problem-from-this-list-of-problems-and-show-that-you-can-solve-it-in-r.---snakes-and-ladders&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;(5) Pick at least one advanced problem from this list of problems, and show that you can solve it in R. - SNAKES AND LADDERS&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Ladders:
+# 3 goes to 11
+# 6 goes to 17
+# 10 goes to 12
+# 9 goes to 16
+
+# Snakes:
+# 14 goes to 4
+# 19 goes to 8
+# 22 goes to 20
+# 24 goes to 16
+
+
+total_rolls &amp;lt;- c()
+
+for(i in 1:1000) {
+  
+  end_state &amp;lt;- 0
+  num_rolls &amp;lt;- 0
+  
+  while(end_state &amp;lt; 25) {
+    
+    num_rolls &amp;lt;- num_rolls + 1
+    roll &amp;lt;- sample(1:6, 1)
+    end_state &amp;lt;- end_state + roll
+    
+    if(end_state == 3) {
+      end_state = 11
+    } else if (end_state == 6) {
+      end_state = 17
+    } else if (end_state == 10) {
+      end_state = 12
+    } else if (end_state == 9) {
+      end_state = 16
+    } else if (end_state == 14) {
+      end_state = 4
+    } else if (end_state == 19) {
+      end_state = 8
+    } else if (end_state == 22) {
+      end_state = 20
+    } else if (end_state == 24) {
+      end_state = 16
+    }
+  }
+  total_rolls &amp;lt;- append(total_rolls, num_rolls)
+}
+
+mean(total_rolls)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 8.738&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;means &amp;lt;- c()
+
+for(i in 1:1000) {
+  total_rolls &amp;lt;- c()
+  
+  for(i in 1:1000) {
+    
+    end_state &amp;lt;- 0
+    num_rolls &amp;lt;- 0
+    
+    while(end_state &amp;lt; 25) {
+      
+      num_rolls &amp;lt;- num_rolls + 1
+      roll &amp;lt;- sample(1:6, 1)
+      end_state &amp;lt;- end_state + roll
+      
+      if(end_state == 3) {
+        end_state = 11
+      } else if (end_state == 6) {
+        end_state = 17
+      } else if (end_state == 10) {
+        end_state = 12
+      } else if (end_state == 9) {
+        end_state = 16
+      } else if (end_state == 14) {
+        end_state = 4
+      } else if (end_state == 19) {
+        end_state = 8
+      } else if (end_state == 22) {
+        end_state = 20
+      } else if (end_state == 24) {
+        end_state = 16
+      }
+    }
+    total_rolls &amp;lt;- append(total_rolls, num_rolls)
+  }
+  
+  means &amp;lt;- append(means, mean(total_rolls))
+}
+
+hist(means)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://djshives.netlify.app/courses/PSYC7709G/project/r_basics_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

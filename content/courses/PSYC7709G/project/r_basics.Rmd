@@ -1,0 +1,227 @@
+---
+title: "R Basics"
+author: "Drew Shives"
+date: "2022-01-31"
+slug: r-basics
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-04-27T13:31:58-05:00'
+featured: no
+type: book
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message = FALSE, warning = FALSE}
+library(tidyverse)
+```
+
+## (1) Different object types, including vectors and data.frames. Also, demonstrate your knowledge of at least two or more object types that are not vectors or data.frames.
+
+```{r}
+# Vectors
+
+vector1 <- c(1, 2, 3, 4, 5)
+vector2 <- c("a", "b", "c", "d", "e")
+
+# Lists
+
+list1 <- list(1, 2, 3, 4, 5)
+list2 <- list("a", "b", "c", "d", "e")
+
+# Tibbles
+
+tibble1 <- tibble(
+  numbers = c(1, 2, 3, 4, 5),
+  letters = c("a", "b", "c", "d", "e")
+)
+
+# Matrices
+
+matrix1 <- matrix(data = tibble1)
+
+# Dataframes
+
+df1 <- data.frame(
+  numbers = c(1, 2, 3, 4, 5),
+  letters = c("a", "b", "c", "d", "e")
+)
+```
+
+## (2) Loops. There are multiple ways to iterate in R. Demonstrate at least two ways, including a FOR loop. Show that you know how to break a loop. Highlight one thing about loops in R that was not obvious to you, or you think might not be obvious to someone else.
+
+```{r}
+# For loops
+
+for(i in 1:5) {
+  print(i)
+}
+
+# While loop
+
+loop_var = 0
+
+while(loop_var <= 5) {
+  print(loop_var)
+  loop_var = loop_var + 1
+}
+
+# I think one thing about loops that is not initially obvious is their utility. The ability to iterate over a variable (or two+ variables if using the foreach library) is incredibly useful when trying to create data, run a function multiple times, etc.
+
+```
+
+## (3) Logic. Show that you understand logical operations in R. Show that you know how to use logical operations for indexing. For example, use logical operations to index a vector, and to index a data.frame.
+
+```{r}
+# If statements
+
+if_var <- sample(c("a", "b", "c", "d"), 1)
+
+if(if_var == "a") {
+  print(vector1[1])
+} else if(if_var == "b") {
+  print(vector1[2])
+} else if(if_var == "c") {
+  print(tibble1[3, ])
+} else {
+  print(tibble1[4, ])
+}
+
+```
+
+## (4) Loops and logic. Demonstrate that you can combine loops and logic to solve some problem. For example, use loops and logic to solve the fizz buzz problem.
+
+```{r}
+# Loops and logic: For loop with an if statement
+
+for(i in sample(c(1:5), 1)) {
+  if(i <= 3) {
+    print("low")
+    break
+  } else {
+    print("high")
+    break
+  }
+}
+```
+
+## (5) Pick at least one advanced problem from this list of problems, and show that you can solve it in R. - SNAKES AND LADDERS
+
+```{r}
+# Ladders:
+# 3 goes to 11
+# 6 goes to 17
+# 10 goes to 12
+# 9 goes to 16
+
+# Snakes:
+# 14 goes to 4
+# 19 goes to 8
+# 22 goes to 20
+# 24 goes to 16
+
+
+total_rolls <- c()
+
+for(i in 1:1000) {
+  
+  end_state <- 0
+  num_rolls <- 0
+  
+  while(end_state < 25) {
+    
+    num_rolls <- num_rolls + 1
+    roll <- sample(1:6, 1)
+    end_state <- end_state + roll
+    
+    if(end_state == 3) {
+      end_state = 11
+    } else if (end_state == 6) {
+      end_state = 17
+    } else if (end_state == 10) {
+      end_state = 12
+    } else if (end_state == 9) {
+      end_state = 16
+    } else if (end_state == 14) {
+      end_state = 4
+    } else if (end_state == 19) {
+      end_state = 8
+    } else if (end_state == 22) {
+      end_state = 20
+    } else if (end_state == 24) {
+      end_state = 16
+    }
+  }
+  total_rolls <- append(total_rolls, num_rolls)
+}
+
+mean(total_rolls)
+```
+
+```{r}
+means <- c()
+
+for(i in 1:1000) {
+  total_rolls <- c()
+  
+  for(i in 1:1000) {
+    
+    end_state <- 0
+    num_rolls <- 0
+    
+    while(end_state < 25) {
+      
+      num_rolls <- num_rolls + 1
+      roll <- sample(1:6, 1)
+      end_state <- end_state + roll
+      
+      if(end_state == 3) {
+        end_state = 11
+      } else if (end_state == 6) {
+        end_state = 17
+      } else if (end_state == 10) {
+        end_state = 12
+      } else if (end_state == 9) {
+        end_state = 16
+      } else if (end_state == 14) {
+        end_state = 4
+      } else if (end_state == 19) {
+        end_state = 8
+      } else if (end_state == 22) {
+        end_state = 20
+      } else if (end_state == 24) {
+        end_state = 16
+      }
+    }
+    total_rolls <- append(total_rolls, num_rolls)
+  }
+  
+  means <- append(means, mean(total_rolls))
+}
+
+hist(means)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
